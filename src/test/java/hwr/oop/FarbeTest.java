@@ -10,7 +10,7 @@ class FarbeTest {
     @Test
     void testWert(){
         Farbe testFarbe = Farbe.KREUZ;
-        Assertions.assertThat(testFarbe.getWert()).isEqualTo(1);
+        Assertions.assertThat(testFarbe.getWert()).isEqualTo(4);
     }
 
     @Test
