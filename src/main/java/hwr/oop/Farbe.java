@@ -4,19 +4,19 @@ import java.util.Arrays;
 import java.util.List;
 
 public enum Farbe {
-  Kreuz(1),
-  Herz(3),
-  Pik(2),
-  Karo(4);
+  KARO(1),
+  HERZ(2),
+  PIK(3),
+  KREUZ(4);
 
-  private int Wert;
+  private final int wert;
 
   private Farbe(int neuerWert) {
-    this.Wert = neuerWert;
+    this.wert = neuerWert;
   }
 
   public int getWert() {
-    return Wert;
+    return wert;
   }
 
   public static List<Farbe> getFarben() {
