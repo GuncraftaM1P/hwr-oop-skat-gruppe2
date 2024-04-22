@@ -29,7 +29,7 @@ public class KartenStapel {
       int i = 0;
       while (this.deck.size() > 2) {
           int zufallsZahl = (int) Math.floor(Math.random() * this.deck.size());
-          if (zufallsZahl != 3) {
+          if (zufallsZahl != this.deck.size()) {
               spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
               this.deck.remove(zufallsZahl);
               i ++;
