@@ -1,4 +1,7 @@
-- Karten Stapel TODO erklären
-- Änderung von Upstream Mergen
-- Java Commands (nicht ausführbar)
-- Was ist beste Möglichkeit Daten zu Speichern (SQL,UML,...)
+- Änderung von Upstream Mergen (ReadMe)
+- Java Commands (nutz GitBash)
+- CSV Dateien zum speichern und laden
+- SonarLint Issues Abarbeiten (SRC rechtsklick -> SonarLint Analyse
+- Kreuz immer trumph Spiel erstellen und implementieren
+-> Skat spiel (erster spieler ist alleinspieler)
+- immer Gruppenarbeit (damit jeder versteht was wir machen)
