@@ -10,8 +10,8 @@ public class SpielVerwaltung {
     }
 
     public SpielVerwaltung(List<SpielendeSpieler> spielers) {
-        KartenStarpel starpel = new KartenStarpel();
-        starpel.kartenRandomVerteilenZweiBleibenUebrig(starpel.neuerKartenStarpel(),spielers);
+        KartenStapel stapel = new KartenStapel();
+        stapel.kartenRandomVerteilenZweiBleibenUebrig(stapel.neuerKartenStapel(),spielers);
 
         starteSpielrunde();
     }

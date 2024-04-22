@@ -3,13 +3,13 @@ package hwr.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KartenStarpel {
+public class KartenStapel {
 
-  KartenStarpel() {}
+  KartenStapel() {}
 
-  KartenStarpel(List<Spieler> spielers) {}
+  KartenStapel(List<Spieler> spielers) {}
 
-  public List<Karte> neuerKartenStarpel() {
+  public List<Karte> neuerKartenStapel() {
     // TODO warum Array List ?
     List<Karte> karten = new ArrayList<>();
     List<Wert> Werte = Wert.getZahlen();
