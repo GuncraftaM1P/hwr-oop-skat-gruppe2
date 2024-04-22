@@ -3,11 +3,11 @@ package hwr.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class KartenStarpel {
+public class KartenStapel {
 
-  KartenStarpel() {}
+  KartenStapel() {}
 
-  KartenStarpel(List<Spieler> spielers) {}
+  KartenStapel(List<Spieler> spieler) {}
 
   public List<Karte> neuerKartenStarpel() {
     // TODO warum Array List ?
@@ -22,7 +22,7 @@ public class KartenStarpel {
     return karten;
   }
 
-  public void kartenRandomVerteilenZweiBleibenUebrig(List<Karte> karten,List<SpielendeSpieler> SpielendeSpieler){
+  public void kartenZufälligVerteilenAußerSkat(List<Karte> karten,List<SpielendeSpieler> SpielendeSpieler){
       while (karten.size()>2) {
           int randomZahl = (int) (Math.random()*(SpielendeSpieler.size()));
           SpielendeSpieler.get(randomZahl).handKarten.add(karten.get(randomZahl));
