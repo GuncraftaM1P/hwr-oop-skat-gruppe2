@@ -12,7 +12,7 @@ public class SpielVerwaltung {
     public SpielVerwaltung(List<SpielendeSpieler> spielers) {
 
         KartenStapel stapel = new KartenStapel();
-        stapel.kartenVerteilen(stapel.neuerKartenStapel(),spielers);
+        stapel.kartenVerteilen(spielers);
 
         starteSpielrunde();
     }
