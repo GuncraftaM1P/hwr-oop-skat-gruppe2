@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KartenStapel {
+    List<Karte> deck;
+    List<Karte> gelegteKarten;
 
-  KartenStapel() {}
-
-  KartenStapel(List<Spieler> spieler) {}
+  public KartenStapel() {
+      this.deck = neuerKartenStapel();
+      this.gelegteKarten = new ArrayList<>();
+  }
 
   public List<Karte> neuerKartenStapel() {
     // TODO warum Array List ?
@@ -22,11 +25,29 @@ public class KartenStapel {
     return karten;
   }
 
-  public void kartenVerteilen(List<Karte> karten, List<SpielendeSpieler> SpielendeSpieler){
-      while (karten.size()>2) {
-          int zufaelligeZahl = (int) (Math.random()*(SpielendeSpieler.size()));
-          SpielendeSpieler.get(zufaelligeZahl).handKarten.add(karten.get(zufaelligeZahl));
+  public void kartenVerteilen(List<SpielendeSpieler> spielendeSpieler){
+      int i = 0;
+      while (this.deck.size() > 2) {
+          int zufallsZahl = (int) Math.floor(Math.random() * spielendeSpieler.size());
+          if (zufallsZahl != 3) {
+              spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
+              this.deck.remove(zufallsZahl);
+              i ++;
+              if (i == spielendeSpieler.size()) {
+                  i = 0;
+              }
+          }
       }
   }
+
+  // Getter
+  public Karte getGelegteKarte() {
+      return this.gelegteKarten.getFirst();
+  }
+
+  // Setter
+    public void addGelegteKarte(Karte karte) {
+      this.gelegteKarten.add(karte);
+    }
 }
 
