@@ -6,11 +6,20 @@ import org.junit.jupiter.api.Test;
 public class SpielerTest {
 
     @Test
-    public void testSpieler(){
+    public void testSpielerName() {
         Spieler testSpieler = new Spieler("Spieler");
         Assertions.assertThat(testSpieler.getName()).isEqualTo("Spieler");
-        Assertions.assertThat(testSpieler.getGewonneneRunden()).isEqualTo(0);
-        Assertions.assertThat(testSpieler.getGespielteRunden()).isEqualTo(0);
+    }
 
+    @Test
+    public void testSpielerGespielt() {
+        Spieler testSpieler = new Spieler("Spieler");
+        Assertions.assertThat(testSpieler.getGespielteRunden()).isEqualTo(0);
+    }
+
+    @Test
+    public void testSpielerGewonnen() {
+        Spieler testSpieler = new Spieler("Spieler");
+        Assertions.assertThat(testSpieler.getGewonneneRunden()).isEqualTo(0);
     }
 }

@@ -16,7 +16,7 @@ public class SpielerVerwaltung {
     SpielerVerwaltung spielerVerwaltung = new SpielerVerwaltung();
 
     while(true) {
-      System.out.println("Geben 1 2 3 ... oder - ein für die auswahl.");
+      System.out.println("Geben Sie ein, was sie tun möchten: \n 1 - Neuen Spieler anlegen \n 2 - Spieler löschen \n 3 - Alle Spieler anzeigen \n 4 - Spieler auswählen \n 5 - Spielende Spieler anzeigen \n 0 - Beenden");
       Scanner in = new Scanner(System.in);
       String input = in.nextLine();
       switch (input) {
@@ -26,7 +26,7 @@ public class SpielerVerwaltung {
           break;
         case "3": spielerVerwaltung.alleSpielerAnzeigen();
         break;
-        case "4":spielerVerwaltung.spielerAuswahlFueSpiel();
+        case "4":spielerVerwaltung.spielerAuswahlFuerSpiel();
           break;
         case "5":List<SpielendeSpieler> temp = new ArrayList<>();
           temp.add(new SpielendeSpieler(new Spieler("a")));
@@ -34,20 +34,20 @@ public class SpielerVerwaltung {
           temp.add(new SpielendeSpieler(new Spieler("c")));
           new SpielVerwaltung(temp);
           break;
-        case "-": return;
+        case "0": return;
       }
     }
 
   }
 
-  List<Spieler> spielern ; // TODO Laden Liste
+  List<Spieler> spieler; // TODO Laden Liste
 
   public SpielerVerwaltung() {
-    spielern = new ArrayList<>(); //TODO Laden Liste
+    spieler = new ArrayList<>(); //TODO Laden Liste
   }
 
-  private void spielerAuswahlFueSpiel(){
-    List<SpielendeSpieler> spielendeSpielers = new ArrayList<>();
+  private void spielerAuswahlFuerSpiel(){
+    List<SpielendeSpieler> spielendeSpieler = new ArrayList<>();
     System.out.println("Geben Sie den Namen des ersten Spieler ein.");
     Scanner in = new Scanner(System.in);
     String name = in.nextLine();
@@ -55,31 +55,31 @@ public class SpielerVerwaltung {
       System.out.println("Anfang von Spiel wurde wegen falscher eingabe abgebrochen.");
       return;
     }
-    spielendeSpielers.add(new SpielendeSpieler(nameExistiertBerits(name)));
+    spielendeSpieler.add(new SpielendeSpieler(nameExistiertBerits(name)));
 
     System.out.println("Geben Sie den Namen des zweiten Spieler ein.");
     name = in.nextLine();
-    if(nameExistiertBerits(name)==null||spielerMitNAmenExisiertInListe(spielendeSpielers, name)){
+    if(nameExistiertBerits(name)==null|| spielerMitNamenExisiertInListe(spielendeSpieler, name)){
       System.out.println("Anfang von Spiel wurde wegen falscher eingabe abgebrochen.");
       return;
     }
-    spielendeSpielers.add(new SpielendeSpieler(nameExistiertBerits(name)));
+    spielendeSpieler.add(new SpielendeSpieler(nameExistiertBerits(name)));
 
     System.out.println("Geben Sie den Namen des dritten Spieler ein.");
     name = in.nextLine();
-    if(nameExistiertBerits(name)==null||spielerMitNAmenExisiertInListe(spielendeSpielers, name)){
+    if(nameExistiertBerits(name)==null|| spielerMitNamenExisiertInListe(spielendeSpieler, name)){
       System.out.println("Anfang von Spiel wurde wegen falscher eingabe abgebrochen.");
       return;
     }
-    spielendeSpielers.add(new SpielendeSpieler(nameExistiertBerits(name)));
+    spielendeSpieler.add(new SpielendeSpieler(nameExistiertBerits(name)));
 
-    System.out.println(spielendeSpielers.size());
+    System.out.println(spielendeSpieler.size());
 
-    SpielVerwaltung spielVerwaltung = new SpielVerwaltung(spielendeSpielers);
+    SpielVerwaltung spielVerwaltung = new SpielVerwaltung(spielendeSpieler);
 
   }
 
-  private boolean spielerMitNAmenExisiertInListe(List<SpielendeSpieler> spielendeSpielerList, String name){
+  private boolean spielerMitNamenExisiertInListe(List<SpielendeSpieler> spielendeSpielerList, String name){
     for (SpielendeSpieler spielendeSpieler : spielendeSpielerList) {
       if(spielendeSpieler.spieler.getName().equals(name)){
         return true;
@@ -101,12 +101,12 @@ public class SpielerVerwaltung {
     }
     else{
       System.out.println("Der Name von den Neuen Spieler ist " + name);
-      spielern.add(new Spieler(name));
+      spieler.add(new Spieler(name));
     }
   }
 
   private Spieler nameExistiertBerits(String name){
-    for (Spieler spieler : spielern) {
+    for (Spieler spieler : spieler) {
       if(spieler.getName().equals(name)){
         return spieler;
       }
@@ -118,9 +118,9 @@ public class SpielerVerwaltung {
     System.out.println("Geben Sie den Namen des zulöschenden Spieler ein.");
     Scanner in = new Scanner(System.in);
     String name = in.nextLine();
-    for (Spieler spieler : spielern) {
+    for (Spieler spieler : spieler) {
       if(spieler.getName().equals(name)){
-        spielern.remove(spieler);
+        this.spieler.remove(spieler);
         System.out.println("Der Spieler mit den Namen "+ name+ " wurde gelöscht.");
         return;
       }
@@ -129,7 +129,7 @@ public class SpielerVerwaltung {
   }
 
   private void alleSpielerAnzeigen(){
-    for (Spieler spieler : spielern) {
+    for (Spieler spieler : spieler) {
       System.out.println(spieler.getName()+"; ");
     }
   }
