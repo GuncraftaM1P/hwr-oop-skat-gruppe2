@@ -28,8 +28,8 @@ public class KartenStapel {
   public void kartenVerteilen(List<SpielendeSpieler> spielendeSpieler){
       int i = 0;
       while (this.deck.size() > 2) {
-          int zufallsZahl = (int) Math.floor(Math.random() * spielendeSpieler.size());
-          if (zufallsZahl != 3) {
+          int zufallsZahl = (int) Math.floor(Math.random() * this.deck.size());
+          if (zufallsZahl != this.deck.size()) {
               spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
               this.deck.remove(zufallsZahl);
               i ++;

@@ -5,13 +5,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class KartenStapelTest {
+import static org.assertj.core.api.Assertions.assertThat;
+
+class KartenStapelTest {
 
     @Test
-    public void testNeuerKartenStapel() {
+    void testNeuerKartenStapel() {
         KartenStapel kartenStapel = new KartenStapel();
         List<Karte> Karten = kartenStapel.neuerKartenStapel();
-        Assertions.assertThat(Karten.size()).isEqualTo(Farbe.getFarben().size()*Wert.getZahlen().size());
+        assertThat(Karten.size()).isEqualTo(Farbe.getFarben().size() * Wert.getZahlen().size());
     }
 
 }
