@@ -32,6 +32,12 @@ public class SpielerVerwaltung {
           temp.add(new SpielendeSpieler(new Spieler("a")));
           temp.add(new SpielendeSpieler(new Spieler("b")));
           temp.add(new SpielendeSpieler(new Spieler("c")));
+
+          List<SpielendeSpieler> list = List.of(
+                  new SpielendeSpieler(new Spieler("a")),
+                  new SpielendeSpieler(new Spieler("b")),
+                  new SpielendeSpieler(new Spieler("c"))
+          );
           new SpielVerwaltung(temp);
           break;
         case "0": return;
