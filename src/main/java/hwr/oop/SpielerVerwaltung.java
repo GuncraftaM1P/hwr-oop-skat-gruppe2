@@ -16,7 +16,7 @@ public class SpielerVerwaltung {
     SpielerVerwaltung spielerVerwaltung = new SpielerVerwaltung();
 
     while(true) {
-      System.out.println("Geben 1 2 3 ... oder - ein für die auswahl.");
+      System.out.println("Geben Sie ein, was sie tun möchten: \n 1 - Neuen Spieler anlegen \n 2 - Spieler löschen \n 3 - Alle Spieler anzeigen \n 4 - Spieler auswählen \n 5 - Spielende Spieler anzeigen \n 0 - Beenden");
       Scanner in = new Scanner(System.in);
       String input = in.nextLine();
       switch (input) {
@@ -34,16 +34,16 @@ public class SpielerVerwaltung {
           temp.add(new SpielendeSpieler(new Spieler("c")));
           new SpielVerwaltung(temp);
           break;
-        case "-": return;
+        case "0": return;
       }
     }
 
   }
 
-  List<Spieler> spielern ; // TODO Laden Liste
+  List<Spieler> spieler; // TODO Laden Liste
 
   public SpielerVerwaltung() {
-    spielern = new ArrayList<>(); //TODO Laden Liste
+    spieler = new ArrayList<>(); //TODO Laden Liste
   }
 
   private void spielerAuswahlFueSpiel(){
@@ -101,12 +101,12 @@ public class SpielerVerwaltung {
     }
     else{
       System.out.println("Der Name von den Neuen Spieler ist " + name);
-      spielern.add(new Spieler(name));
+      spieler.add(new Spieler(name));
     }
   }
 
   private Spieler nameExistiertBerits(String name){
-    for (Spieler spieler : spielern) {
+    for (Spieler spieler : spieler) {
       if(spieler.getName().equals(name)){
         return spieler;
       }
@@ -118,9 +118,9 @@ public class SpielerVerwaltung {
     System.out.println("Geben Sie den Namen des zulöschenden Spieler ein.");
     Scanner in = new Scanner(System.in);
     String name = in.nextLine();
-    for (Spieler spieler : spielern) {
+    for (Spieler spieler : spieler) {
       if(spieler.getName().equals(name)){
-        spielern.remove(spieler);
+        this.spieler.remove(spieler);
         System.out.println("Der Spieler mit den Namen "+ name+ " wurde gelöscht.");
         return;
       }
@@ -129,7 +129,7 @@ public class SpielerVerwaltung {
   }
 
   private void alleSpielerAnzeigen(){
-    for (Spieler spieler : spielern) {
+    for (Spieler spieler : spieler) {
       System.out.println(spieler.getName()+"; ");
     }
   }
