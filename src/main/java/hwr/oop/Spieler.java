@@ -14,4 +14,12 @@ public class Spieler {
     public String getName() {
         return name;
     }
+
+    public int getGewonneneRunden() {
+        return gewonneneRunden;
+    }
+
+    public int getGespielteRunden() {
+        return gewonneneRunden;
+    }
 }
