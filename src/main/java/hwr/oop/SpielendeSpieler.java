@@ -40,4 +40,8 @@ public class SpielendeSpieler {
     public void karteAufDieHand(Karte karte) {
         this.handKarten.add(karte);
     }
+
+    public void karteGewonnen(Karte karte) {
+        this.gewonneneKarten.add(karte);
+    }
 }
