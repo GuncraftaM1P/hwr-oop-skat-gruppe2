@@ -3,7 +3,6 @@ package hwr.oop;
 import java.sql.*;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,35 +14,30 @@ public class SQLVerbinder {
 
   private static SQLVerbinder singleton;
 
-  private String url = "jdbc:sqlite:sqlite/Skat.db";
-  private Connection schnitstelle = null;
+  private static final String URL = "jdbc:sqlite:sqlite/Skat.db";
+  private Connection schnittstelle = null;
 
   public static Connection getSingletonSchnitstelle() {
     if (singleton == null) {
       singleton = new SQLVerbinder();
     }
-    return singleton.schnitstelle;
+    return singleton.schnittstelle;
   }
-
-
 
   private SQLVerbinder() {
     try {
       // db parameters
-      String url = "jdbc:sqlite:sqlite/Skat.db";
+
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
-      schnitstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(URL);
     }
     catch (SQLException e) {
       e.printStackTrace();
     }
 
-
-
-      System.out.println("Test");
-    // Eine Liste für alle Befehle die am anfang vor dem benutzen der Datenban gemacht werden soll
+    // Eine Liste für alle Befehle die am anfang vor dem Benutzen der Datenbank gemacht werden soll
     List<String> startBefehle = new ArrayList<>();
 
     startBefehle.add(
@@ -51,13 +45,13 @@ public class SQLVerbinder {
             + "UUID text PRIMARY KEY,\n"
             + "name text NOT NULL,\n"
             + "gewonneneSpiele integer\n"
-            + "verlohrendeSpiele integer\n"
+            + "verloreneSpiele integer\n"
             + ");");
     startBefehle.add(
         "CREATE TABLE IF NOT EXISTS spielendeSpieler (\n"
-            + "UUID spieler PRIMARY KEY,\n" // ist der gleiche wie in spieler
+            + "UUID text PRIMARY KEY,\n"
             + "name text NOT NULL,\n"
-            + "istEinzelspieler integer\n" // 1 =true; 0 = false; 2= es wurde nochnicht entschieden
+            + "istEinzelspieler integer\n" // 1 =true; 0 = false; 2= es wurde noch nicht entschieden
             + " integer\n"
             + ");");
     startBefehle.add(
@@ -65,38 +59,49 @@ public class SQLVerbinder {
             + "UUID spieler text PRIMARY KEY,\n"
             + "name text NOT NULL,\n"
             + "istEinzelspieler integer\n"
-            
     );
 
-    sendMehreSQLBefehle(startBefehle);
-
-
+    sendeMehreSQLBefehle(startBefehle);
   }
 
-  private void sendSQLBefehle(String sql) {
+  private String sendeSQLAnfrage(String sql) {
     try{
-      schnitstelle = DriverManager.getConnection(url);
-      schnitstelle.prepareStatement(sql).execute();
-      //TODO löschen ! nach arbeiten
-      System.out.println(sql);
+      Statement statement = schnittstelle.createStatement();
+      ResultSet resultSet = statement.executeQuery(sql);
+
+      //Beispiel zum Lesen der return Werte
+      int id = resultSet.getInt("id");
+      return ""+id;
+    }
+    catch (SQLException e) {
+      e.printStackTrace();
+      return "";
+    }
+  }
+
+  public void spielLoeschen(String spielID) {
+    try {
+      schnittstelle = DriverManager.getConnection(URL);
     }
     catch (SQLException e) {
       e.printStackTrace();
     }
+    List<String> loeschenBefehle = new ArrayList<>();
+    loeschenBefehle.add("DELETE FROM spielHatSpieler sh WHERE sh.spielID = "+spielID+";");
+    loeschenBefehle.add("DELETE FROM spiel s WHERE s.UUID = "+spielID+";");
+
+    sendeMehreSQLBefehle(loeschenBefehle);
   }
 
-  private void sendMehreSQLBefehle(List<String> sqlList) {
+  private void sendeMehreSQLBefehle(List<String> sqlList) {
     try{
-      schnitstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(URL);
       for(String s : sqlList) {
-        schnitstelle.prepareStatement(s).execute();
-        //TODO löschen ! nach arbeiten
-        System.out.println(s);
+        schnittstelle.prepareStatement(s).execute();
       }
     }
     catch (SQLException e) {
       e.printStackTrace();
     }
   }
-
 }
