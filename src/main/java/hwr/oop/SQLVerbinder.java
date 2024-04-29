@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class SQLVerbinder {
 
@@ -62,7 +61,7 @@ public class SQLVerbinder {
             + " integer\n"
             + ");");
     startBefehle.add(
-            "CREATE TABLE IF NOT EXISTS spielendeSpiel (\n"
+            "CREATE TABLE IF NOT EXISTS runden (\n"
             + "UUID spieler text PRIMARY KEY,\n"
             + "name text NOT NULL,\n"
             + "istEinzelspieler integer\n"
