@@ -3,7 +3,7 @@ package hwr.oop;
 import java.util.List;
 
 public class SpielVerwaltung {
-    KartenStapel stapel;
+
 
     public static void main(String[] args){
 
@@ -11,7 +11,7 @@ public class SpielVerwaltung {
 
     public SpielVerwaltung(List<SpielendeSpieler> spielers) {
 
-        this.stapel = new KartenStapel();
+        KartenStapel stapel = new KartenStapel();
         stapel.kartenVerteilen(spielers);
 
         starteSpielrunde();

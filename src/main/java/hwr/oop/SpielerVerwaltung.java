@@ -1,5 +1,6 @@
 package hwr.oop;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -8,42 +9,9 @@ public class SpielerVerwaltung {
 
 
   public static void main(String[] args) {
-    // TODO
-    // Das laden von allen Spielern und auswählen von den Spielern die Spielen wollen.
+   //TODO noch erstellen@SuppressWarnings()
+    new Cli( System.out, args);
 
-      //TODO
-    // Neue Spieler anlegen gewonnene runden anzeigen lassen
-    SpielerVerwaltung spielerVerwaltung = new SpielerVerwaltung();
-      //TODO
-    //nicht mit scann machen weil nicht gut für Test
-    while(true) {
-      System.out.println("Geben Sie ein, was sie tun möchten: \n 1 - Neuen Spieler anlegen \n 2 - Spieler löschen \n 3 - Alle Spieler anzeigen \n 4 - Spieler auswählen \n 5 - Spielende Spieler anzeigen \n 0 - Beenden");
-      Scanner in = new Scanner(System.in);
-      String input = in.nextLine();
-      switch (input) {
-        case "1":spielerVerwaltung.neuenSpielerAnlegen();
-            break;
-        case "2": spielerVerwaltung.spielerLoeschen();
-          break;
-        case "3": spielerVerwaltung.alleSpielerAnzeigen();
-        break;
-        case "4":spielerVerwaltung.spielerAuswahlFuerSpiel();
-          break;
-        case "5":List<SpielendeSpieler> temp = new ArrayList<>();
-          temp.add(new SpielendeSpieler(new Spieler("a")));
-          temp.add(new SpielendeSpieler(new Spieler("b")));
-          temp.add(new SpielendeSpieler(new Spieler("c")));
-
-          List<SpielendeSpieler> list = List.of(
-                  new SpielendeSpieler(new Spieler("a")),
-                  new SpielendeSpieler(new Spieler("b")),
-                  new SpielendeSpieler(new Spieler("c"))
-          );
-          new SpielVerwaltung(temp);
-          break;
-        case "0": return;
-      }
-    }
 
   }
 
