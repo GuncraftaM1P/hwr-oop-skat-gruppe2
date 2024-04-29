@@ -19,9 +19,9 @@ public class SpielendeSpieler {
         // Karte auf der Hand?
         if (this.handKarten.contains(karte)) {
             // Trumpfkarte / Ungleiche Farbe
-            if (karte.getFarbe() != kartenStapel.getGelegteKarte().getFarbe()) {
+            if (karte.getFarbe() != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
                 for (Karte i : this.handKarten) {
-                    if (i.getFarbe() == kartenStapel.getGelegteKarte().getFarbe()) {
+                    if (i.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
                         return false;
                     }
                 }
@@ -43,5 +43,13 @@ public class SpielendeSpieler {
 
     public void karteGewonnen(Karte karte) {
         this.gewonneneKarten.add(karte);
+    }
+
+    // Getter
+    public List<Karte> getHandKarten() {
+        return this.handKarten;
+    }
+    public List<Karte> getGewonneneKarten() {
+        return this.gewonneneKarten;
     }
 }
