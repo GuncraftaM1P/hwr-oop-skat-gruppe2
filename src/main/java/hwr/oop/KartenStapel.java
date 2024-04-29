@@ -5,11 +5,11 @@ import java.util.List;
 
 public class KartenStapel {
     List<Karte> deck;
-    List<Karte> gelegteKarten;
+    List<Karte> gelegteKarte;
 
   public KartenStapel() {
       this.deck = neuerKartenStapel();
-      this.gelegteKarten = new ArrayList<>();
+      this.gelegteKarte = new ArrayList<>();
   }
 
   public List<Karte> neuerKartenStapel() {
@@ -41,13 +41,13 @@ public class KartenStapel {
   }
 
   // Getter
-  public Karte getGelegteKarte() {
-      return this.gelegteKarten.getFirst();
+  public List<Karte> getGelegteKarten() {
+      return this.gelegteKarte;
   }
 
   // Setter
     public void addGelegteKarte(Karte karte) {
-      this.gelegteKarten.add(karte);
+      this.gelegteKarte.add(karte);
     }
 }
 
