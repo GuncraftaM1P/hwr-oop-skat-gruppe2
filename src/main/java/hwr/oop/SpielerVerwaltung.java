@@ -14,7 +14,8 @@ public class SpielerVerwaltung {
       //TODO
     // Neue Spieler anlegen gewonnene runden anzeigen lassen
     SpielerVerwaltung spielerVerwaltung = new SpielerVerwaltung();
-
+      //TODO
+    //nicht mit scann machen weil nicht gut für Test
     while(true) {
       System.out.println("Geben Sie ein, was sie tun möchten: \n 1 - Neuen Spieler anlegen \n 2 - Spieler löschen \n 3 - Alle Spieler anzeigen \n 4 - Spieler auswählen \n 5 - Spielende Spieler anzeigen \n 0 - Beenden");
       Scanner in = new Scanner(System.in);
