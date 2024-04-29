@@ -52,7 +52,55 @@ class KartenStapelTest {
     }
 
     @Test
-    void testKarteVerteilen() {
+    void testKartenVerteilenDeck() {
+        KartenStapel testKartenStapel = new KartenStapel();
 
+        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+
+        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+
+        Assertions.assertThat(testKartenStapel.deck.size()).isEqualTo(2);
+    }
+    @Test
+    void testKartenVerteilenSpielerEins() {
+        KartenStapel testKartenStapel = new KartenStapel();
+
+        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+
+        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+
+        Assertions.assertThat(testSpielendeSpieler.getFirst().handKarten.size()).isEqualTo(10);
+    }
+    @Test
+    void testKartenVerteilenSpielerZwei() {
+        KartenStapel testKartenStapel = new KartenStapel();
+
+        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+
+        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+
+        Assertions.assertThat(testSpielendeSpieler.get(1).handKarten.size()).isEqualTo(10);
+    }
+    @Test
+    void testKartenVerteilenSpielerDrei() {
+        KartenStapel testKartenStapel = new KartenStapel();
+
+        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+
+        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+
+        Assertions.assertThat(testSpielendeSpieler.get(2).handKarten.size()).isEqualTo(10);
     }
 }
