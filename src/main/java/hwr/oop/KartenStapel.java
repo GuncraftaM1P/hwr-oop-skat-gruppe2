@@ -44,7 +44,9 @@ public class KartenStapel {
   public List<Karte> getGelegteKarten() {
       return this.gelegteKarte;
   }
-
+  public List<Karte> getDeck() {
+      return this.deck;
+  }
   // Setter
     public void addGelegteKarte(Karte karte) {
       this.gelegteKarte.add(karte);

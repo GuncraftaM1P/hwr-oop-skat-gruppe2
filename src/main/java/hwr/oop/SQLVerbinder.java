@@ -16,8 +16,8 @@ public class SQLVerbinder {
 
   private static SQLVerbinder singleton;
 
-  private String url = "jdbc:sqlite:sqlite/Skat.db";
-  private Connection schnitstelle = null;
+  private static final String URL = "jdbc:sqlite:sqlite/Skat.db";
+  private Connection schnittstelle = null;
 
   public static SQLVerbinder getSingletonSchnitstelle() {
     if (singleton == null) {
@@ -35,16 +35,13 @@ public class SQLVerbinder {
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
-      schnitstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(URL);
     }
     catch (SQLException e) {
       e.printStackTrace();
     }
 
-
-
-      System.out.println("Test");
-    // Eine Liste für alle Befehle die am anfang vor dem benutzen der Datenban gemacht werden soll
+    // Eine Liste für alle Befehle die am anfang vor dem Benutzen der Datenbank gemacht werden soll
     List<String> startBefehle = new ArrayList<>();
 
     startBefehle.add(
