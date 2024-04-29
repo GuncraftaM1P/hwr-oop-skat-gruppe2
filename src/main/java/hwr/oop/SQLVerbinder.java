@@ -16,7 +16,7 @@ public class SQLVerbinder {
 
   private static SQLVerbinder singleton;
 
-  private static final String URL = "jdbc:sqlite:sqlite/Skat.db";
+  private static final String url = "jdbc:sqlite:sqlite/Skat.db";
   private Connection schnittstelle = null;
 
   public static SQLVerbinder getSingletonSchnitstelle() {
@@ -35,7 +35,7 @@ public class SQLVerbinder {
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
-      schnittstelle = DriverManager.getConnection(URL);
+      schnittstelle = DriverManager.getConnection(url);
     }
     catch (SQLException e) {
       e.printStackTrace();
@@ -127,7 +127,7 @@ public class SQLVerbinder {
 
   public int getIntegerVonDB(String sql){
     try {
-         ResultSet resultSet = schnitstelle.prepareStatement(sql).executeQuery() ;
+         ResultSet resultSet = schnittstelle.prepareStatement(sql).executeQuery() ;
       while (resultSet.next()){
         int id = resultSet.getInt(1);
         return id;
@@ -141,7 +141,7 @@ public class SQLVerbinder {
 
   private ResultSet executeSQL(String sql) {
     try {
-      return schnitstelle.prepareStatement(sql).executeQuery();
+      return schnittstelle.prepareStatement(sql).executeQuery();
     } catch (Exception e) {
       e.printStackTrace();
       return null;
@@ -151,8 +151,8 @@ public class SQLVerbinder {
 
   private void sendSQLBefehle(String sql) {
     try{
-      schnitstelle = DriverManager.getConnection(url);
-      schnitstelle.prepareStatement(sql).execute();
+      schnittstelle = DriverManager.getConnection(url);
+      schnittstelle.prepareStatement(sql).execute();
       //TODO löschen ! nach arbeiten
       System.out.println(sql);
     }
@@ -163,9 +163,9 @@ public class SQLVerbinder {
 
   private void sendMehreSQLBefehle(List<String> sqlList) {
     try{
-      schnitstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(url);
       for(String s : sqlList) {
-        schnitstelle.prepareStatement(s).execute();
+        schnittstelle.prepareStatement(s).execute();
         //TODO löschen ! nach arbeiten
         System.out.println(s);
       }
