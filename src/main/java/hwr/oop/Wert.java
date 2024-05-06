@@ -21,7 +21,7 @@ public enum Wert {
     this.staerke = staerke;
   }
 
-  public Wert getWertByStaerke(int vergleichStearke){
+  public static Wert getWertByStaerke(int vergleichStearke){
     for(Wert wert : Wert.values()){if(wert.getStaerke()==vergleichStearke)return wert;}
     return null;
   }

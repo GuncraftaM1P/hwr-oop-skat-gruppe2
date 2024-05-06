@@ -1,37 +1,43 @@
 package hwr.oop;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class KartenListe {
-    private List<Karte> Karte;
+    private List<Karte> karten = new ArrayList<>();
+
     public KartenListe() {}
     public KartenListe(List<Karte> Karte) {
-        this.Karte = Karte;
+        this.karten = Karte;
+
     }
     //TODO ist atomic klassen  erlaubt ?
     public boolean istKarteEnthalten(Karte vergleichkarte) {
         AtomicBoolean istKarteEnthalten = new AtomicBoolean(false);
-        Karte.forEach(karte -> {if(karte.getFarbe()==vergleichkarte.getFarbe()&&karte.getWert()==vergleichkarte.getWert()){
+        karten.forEach(karte -> {if(karte.getFarbe()==vergleichkarte.getFarbe()&&karte.getWert()==vergleichkarte.getWert()){
             istKarteEnthalten.set(true);}});
         return istKarteEnthalten.get();
     }
 
     public boolean istFarbeEnthalten(Farbe farbe) {
         AtomicBoolean istKarteEnthalten = new AtomicBoolean(false);
-        Karte.forEach(karte -> {if(karte.getFarbe()==farbe){
+        karten.forEach(karte -> {if(karte.getFarbe()==farbe){
             istKarteEnthalten.set(true);}});
         return istKarteEnthalten.get();
     }
 
     public List<Karte> getKartenListe() {
-        return Karte;
+        return karten;
     }
 
-    public List<Karte> kartenListeVonString(String kartenListenString) {
+    public boolean istEmpte(){
+        return karten.isEmpty();
+    }
 
-        return Karte;
+    public void addKarte(Karte karte) {
+        karten.add(karte);
     }
 
 }

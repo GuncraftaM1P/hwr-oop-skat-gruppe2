@@ -15,7 +15,7 @@ public enum Farbe {
     this.wert = neuerWert;
   }
 
-  public Farbe getFarbeByWert(int vergleichWert){
+  public static Farbe getFarbeByWert(int vergleichWert){
     for(Farbe farbe : Farbe.values()){if(farbe.getWert()==vergleichWert){return farbe;}}
     return null;
   }

@@ -5,32 +5,32 @@ import java.util.List;
 
 public class SpielendeSpieler {
     Spieler spieler;
-    List<Karte> handKarten;
-    List<Karte> gewonneneKarten;
+    KartenListe handKarten;
+    KartenListe gewonneneKarten;
 
 
     public SpielendeSpieler(Spieler spieler) {
         this.spieler = spieler;
-        this.handKarten = new ArrayList<>();
-        this.gewonneneKarten = new ArrayList<>();
+        this.handKarten = new KartenListe();
+        this.gewonneneKarten = new KartenListe();
     }
 
     public boolean karteSetzen(Karte karte, KartenStapel kartenStapel) {
         // Karte auf der Hand?
-        if (this.handKarten.contains(karte)) {
+        if (!handKarten.istEmpte()) {
             // Trumpfkarte / Ungleiche Farbe
             if (karte.getFarbe() != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
-                for (Karte i : this.handKarten) {
+                for (Karte i : handKarten.getKartenListe()) {
                     if (i.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
                         return false;
                     }
                 }
-                this.handKarten.remove(karte);
+                this.handKarten.getKartenListe().remove(karte);
                 kartenStapel.addGelegteKarte(karte);
                 return true;
             }
             // Gleiche Farbe
-            this.handKarten.remove(karte);
+            this.handKarten.getKartenListe().remove(karte);
             kartenStapel.addGelegteKarte(karte);
             return true;
         }
@@ -38,18 +38,18 @@ public class SpielendeSpieler {
     }
 
     public void karteAufDieHand(Karte karte) {
-        this.handKarten.add(karte);
+        this.handKarten.addKarte(karte);
     }
 
     public void karteGewonnen(Karte karte) {
-        this.gewonneneKarten.add(karte);
+        this.gewonneneKarten.addKarte(karte);
     }
 
     // Getter
-    public List<Karte> getHandKarten() {
+    public KartenListe getHandKarten() {
         return this.handKarten;
     }
-    public List<Karte> getGewonneneKarten() {
+    public KartenListe getGewonneneKarten() {
         return this.gewonneneKarten;
     }
 }

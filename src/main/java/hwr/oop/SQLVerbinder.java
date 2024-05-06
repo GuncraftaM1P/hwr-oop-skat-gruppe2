@@ -15,6 +15,7 @@ public class SQLVerbinder {
 
   private static SQLVerbinder singleton;
   //db parameter
+  //TODO ersetzen durch objekt von typ path wegen windows mac untetschiede
   private static final String url = "jdbc:sqlite:sqlite/Skat.db";
   private Connection schnittstelle = null;
 
