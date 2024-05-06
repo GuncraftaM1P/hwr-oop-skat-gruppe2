@@ -43,35 +43,45 @@ public class SQLVerbinder {
     List<String> startBefehle = new ArrayList<>();
 
     startBefehle.add(
-        "CREATE TABLE IF NOT EXISTS spieler (\n"
-            + "UUIDSpieler text PRIMARY KEY,\n"
-            + "name text NOT NULL,\n"
-            + "gewonneneSpiele integer,\n"
-            + "verlohrendeSpiele integer\n"
-            + ");");
+            """
+                    CREATE TABLE IF NOT EXISTS spieler (
+                    UUIDSpieler text PRIMARY KEY,
+                    name text NOT NULL,
+                    gewonneneSpiele integer,
+                    verlohrendeSpiele integer
+                    );""");
 
-    startBefehle.add("CREATE TABLE IF NOT EXISTS spiel (\n"
-            + "UUIDSpiel text PRIMARY KEY,\n"//Spiel ID
-            + "UUIDRunde text,\n"
-            + "UUIDspielenderSpielerEinzelspieler text, \n" //einzelspieler
-            + "UUIDAktuellerSpielenderSpieler text, \n" //der Spieler der darann ist
-            + "UUIDStich text, \n"
-            + "OffenerSkart text \n" // wenn Null skat wurde vergeben und sonnst mit zwei katent belegt die vergegeben werden müssen
-            + ");");
+      //Spiel ID
+      //einzelspieler
+      //der Spieler der darann ist
+      // wenn Null skat wurde vergeben und sonnst mit zwei katent belegt die vergegeben werden müssen
+      startBefehle.add("""
+              CREATE TABLE IF NOT EXISTS spiel (
+              UUIDSpiel text PRIMARY KEY,
+              UUIDRunde text,
+              UUIDspielenderSpielerEinzelspieler text,
+              UUIDAktuellerSpielenderSpieler text,
+              UUIDStich text,
+              OffenerSkart text
+              );""");
 
-    startBefehle.add("CREATE TABLE IF NOT EXISTS SpielHatSpieler (\n"
-            + "UUIDSpiel text PRIMARY KEY,\n"//Spiel ID
-            + "UUIDspielenderSpieler text, \n" //Spieler 1
-            + "SpielerNummer interger, \n" //die nummer von spieler im game
-            + "Hantkaten text, \n"
-            + "GewonneneKaten text \n"
-            + ");");
+      //Spiel ID
+      //Spieler 1
+      //die nummer von spieler im game
+      startBefehle.add("""
+              CREATE TABLE IF NOT EXISTS SpielHatSpieler (
+              UUIDSpiel text PRIMARY KEY,
+              UUIDspielenderSpieler text,
+              SpielerNummer interger,
+              Hantkaten text,
+              GewonneneKaten text
+              );""");
 
-    startBefehle.add(
-            "CREATE TABLE IF NOT EXISTS runden (\n"
-            + "UUIDRunde  text PRIMARY KEY,\n"
-            + "GespielteKarten text\n"
-                    + ");");
+    startBefehle.add("""
+              CREATE TABLE IF NOT EXISTS runden ("
+              "UUIDRunde  text PRIMARY KEY,"
+              "GespielteKarten text"
+              ");""");
 
     sendMehreSQLBefehle(startBefehle);
 
