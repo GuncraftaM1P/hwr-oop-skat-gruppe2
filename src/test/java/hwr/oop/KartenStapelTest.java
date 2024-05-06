@@ -47,7 +47,8 @@ class KartenStapelTest {
                 new Karte(Farbe.KREUZ, Wert.ASS)
         );
 
-        Assertions.assertThat(testKartenStapel.getDeck().containsAll(testKarten)).isTrue();
+        List<Karte> deck = testKartenStapel.getDeck();
+        Assertions.assertThat(deck.containsAll(testKarten)).isTrue();
     }
 
     @Test
