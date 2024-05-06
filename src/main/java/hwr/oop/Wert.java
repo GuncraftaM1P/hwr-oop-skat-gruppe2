@@ -21,6 +21,11 @@ public enum Wert {
     this.staerke = staerke;
   }
 
+  public Wert getWertByStaerke(int vergleichStearke){
+    for(Wert wert : Wert.values()){if(wert.getStaerke()==vergleichStearke)return wert;}
+    return null;
+  }
+
   public int getPunkte() {
     return punkte;
   }
