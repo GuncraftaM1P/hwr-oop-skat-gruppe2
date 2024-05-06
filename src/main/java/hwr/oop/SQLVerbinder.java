@@ -14,7 +14,7 @@ public class SQLVerbinder {
   }
 
   private static SQLVerbinder singleton;
-
+  //db parameter
   private static final String url = "jdbc:sqlite:sqlite/Skat.db";
   private Connection schnittstelle = null;
 
@@ -29,8 +29,6 @@ public class SQLVerbinder {
 
   private SQLVerbinder() {
     try {
-      // db parameters
-      String url = "jdbc:sqlite:sqlite/Skat.db";
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
@@ -76,9 +74,9 @@ public class SQLVerbinder {
 
     sendMehreSQLBefehle(startBefehle);
 
-
+    //TODO entefernen nach dem Testen ist Test daten
     try{
-      ResultSet resultSet =executeSQL("SELECT COUNT(*) as Anzahl FROM spieler WHERE spieler.UUIDSpieler like 'Test1'");
+      ResultSet resultSet = executeSQL("SELECT COUNT(*) as Anzahl FROM spieler WHERE spieler.UUIDSpieler like 'Test1'");
       resultSet.next();
     if (resultSet.getInt("Anzahl") < 0) {
         sendSQLBefehle("INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verlohrendeSpiele)\n"
@@ -109,19 +107,18 @@ public class SQLVerbinder {
             + "VALUES('"+UUIDSpieler+"','"+Name+"',0,0);");
   }
 
-  public Spieler getSpielerVonDatenbank(UUID UUIDSpieler){
-
-    ResultSet resultSet =  executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '"+UUIDSpieler+"'");
+  public Spieler getSpielerByUUIDSpieler(String UUIDSpieler){
+    ResultSet resultSet = executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '"+UUIDSpieler+"'");
     try{
-      return new Spieler(
-              UUID.fromString( resultSet.getString("UUIDSpieler")),
-          resultSet.getString("name"),
-          resultSet.getInt("gewonneneRunden"),
-          resultSet.getInt("gespieleteRunden"));
+      return new Spieler(UUID.fromString(resultSet.getString("UUIDSpieler")),resultSet.getString("name"),resultSet.getInt("gewonneneSpiele"),resultSet.getInt("verlohrendeSpiele"));
     }catch (SQLException e){
       e.printStackTrace();
     }
     return null;
+  }
+
+  public KartenListe getKatenByString(String KatenString){
+    return new KartenListe();
   }
 
   public int getIntegerVonDB(String sql){

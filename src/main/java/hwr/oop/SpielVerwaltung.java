@@ -5,9 +5,6 @@ import java.util.List;
 public class SpielVerwaltung {
 
 
-    public static void main(String[] args){
-
-    }
 
     public SpielVerwaltung(List<SpielendeSpieler> spielers) {
 
@@ -18,10 +15,6 @@ public class SpielVerwaltung {
     }
 
     private void starteSpielrunde() {
-        boolean spielleuft = true;
-        while (spielleuft) {
-
-        }
 
     }
 
