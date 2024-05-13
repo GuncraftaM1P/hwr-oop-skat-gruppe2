@@ -25,7 +25,7 @@ public class SpielendeSpielerTest {
 
         testSpielenderSpieler.karteAufDieHand(testKarte);
 
-        Assertions.assertThat(testSpielenderSpieler.getHandKarten().contains(testKarte)).isEqualTo(true);
+        Assertions.assertThat(testSpielenderSpieler.getHandKarten().istKarteEnthalten(testKarte)).isEqualTo(true);
     }
     @Test
     void testKarteGewonnen() {
@@ -35,6 +35,6 @@ public class SpielendeSpielerTest {
 
         testSpielenderSpieler.karteGewonnen(testKarte);
 
-        Assertions.assertThat(testSpielenderSpieler.getGewonneneKarten().contains(testKarte)).isEqualTo(true);
+        Assertions.assertThat(testSpielenderSpieler.getGewonneneKarten().istKarteEnthalten(testKarte)).isEqualTo(true);
     }
 }

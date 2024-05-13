@@ -40,4 +40,8 @@ public class KartenListe {
         karten.add(karte);
     }
 
+    public boolean removeKarte(Karte karte) {
+        return karten.remove(karte);
+    }
+
 }
