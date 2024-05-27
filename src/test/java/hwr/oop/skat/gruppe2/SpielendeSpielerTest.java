@@ -5,6 +5,8 @@ import hwr.oop.skat.gruppe2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 public class SpielendeSpielerTest {
     @Test
     void testKarteSetzen() {
@@ -17,7 +19,10 @@ public class SpielendeSpielerTest {
 
         testSpielenderSpieler.karteSetzen(testKarte, testKartenStapel);
 
-        Assertions.assertThat(testKartenStapel.getGelegteKarten().contains(testKarte)).isEqualTo(true);
+        List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
+        Assertions.assertThat(gelegteKarten)
+                .hasSize(1)
+                .contains(testKarte);
     }
     @Test
     void testKarteAufDieHand() {

@@ -17,7 +17,7 @@ class KartenStapelTest {
         List<Karte> testKarten = List.of(
                 new Karte(Farbe.KARO, Wert.SIEBEN),
                 new Karte(Farbe.HERZ, Wert.SIEBEN),
-                new Karte(Farbe.KARO, Wert.SIEBEN),
+                new Karte(Farbe.PIK, Wert.SIEBEN),
                 new Karte(Farbe.KREUZ, Wert.SIEBEN),
                 new Karte(Farbe.KARO, Wert.ACHT),
                 new Karte(Farbe.HERZ, Wert.ACHT),
@@ -50,7 +50,9 @@ class KartenStapelTest {
         );
 
         List<Karte> deck = testKartenStapel.getDeck();
-        Assertions.assertThat(deck.containsAll(testKarten)).isTrue();
+        Assertions.assertThat(deck)
+                .hasSize(testKarten.size())
+                .containsExactlyInAnyOrderElementsOf(testKarten);
     }
 
     @Test
