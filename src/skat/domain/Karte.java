@@ -1,4 +1,4 @@
-package hwr.oop;
+package skat.domain;
 
 public class Karte {
 

@@ -1,4 +1,4 @@
-package hwr.oop;
+package skat.cli;
 
 import java.io.PrintStream;
 

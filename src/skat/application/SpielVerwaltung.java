@@ -1,4 +1,4 @@
-package hwr.oop;
+package skat.application;
 
 import java.util.List;
 

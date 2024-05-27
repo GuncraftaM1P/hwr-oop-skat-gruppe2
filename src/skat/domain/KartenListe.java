@@ -1,5 +1,4 @@
-package hwr.oop;
-
+package skat.domain;
 
 import java.util.ArrayList;
 import java.util.List;

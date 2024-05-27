@@ -1,4 +1,4 @@
-package hwr.oop;
+package skat.persistence;
 
 import java.util.ArrayList;
 import java.util.Arrays;
