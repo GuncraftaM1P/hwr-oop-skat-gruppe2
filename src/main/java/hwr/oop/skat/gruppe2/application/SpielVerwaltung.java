@@ -1,6 +1,5 @@
 package hwr.oop.skat.gruppe2.application;
 
-import hwr.oop.skat.gruppe2.application;
 import hwr.oop.skat.gruppe2.domain.KartenStapel;
 import hwr.oop.skat.gruppe2.domain.SpielendeSpieler;
 

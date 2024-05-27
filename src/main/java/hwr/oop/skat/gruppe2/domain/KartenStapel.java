@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KartenStapel {
-    List<Karte> deck;
-    List<Karte> gelegteKarte;
+    private List<Karte> deck;
+    private List<Karte> gelegteKarte;
 
   public KartenStapel() {
       this.deck = neuerKartenStapel();

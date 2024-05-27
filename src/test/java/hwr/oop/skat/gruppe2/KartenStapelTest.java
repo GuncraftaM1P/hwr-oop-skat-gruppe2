@@ -64,7 +64,7 @@ class KartenStapelTest {
 
         testKartenStapel.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testKartenStapel.deck.size()).isEqualTo(2);
+        Assertions.assertThat(testKartenStapel.getDeck().size()).isEqualTo(2);
     }
     @Test
     void testKartenVerteilenSpielerEins() {
@@ -77,7 +77,7 @@ class KartenStapelTest {
 
         testKartenStapel.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.getFirst().handKarten.size()).isEqualTo(10);
+        Assertions.assertThat(testSpielendeSpieler.getFirst().getHandKarten().size()).isEqualTo(10);
     }
     @Test
     void testKartenVerteilenSpielerZwei() {
@@ -90,7 +90,7 @@ class KartenStapelTest {
 
         testKartenStapel.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.get(1).handKarten.size()).isEqualTo(10);
+        Assertions.assertThat(testSpielendeSpieler.get(1).getHandKarten().size()).isEqualTo(10);
     }
     @Test
     void testKartenVerteilenSpielerDrei() {
@@ -103,6 +103,6 @@ class KartenStapelTest {
 
         testKartenStapel.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.get(2).handKarten.size()).isEqualTo(10);
+        Assertions.assertThat(testSpielendeSpieler.get(2).getHandKarten().size()).isEqualTo(10);
     }
 }

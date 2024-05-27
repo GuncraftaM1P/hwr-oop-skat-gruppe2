@@ -39,6 +39,10 @@ public class KartenListe {
         karten.add(karte);
     }
 
+    public int size(){
+        return karten.size();
+    }
+
     public boolean removeKarte(Karte karte) {
         return karten.remove(karte);
     }
