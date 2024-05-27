@@ -1,7 +1,6 @@
 package hwr.oop.skat.gruppe2.persistence;
 
 import hwr.oop.skat.gruppe2.domain.*;
-
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -10,7 +9,7 @@ public class LadenUndSpeichern {
     public static void main(String[] args){
         LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
         KartenListe kartes = ladenUndSpeichern.kartenListeVonString("2-7,3-12,1-8");
-    System.out.println(ladenUndSpeichern.kartenListeZuString(kartes));
+        System.out.println(ladenUndSpeichern.kartenListeZuString(kartes));
     }
 
     //
@@ -43,7 +42,7 @@ public class LadenUndSpeichern {
         return spieler.getUuid();
     }
 
-    public Spieler getSpielerVonUUID(UUID uuid){
+  public Spieler getSpielerVonUUID(UUID uuid) {
         return SQLVerbinder.getSingletonSchnitstelle().getSpielerByUUIDSpieler(uuid.toString());
     }
 }

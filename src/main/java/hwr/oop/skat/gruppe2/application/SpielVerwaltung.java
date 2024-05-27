@@ -1,24 +1,32 @@
 package hwr.oop.skat.gruppe2.application;
 
-import hwr.oop.skat.gruppe2.domain.KartenStapel;
-import hwr.oop.skat.gruppe2.domain.SpielendeSpieler;
-
+import hwr.oop.skat.gruppe2.domain.*;
+import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class SpielVerwaltung {
 
+  private List<SpielendeSpieler> spielendeSpielerList = new ArrayList<>();
 
+  private Farbe trumpf;
+  private KartenListe skat;
+  private Runde runde;
 
-    public SpielVerwaltung(List<SpielendeSpieler> spielers) {
+  public SpielVerwaltung(SpielendeSpieler spielendeSpieler1, SpielendeSpieler spielendeSpieler2,SpielendeSpieler spielendeSpieler3) {
+    spielendeSpielerList = List.of(spielendeSpieler1, spielendeSpieler2,spielendeSpieler3);
+     skat =  new KartenStapel().kartenVerteilen(spielendeSpielerList);
+     runde =  null;
 
-        KartenStapel stapel = new KartenStapel();
-        stapel.kartenVerteilen(spielers);
+     //TODO trumpf soll null sein später
+    trumpf =  Farbe.KREUZ;
 
-        starteSpielrunde();
-    }
+  }
 
-    private void starteSpielrunde() {
+  public SpielVerwaltung(List<SpielendeSpieler> spielendeSpielern) {
+    this.spielendeSpielerList = spielendeSpielern;
+  }
 
-    }
-
+  private void starteSpielrunde() {}
 }

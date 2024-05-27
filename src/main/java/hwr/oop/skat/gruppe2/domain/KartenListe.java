@@ -47,4 +47,8 @@ public class KartenListe {
         return karten.remove(karte);
     }
 
+    public  Karte getKarte(int index){
+        return karten.get(index);
+    }
+
 }
