@@ -28,5 +28,9 @@ public class SpielVerwaltung {
     this.spielendeSpielerList = spielendeSpielern;
   }
 
+  public Farbe getTrumpf() {
+    return trumpf;
+  }
+
   private void starteSpielrunde() {}
 }

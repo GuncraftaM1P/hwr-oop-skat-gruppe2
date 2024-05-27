@@ -1,5 +1,7 @@
 package hwr.oop.skat.gruppe2.domain;
 
+import hwr.oop.skat.gruppe2.application.SpielVerwaltung;
+
 public class SpielendeSpieler {
   Spieler spieler;
   KartenListe handKarten;
@@ -17,26 +19,16 @@ public class SpielendeSpieler {
     this.gewonneneKarten = new KartenListe();
   }
 
-  public boolean karteSetzen(Karte karte, KartenStapel kartenStapel) {
-    // Karte auf der Hand?
-    if (!handKarten.istEmpte()) {
-      // Trumpfkarte / Ungleiche Farbe
-      if (karte.getFarbe() != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
-        for (Karte i : handKarten.getKartenListe()) {
-          if (i.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
-            return false;
-          }
-        }
-        this.handKarten.getKartenListe().remove(karte);
-        kartenStapel.addGelegteKarte(karte);
-        return true;
-      }
-      // Gleiche Farbe
-      this.handKarten.getKartenListe().remove(karte);
-      kartenStapel.addGelegteKarte(karte);
-      return true;
+  public boolean karteSetzen(Karte karte, Runde runde) {
+    if (!handKarten.istKarteEnthalten(karte)){
+      return false;
     }
-    return false;
+    if(runde.getBedinnFarbe()==karte.getFarbe()||!handKarten.istFarbeEnthalten(karte.getFarbe())){
+      runde.addGelegteKarte(karte,this);
+      return true;
+    }else{
+      return false;
+    }
   }
 
   public void karteAufDieHand(Karte karte) {

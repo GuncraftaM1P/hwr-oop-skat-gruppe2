@@ -63,7 +63,6 @@ public class SQLVerbinder {
               UUIDSpiel text PRIMARY KEY,
               UUIDRunde text,
               UUIDspielenderSpielerEinzelspieler text,
-              UUIDAktuellerSpielenderSpieler text,
               UUIDStich text,
               OffenerSkart text
               );""");
@@ -81,10 +80,17 @@ public class SQLVerbinder {
               );""");
 
     startBefehle.add("""
-              CREATE TABLE IF NOT EXISTS runden ("
-              "UUIDRunde  text PRIMARY KEY,"
-              "GespielteKarten text"
-              ");""");
+              CREATE TABLE IF NOT EXISTS runden (
+              UUIDRunde  text PRIMARY KEY,
+              UUIDAktuellerSpielenderSpieler text,
+              );""");
+
+    startBefehle.add("""
+              CREATE TABLE IF NOT EXISTS KarteMitGelegterSpieler (
+              UUIDSpiel text PRIMARY KEY,
+              UUIDSpielerVonKarte text PRIMARY KEY,
+              GespielteKarte text"
+              );""");
 
     sendMehreSQLBefehle(startBefehle);
 
