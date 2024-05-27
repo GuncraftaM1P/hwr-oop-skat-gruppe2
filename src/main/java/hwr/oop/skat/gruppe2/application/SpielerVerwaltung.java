@@ -24,47 +24,10 @@ public class SpielerVerwaltung {
     spieler = new ArrayList<>(); //TODO Laden Liste
   }
 
-  private void spielerAuswahlFuerSpiel(){
-    List<SpielendeSpieler> spielendeSpieler = new ArrayList<>();
-    System.out.println("Geben Sie den Namen des ersten Spieler ein.");
-    Scanner in = new Scanner(System.in);
-    String name = in.nextLine();
-    if(nameExistiertBerits(name)==null){
-      System.out.println("Anfang von Spiel wurde wegen falscher eingabe abgebrochen.");
-      return;
-    }
-    spielendeSpieler.add(new SpielendeSpieler(nameExistiertBerits(name)));
 
-    System.out.println("Geben Sie den Namen des zweiten Spieler ein.");
-    name = in.nextLine();
-    if(nameExistiertBerits(name)==null|| spielerMitNamenExisiertInListe(spielendeSpieler, name)){
-      System.out.println("Anfang von Spiel wurde wegen falscher eingabe abgebrochen.");
-      return;
-    }
-    spielendeSpieler.add(new SpielendeSpieler(nameExistiertBerits(name)));
 
-    System.out.println("Geben Sie den Namen des dritten Spieler ein.");
-    name = in.nextLine();
-    if(nameExistiertBerits(name)==null|| spielerMitNamenExisiertInListe(spielendeSpieler, name)){
-      System.out.println("Anfang von Spiel wurde wegen falscher eingabe abgebrochen.");
-      return;
-    }
-    spielendeSpieler.add(new SpielendeSpieler(nameExistiertBerits(name)));
 
-    System.out.println(spielendeSpieler.size());
 
-    SpielVerwaltung spielVerwaltung = new SpielVerwaltung(spielendeSpieler);
-
-  }
-
-  private boolean spielerMitNamenExisiertInListe(List<SpielendeSpieler> spielendeSpielerList, String name){
-    for (SpielendeSpieler spielendeSpieler : spielendeSpielerList) {
-      if(spielendeSpieler.spieler.getName().equals(name)){
-        return true;
-      }
-    }
-    return false;
-  }
 
   private void neuenSpielerAnlegen(){
 
