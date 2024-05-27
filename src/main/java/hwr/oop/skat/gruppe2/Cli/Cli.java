@@ -1,3 +1,4 @@
+<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/Cli/Cli.java
 package hwr.oop.skat.gruppe2.Cli;
 
 import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
