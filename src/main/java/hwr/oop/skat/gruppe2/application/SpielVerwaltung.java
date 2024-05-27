@@ -1,10 +1,8 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/SpielVerwaltung.java
-package hwr.oop.skat.gruppe2.domain;
+package hwr.oop.skat.gruppe2.application;
 
-import hwr.oop.skat.gruppe2.application.SpielendeSpieler;
-========
-package skat.application;
->>>>>>>> origin/main:src/skat/application/SpielVerwaltung.java
+import hwr.oop.skat.gruppe2.application;
+import hwr.oop.skat.gruppe2.domain.KartenStapel;
+import hwr.oop.skat.gruppe2.domain.SpielendeSpieler;
 
 import java.util.List;
 

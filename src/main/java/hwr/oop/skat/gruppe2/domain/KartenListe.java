@@ -1,9 +1,4 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/KartenListe.java
 package hwr.oop.skat.gruppe2.domain;
-
-========
-package skat.domain;
->>>>>>>> origin/main:src/skat/domain/KartenListe.java
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,11 +1,7 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/Cli/Cli.java
 package hwr.oop.skat.gruppe2.Cli;
 
 import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
 import hwr.oop.skat.gruppe2.domain.Spieler;
-========
-package skat.cli;
->>>>>>>> origin/main:src/skat/cli/Cli.java
 
 import java.io.PrintStream;
 

@@ -1,8 +1,5 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/Karte.java
 package hwr.oop.skat.gruppe2.domain;
-========
-package skat.domain;
->>>>>>>> origin/main:src/skat/domain/Karte.java
+
 
 public class Karte {
 

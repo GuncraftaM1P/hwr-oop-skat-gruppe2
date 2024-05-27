@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/Wert.java
 package hwr.oop.skat.gruppe2.domain;
-========
-package skat.domain;
->>>>>>>> origin/main:src/skat/domain/Wert.java
 
 import java.util.Arrays;
 import java.util.List;

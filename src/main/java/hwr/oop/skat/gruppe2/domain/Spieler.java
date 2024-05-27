@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/Spieler.java
 package hwr.oop.skat.gruppe2.domain;
-========
-package skat.domain;
->>>>>>>> origin/main:src/skat/domain/Spieler.java
 
 import java.util.UUID;
 

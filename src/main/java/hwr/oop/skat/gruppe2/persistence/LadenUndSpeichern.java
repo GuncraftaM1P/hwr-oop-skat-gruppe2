@@ -1,10 +1,6 @@
-<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/persistence/LadenUndSpeichern.java
 package hwr.oop.skat.gruppe2.persistence;
 
 import hwr.oop.skat.gruppe2.domain.*;
-========
-package skat.persistence;
->>>>>>>> origin/main:src/skat/persistence/LadenUndSpeichern.java
 
 import java.util.Arrays;
 import java.util.UUID;
