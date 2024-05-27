@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/application/SpielendeSpieler.java
 package hwr.oop.skat.gruppe2.application;
+========
+package skat.domain;
+>>>>>>>> origin/main:src/skat/domain/SpielendeSpieler.java
 
 import hwr.oop.skat.gruppe2.domain.Karte;
 import hwr.oop.skat.gruppe2.domain.KartenListe;

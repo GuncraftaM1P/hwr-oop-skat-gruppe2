@@ -1,8 +1,12 @@
+<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/application/SpielerVerwaltung.java
 package hwr.oop.skat.gruppe2.application;
 
 import hwr.oop.skat.gruppe2.Cli.Cli;
 import hwr.oop.skat.gruppe2.domain.SpielVerwaltung;
 import hwr.oop.skat.gruppe2.domain.Spieler;
+========
+package skat.application;
+>>>>>>>> origin/main:src/skat/application/SpielerVerwaltung.java
 
 import java.util.ArrayList;
 import java.util.List;

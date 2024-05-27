@@ -20,3 +20,19 @@ Funktionen, um diese Spieler-Eingabe zu ermöglichen
 - Sieger des Stichs ermitteln
         - Karten diesem Spieler zuweisen, Stich leeren und neue Runde starten
 - karte erhalten/ gewinnen
+
+Konkrete Funktionen für Nutzer:
+- Spieler erstellen
+- Spiel erstellen
+- Spieler hinzufügen
+- Spiel starten
+
+- Hand anschauen
+- (Punkte anzeigen, Reizen)
+- (Einzelspieler) 2 Karten abwerfen
+
+
+- Stich anschauen
+- Karte setzen
+
+- (Gewonnene Karten anschauen)

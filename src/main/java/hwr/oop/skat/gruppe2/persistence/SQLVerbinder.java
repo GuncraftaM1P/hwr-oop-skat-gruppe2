@@ -1,7 +1,11 @@
+<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/persistence/SQLVerbinder.java
 package hwr.oop.skat.gruppe2.persistence;
 
 import hwr.oop.skat.gruppe2.domain.KartenListe;
 import hwr.oop.skat.gruppe2.domain.Spieler;
+========
+package skat.persistence;
+>>>>>>>> origin/main:src/skat/persistence/SQLVerbinder.java
 
 import java.sql.*;
 

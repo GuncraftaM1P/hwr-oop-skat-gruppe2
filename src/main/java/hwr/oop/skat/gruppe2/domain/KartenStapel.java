@@ -1,6 +1,10 @@
+<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/KartenStapel.java
 package hwr.oop.skat.gruppe2.domain;
 
 import hwr.oop.skat.gruppe2.application.SpielendeSpieler;
+========
+package skat.domain;
+>>>>>>>> origin/main:src/skat/domain/KartenStapel.java
 
 import java.util.ArrayList;
 import java.util.List;

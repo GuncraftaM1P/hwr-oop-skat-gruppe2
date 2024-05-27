@@ -1,4 +1,8 @@
+<<<<<<<< HEAD:src/main/java/hwr/oop/skat/gruppe2/domain/Farbe.java
 package hwr.oop.skat.gruppe2.domain;
+========
+package skat.domain;
+>>>>>>>> origin/main:src/skat/domain/Farbe.java
 
 import java.util.Arrays;
 import java.util.List;
