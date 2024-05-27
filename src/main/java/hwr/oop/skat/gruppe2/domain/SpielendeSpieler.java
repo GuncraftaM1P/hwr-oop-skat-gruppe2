@@ -2,6 +2,7 @@ package hwr.oop.skat.gruppe2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SpielendeSpieler {
     Spieler spieler;
@@ -19,9 +20,9 @@ public class SpielendeSpieler {
         // Karte auf der Hand?
         if (!this.getHandKarten().isEmpty()) {
             // Trumpfkarte / Ungleiche Farbe
-            if (karte.getFarbe() != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
+            if (karte.getFarbe().getWert() != kartenStapel.getGelegteKarten().getFirst().getFarbe().getWert()) {
                 for (Karte i : this.getHandKarten()) {
-                    if (i.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
+                    if (i.getFarbe().getWert() == kartenStapel.getGelegteKarten().getFirst().getFarbe().getWert()) {
                         return;
                     }
                 }
@@ -49,5 +50,18 @@ public class SpielendeSpieler {
     }
     public List<Karte> getGewonneneKarten() {
         return this.gewonneneKarten;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SpielendeSpieler that = (SpielendeSpieler) o;
+        return Objects.equals(spieler, that.spieler) && Objects.equals(handKarten, that.handKarten) && Objects.equals(gewonneneKarten, that.gewonneneKarten);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(spieler, handKarten, gewonneneKarten);
     }
 }

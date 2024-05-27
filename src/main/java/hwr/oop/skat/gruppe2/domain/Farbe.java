@@ -27,4 +27,6 @@ public enum Farbe {
   public static List<Farbe> getFarben() {
     return Arrays.asList(Farbe.values());
   }
+
+
 }
