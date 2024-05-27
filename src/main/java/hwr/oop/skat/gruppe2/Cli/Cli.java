@@ -1,4 +1,7 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2.Cli;
+
+import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
+import hwr.oop.skat.gruppe2.domain.Spieler;
 
 import java.io.PrintStream;
 

@@ -1,5 +1,6 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2;
 
+import hwr.oop.skat.gruppe2.domain.Spieler;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

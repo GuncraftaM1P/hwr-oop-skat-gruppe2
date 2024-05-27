@@ -1,6 +1,6 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2;
 
-import org.assertj.core.api.Assertions;
+import hwr.oop.skat.gruppe2.application.SpielerVerwaltung;
 import org.junit.jupiter.api.Test;
 
 public class SpielerVerwaltungTest {

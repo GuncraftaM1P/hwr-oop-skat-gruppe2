@@ -1,4 +1,8 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2.application;
+
+import hwr.oop.skat.gruppe2.Cli.Cli;
+import hwr.oop.skat.gruppe2.domain.SpielVerwaltung;
+import hwr.oop.skat.gruppe2.domain.Spieler;
 
 import java.util.ArrayList;
 import java.util.List;

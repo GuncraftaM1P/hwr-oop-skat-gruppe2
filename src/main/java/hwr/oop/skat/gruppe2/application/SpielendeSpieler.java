@@ -1,7 +1,9 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2.application;
 
-import java.util.ArrayList;
-import java.util.List;
+import hwr.oop.skat.gruppe2.domain.Karte;
+import hwr.oop.skat.gruppe2.domain.KartenListe;
+import hwr.oop.skat.gruppe2.domain.KartenStapel;
+import hwr.oop.skat.gruppe2.domain.Spieler;
 
 public class SpielendeSpieler {
     Spieler spieler;

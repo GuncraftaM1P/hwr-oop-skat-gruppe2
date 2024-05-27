@@ -1,4 +1,4 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2.domain;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +32,7 @@ public enum Wert {
 
   public int getStaerke() {return staerke;}
 
-  public static List<hwr.oop.Wert> getZahlen() {
-    return Arrays.asList(hwr.oop.Wert.values());
+  public static List<Wert> getZahlen() {
+    return Arrays.asList(Wert.values());
   }
 }

@@ -1,8 +1,8 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2.persistence;
 
-import java.util.ArrayList;
+import hwr.oop.skat.gruppe2.domain.*;
+
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 public class LadenUndSpeichern {
@@ -24,7 +24,7 @@ public class LadenUndSpeichern {
     }
     private Karte stringZuKarte(String stringZuKarte) {
         String[] temp =  stringZuKarte.split("-");
-        return new Karte(Farbe.getFarbeByWert(Integer.parseInt(temp[0])),Wert.getWertByStaerke(Integer.parseInt(temp[1])));
+        return new Karte(Farbe.getFarbeByWert(Integer.parseInt(temp[0])), Wert.getWertByStaerke(Integer.parseInt(temp[1])));
     }
 
     public String kartenListeZuString(KartenListe kartenListe){

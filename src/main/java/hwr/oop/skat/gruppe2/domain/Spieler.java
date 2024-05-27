@@ -1,4 +1,4 @@
-package hwr.oop;
+package hwr.oop.skat.gruppe2.domain;
 
 import java.util.UUID;
 
