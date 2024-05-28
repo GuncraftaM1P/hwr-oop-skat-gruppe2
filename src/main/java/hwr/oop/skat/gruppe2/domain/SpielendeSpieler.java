@@ -28,9 +28,6 @@ public class SpielendeSpieler {
             if (kartensuche.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
               return;
             }
-          this.getHandKarten().remove(karte);
-          kartenStapel.addGelegteKarte(karte);
-          return;
         }
         // TODO Bube auf Nichttrumph
         }
