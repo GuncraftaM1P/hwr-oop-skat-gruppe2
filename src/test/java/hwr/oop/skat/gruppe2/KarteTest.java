@@ -38,4 +38,18 @@ class KarteTest {
     Karte testZweiteKarte = new Karte(Farbe.HERZ, Wert.ASS);
     Assertions.assertThat(testErsteKarte.equals(testZweiteKarte)).isTrue();
   }
+
+  @Test
+  public void testEquals_DifferentFarbe() {
+    Karte karte1 = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte karte2 = new Karte(Farbe.PIK, Wert.ASS;
+    Assertions.assertThat(karte1.equals(karte2)).isFalse();
+  }
+
+  @Test
+  public void testEquals_DifferentWert() {
+    Karte karte1 = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte karte2 = new Karte(Farbe.HERZ, Wert.BUBE);
+    Assertions.assertThat(karte1.equals(karte2)).isFalse();
+  }
 }
