@@ -23,6 +23,7 @@ public class SpielerVerwaltung {
   public SpielerVerwaltung() {
     spieler = new ArrayList<>(); //TODO Laden Liste
   }
+}
 
 
 
