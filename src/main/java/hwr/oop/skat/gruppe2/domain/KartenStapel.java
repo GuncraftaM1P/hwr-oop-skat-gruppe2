@@ -4,16 +4,16 @@ import hwr.oop.skat.gruppe2.application.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class KartenStapel {
-    private List<Karte> deck;
-    private List<Karte> gelegteKarte;
-    private List<Karte> skat;
-
+  private List<Karte> deck;
+  private List<Karte> gelegteKarte;
+  private List<Karte> skat;
 
   public KartenStapel() {
-      this.deck = neuerKartenStapel();
-      this.gelegteKarte = new ArrayList<>();
+    this.deck = neuerKartenStapel();
+    this.gelegteKarte = new ArrayList<>();
   }
 
   public List<Karte> neuerKartenStapel() {
@@ -29,31 +29,32 @@ public class KartenStapel {
     return karten;
   }
 
-  public void kartenVerteilen(List<SpielendeSpieler> spielendeSpieler){
-      int i = 0;
-      while (this.deck.size() > 2) {
-          int zufallsZahl = (int) Math.floor(Math.random() * this.deck.size());
-          if (zufallsZahl != this.deck.size()) {
-              spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
-              this.deck.remove(zufallsZahl);
-              i ++;
-              if (i == spielendeSpieler.size()) {
-                  i = 0;
-              }
-          }
-      }
+  public void kartenVerteilen(List<SpielendeSpieler> spielendeSpieler) {
+    int i = 0;
+    while (this.deck.size() > 2) {
+        Random random = new Random();
+        int zufallsZahl = random.nextInt(this.deck.size());
+        spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
+        this.deck.remove(zufallsZahl);
+        i++;
+        if (i == spielendeSpieler.size()) {
+          i = 0;
+        }
+
+    }
   }
 
   // Getter
   public List<Karte> getGelegteKarten() {
-      return this.gelegteKarte;
+    return this.gelegteKarte;
   }
-  public List<Karte> getDeck() {
-      return this.deck;
-  }
-  // Setter
-    public void addGelegteKarte(Karte karte) {
-      this.gelegteKarte.add(karte);
-    }
-}
 
+  public List<Karte> getDeck() {
+    return this.deck;
+  }
+
+  // Setter
+  public void addGelegteKarte(Karte karte) {
+    this.gelegteKarte.add(karte);
+  }
+  }
