@@ -27,8 +27,9 @@ public class KartenStapel {
 
   public void kartenVerteilen(List<SpielendeSpieler> spielendeSpieler) {
     int i = 0;
+    Random random;
     while (this.deck.size() > 2) {
-        Random random = new Random();
+        random = new Random();
         int zufallsZahl = random.nextInt(this.deck.size());
         spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
         this.deck.remove(zufallsZahl);
