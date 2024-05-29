@@ -29,7 +29,7 @@ public class KarteTest {
     void testEqualsKeineKarte(){
         Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
         int testWert = 1;
-        Assertions.assertThat(testKarte.equals(1)).isFalse();
+        Assertions.assertThat(testKarte.equals(testWert)).isFalse();
     }
 
     @Test
