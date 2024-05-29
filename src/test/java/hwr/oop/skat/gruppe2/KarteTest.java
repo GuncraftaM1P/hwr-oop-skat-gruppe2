@@ -56,9 +56,8 @@ class KarteTest {
   @Test
   void testHashCode() {
     Karte testKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
-    Karte testKarteZwei = new Karte(Farbe.HERZ, Wert.ASS);
 
-    Assertions.assertThat(testKarteEins.hashCode()).isEqualTo(testKarteZwei.hashCode());
+    Assertions.assertThat(testKarteEins.hashCode()).isEqualTo(-429339574);
   }
 
   @Test
