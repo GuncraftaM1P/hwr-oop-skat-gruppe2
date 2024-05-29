@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class SpielendeSpielerTest {
+class SpielendeSpielerTest {
     @Test
     void testKarteSetzen() {
         KartenStapel testKartenStapel = new KartenStapel();
