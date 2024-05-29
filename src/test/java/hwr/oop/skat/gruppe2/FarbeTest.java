@@ -15,7 +15,15 @@ class FarbeTest {
     }
 
     @Test
-    void TestGetFarbeByWert(){
+    void testGetFarbeByWert(){
+        int testWert = 1;
+        Farbe testFarbe = Farbe.KREUZ;
+
+        Assertions.assertThat(Farbe.getFarbeByWert(testWert).getWert()).isEqualTo(testFarbe.getWert());
+    }
+
+    @Test
+    void testGetFarbeByWertNull(){
         int testWert = 5;
 
         Assertions.assertThat(Farbe.getFarbeByWert(testWert)).isNull();
