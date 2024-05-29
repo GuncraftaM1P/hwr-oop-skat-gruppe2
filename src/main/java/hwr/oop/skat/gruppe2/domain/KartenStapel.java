@@ -1,15 +1,12 @@
 package hwr.oop.skat.gruppe2.domain;
 
-import hwr.oop.skat.gruppe2.application.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class KartenStapel {
-  private List<Karte> deck;
-  private List<Karte> gelegteKarte;
-  private List<Karte> skat;
+  private final List<Karte> deck;
+  private final List<Karte> gelegteKarte;
 
   public KartenStapel() {
     this.deck = neuerKartenStapel();
@@ -17,7 +14,6 @@ public class KartenStapel {
   }
 
   public List<Karte> neuerKartenStapel() {
-    // TODO warum Array List ?
     List<Karte> karten = new ArrayList<>();
     List<Wert> werte = Wert.getZahlen();
     List<Farbe> farben = Farbe.getFarben();
