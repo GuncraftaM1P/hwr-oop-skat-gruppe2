@@ -21,8 +21,7 @@ public class SpielendeSpieler {
       // Kartenstapel Leer?
       if (!kartenStapel.getGelegteKarten().isEmpty()) {
         // Ungleiche Farbe
-        if (karte.getFarbe()
-                != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
+        if (karte.getFarbe() != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
           // Schauen ob Spieler nicht bedienen kann
           for (Karte kartensuche : this.getHandKarten()) {
             if (kartensuche.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
