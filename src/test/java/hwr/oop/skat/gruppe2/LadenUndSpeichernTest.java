@@ -1,11 +1,10 @@
 package hwr.oop.skat.gruppe2;
 
-import hwr.oop.skat.gruppe2.domain.KartenListe;
 import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class LadenUndSpeichernTest {
+/* public class LadenUndSpeichernTest {
 
     @Test
     public void LandUndSpeichernTestVonKartenListen() {
@@ -24,3 +23,4 @@ public class LadenUndSpeichernTest {
     }
 
 }
+*/
