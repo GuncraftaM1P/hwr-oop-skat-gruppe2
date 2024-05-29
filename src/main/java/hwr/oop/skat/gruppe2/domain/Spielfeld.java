@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class KartenStapel {
+public class Spielfeld {
   private final List<Karte> deck;
   private final List<Karte> gelegteKarte;
 
-  public KartenStapel() {
+  public Spielfeld() {
     this.deck = neuerKartenStapel();
     this.gelegteKarte = new ArrayList<>();
   }

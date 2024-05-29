@@ -8,11 +8,11 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-class KartenStapelTest {
+class SpielfeldTest {
 
     @Test
     void testNeuerKartenStapel() {
-        KartenStapel testKartenStapel = new KartenStapel();
+        Spielfeld testSpielfeld = new Spielfeld();
 
         List<Karte> testKarten = List.of(
                 new Karte(Farbe.KARO, Wert.SIEBEN),
@@ -49,7 +49,7 @@ class KartenStapelTest {
                 new Karte(Farbe.KREUZ, Wert.ASS)
         );
 
-        List<Karte> deck = testKartenStapel.getDeck();
+        List<Karte> deck = testSpielfeld.getDeck();
         Assertions.assertThat(deck)
                 .hasSize(testKarten.size())
                 .containsExactlyInAnyOrderElementsOf(testKarten);
@@ -57,54 +57,54 @@ class KartenStapelTest {
 
     @Test
     void testKartenVerteilenDeck() {
-        KartenStapel testKartenStapel = new KartenStapel();
+        Spielfeld testSpielfeld = new Spielfeld();
 
         List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
 
-        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testKartenStapel.getDeck().size()).isEqualTo(2);
+        Assertions.assertThat(testSpielfeld.getDeck()).hasSize(2);
     }
     @Test
     void testKartenVerteilenSpielerEins() {
-        KartenStapel testKartenStapel = new KartenStapel();
+        Spielfeld testSpielfeld = new Spielfeld();
 
         List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
 
-        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.getFirst().getHandKarten().size()).isEqualTo(10);
+        Assertions.assertThat(testSpielendeSpieler.getFirst().getHandKarten()).hasSize(10);
     }
     @Test
     void testKartenVerteilenSpielerZwei() {
-        KartenStapel testKartenStapel = new KartenStapel();
+        Spielfeld testSpielfeld = new Spielfeld();
 
         List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
 
-        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.get(1).getHandKarten().size()).isEqualTo(10);
+        Assertions.assertThat(testSpielendeSpieler.get(1).getHandKarten()).hasSize(10);
     }
     @Test
     void testKartenVerteilenSpielerDrei() {
-        KartenStapel testKartenStapel = new KartenStapel();
+        Spielfeld testSpielfeld = new Spielfeld();
 
         List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Spieler("Spieler 3")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
+        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
 
-        testKartenStapel.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.get(2).getHandKarten().size()).isEqualTo(10);
+        Assertions.assertThat(testSpielendeSpieler.get(2).getHandKarten()).hasSize(10);
     }
 }

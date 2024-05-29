@@ -1,30 +1,28 @@
 package hwr.oop.skat.gruppe2.domain;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class SpielendeSpieler {
-  Spieler spieler;
+  Person person;
   List<Karte> handKarten;
   List<Karte> gewonneneKarten;
 
-  public SpielendeSpieler(Spieler spieler) {
-    this.spieler = spieler;
+  public SpielendeSpieler (Person person) {
+    this.person = person;
     this.handKarten = new ArrayList<>();
     this.gewonneneKarten = new ArrayList<>();
   }
 
-  public void karteSetzen(Karte karte, KartenStapel kartenStapel) {
+  public void karteSetzen(Karte karte, Spielfeld spielfeld) {
     // Karte auf der Hand?
     if (handKarten.contains(karte)) {
       // Kartenstapel Leer?
-      if (!kartenStapel.getGelegteKarten().isEmpty()) {
+      if (!spielfeld.getGelegteKarten().isEmpty()) {
         // Ungleiche Farbe
-        if (karte.getFarbe() != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
+        if (karte.getFarbe() != spielfeld.getGelegteKarten().getFirst().getFarbe()) {
           // Schauen ob Spieler nicht bedienen kann
           for (Karte kartensuche : this.getHandKarten()) {
-            if (kartensuche.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
+            if (kartensuche.getFarbe() == spielfeld.getGelegteKarten().getFirst().getFarbe()) {
               return;
             }
           }
@@ -33,11 +31,11 @@ public class SpielendeSpieler {
         // TODO Bube gleicher Farbe auf Farbe
         // Gleiche Farbe
         this.getHandKarten().remove(karte);
-        kartenStapel.addGelegteKarte(karte);
+        spielfeld.addGelegteKarte(karte);
         return;
       }
       this.getHandKarten().remove(karte);
-      kartenStapel.addGelegteKarte(karte);
+      spielfeld.addGelegteKarte(karte);
     }
   }
 
