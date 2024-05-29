@@ -6,38 +6,36 @@ import hwr.oop.skat.gruppe2.domain.Wert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class KarteTest {
-    @Test
-    void testGetFarbe(){
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Assertions.assertThat(testKarte.getFarbe().getWert()).isEqualTo(Farbe.HERZ.getWert());
-    }
+class KarteTest {
+  @Test
+  void testGetFarbe() {
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Assertions.assertThat(testKarte.getFarbe().getWert()).isEqualTo(Farbe.HERZ.getWert());
+  }
 
-    @Test
-    void testGetWert(){
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Assertions.assertThat(testKarte.getWert().getPunkte()).isEqualTo(Wert.ASS.getPunkte());
-    }
+  @Test
+  void testGetWert() {
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Assertions.assertThat(testKarte.getWert().getPunkte()).isEqualTo(Wert.ASS.getPunkte());
+  }
 
-    @Test
-    void testEqualsSelf(){
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Assertions.assertThat(testKarte.equals(testKarte)).isTrue();
-    }
+  @Test
+  void testEqualsSelf() {
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Assertions.assertThat(testKarte.equals(testKarte)).isTrue();
+  }
 
-    @Test
-    void testEqualsKeineKarte(){
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        int testWert = 1;
-        Assertions.assertThat(testKarte.equals(testWert)).isFalse();
-    }
+  @Test
+  void testEqualsKeineKarte() {
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    int testWert = 1;
+    Assertions.assertThat(testKarte.equals(testWert)).isFalse();
+  }
 
-    @Test
-    void testEquals(){
-        Karte testErsteKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Karte testZweiteKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Assertions.assertThat(testErsteKarte.equals(testZweiteKarte)).isTrue();
-    }
+  @Test
+  void testEquals() {
+    Karte testErsteKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte testZweiteKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Assertions.assertThat(testErsteKarte.equals(testZweiteKarte)).isTrue();
+  }
 }
-
-
