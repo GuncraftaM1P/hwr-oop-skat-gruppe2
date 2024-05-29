@@ -1,6 +1,5 @@
 package hwr.oop.skat.gruppe2.domain;
 
-
 import java.util.Objects;
 
 public class Karte {
