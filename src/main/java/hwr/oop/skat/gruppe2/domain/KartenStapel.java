@@ -8,6 +8,8 @@ import java.util.List;
 public class KartenStapel {
     private List<Karte> deck;
     private List<Karte> gelegteKarte;
+    private List<Karte> skat;
+
 
   public KartenStapel() {
       this.deck = neuerKartenStapel();
