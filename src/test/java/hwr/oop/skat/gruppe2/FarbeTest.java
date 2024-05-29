@@ -17,7 +17,7 @@ class FarbeTest {
     @Test
     void testGetFarbeByWert(){
         int testWert = 1;
-        Farbe testFarbe = Farbe.KREUZ;
+        Farbe testFarbe = Farbe.KARO;
 
         Assertions.assertThat(Farbe.getFarbeByWert(testWert).getWert()).isEqualTo(testFarbe.getWert());
     }

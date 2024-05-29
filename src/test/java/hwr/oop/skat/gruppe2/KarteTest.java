@@ -42,7 +42,7 @@ class KarteTest {
   @Test
   public void testEquals_DifferentFarbe() {
     Karte karte1 = new Karte(Farbe.HERZ, Wert.ASS);
-    Karte karte2 = new Karte(Farbe.PIK, Wert.ASS;
+    Karte karte2 = new Karte(Farbe.PIK, Wert.ASS);
     Assertions.assertThat(karte1.equals(karte2)).isFalse();
   }
 
