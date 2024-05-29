@@ -40,16 +40,31 @@ class KarteTest {
   }
 
   @Test
-  public void testEquals_DifferentFarbe() {
+  void testEquals_DifferentFarbe() {
     Karte karte1 = new Karte(Farbe.HERZ, Wert.ASS);
     Karte karte2 = new Karte(Farbe.PIK, Wert.ASS);
     Assertions.assertThat(karte1.equals(karte2)).isFalse();
   }
 
   @Test
-  public void testEquals_DifferentWert() {
+  void testEquals_DifferentWert() {
     Karte karte1 = new Karte(Farbe.HERZ, Wert.ASS);
     Karte karte2 = new Karte(Farbe.HERZ, Wert.BUBE);
     Assertions.assertThat(karte1.equals(karte2)).isFalse();
+  }
+
+  @Test
+  void testHashCode() {
+    Karte testKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte testKarteZwei = new Karte(Farbe.HERZ, Wert.ASS);
+
+    Assertions.assertThat(testKarteEins.hashCode()).isEqualTo(testKarteZwei.hashCode());
+  }
+
+  @Test
+  void testToString() {
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+
+    Assertions.assertThat(testKarte.toString()).isEqualTo("Karte{farbe=HERZ, wert=ASS}");
   }
 }
