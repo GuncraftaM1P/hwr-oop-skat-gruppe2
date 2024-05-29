@@ -32,12 +32,12 @@ public class LadenUndSpeichern {
 
   // Neuer Spieler in DatenBank Speichern
   public UUID spielerNeuErstellen(Spieler spieler) {
-    SQLVerbinder.getSingletonSchnitstelle()
+    SqlVerbinder.getSingletonSchnittstelle()
         .NeuenSpielerInDatenbank(spieler.getName(), spieler.getUuid());
     return spieler.getUuid();
   }
 
   public Spieler getSpielerVonUUID(UUID uuid) {
-    return SQLVerbinder.getSingletonSchnitstelle().getSpielerByUUIDSpieler(uuid.toString());
+    return SqlVerbinder.getSingletonSchnittstelle().getSpielerByUUIDSpieler(uuid.toString());
   }
 }

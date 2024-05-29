@@ -1,43 +1,39 @@
 package hwr.oop.skat.gruppe2.persistence;
 
-import hwr.oop.skat.gruppe2.domain.Farbe;
-import hwr.oop.skat.gruppe2.domain.Karte;
 import hwr.oop.skat.gruppe2.domain.Spieler;
-import hwr.oop.skat.gruppe2.domain.Wert;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class SQLVerbinder {
-
+class SqlVerbinder {
   public static void main(String[] args) {
-    getSingletonSchnitstelle();
+    getSingletonSchnittstelle();
   }
 
-  private static SQLVerbinder singleton;
+  private static SqlVerbinder singleton;
   // db parameter
-  // TODO ersetzen durch objekt von typ path wegen windows mac untetschiede
-  private static final String url = "jdbc:sqlite:sqlite/Skat.db";
+  private static final Path URL = Paths.get("jdbc:sqlite:sqlite/Skat.db");
   private Connection schnittstelle = null;
 
-  public static SQLVerbinder getSingletonSchnitstelle() {
+  public static SqlVerbinder getSingletonSchnittstelle() {
     if (singleton == null) {
-      singleton = new SQLVerbinder();
+      singleton = new SqlVerbinder();
     }
     return singleton;
   }
 
-  private SQLVerbinder() {
+  private SqlVerbinder() {
     try {
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
-      schnittstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(URL.toString());
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -170,7 +166,7 @@ public class SQLVerbinder {
 
   private void sendSQLBefehle(String sql) {
     try {
-      schnittstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(URL.toString());
       schnittstelle.prepareStatement(sql).execute();
       // TODO löschen ! nach arbeiten
       System.out.println(sql);
@@ -181,7 +177,7 @@ public class SQLVerbinder {
 
   private void sendMehreSQLBefehle(List<String> sqlList) {
     try {
-      schnittstelle = DriverManager.getConnection(url);
+      schnittstelle = DriverManager.getConnection(URL.toString());
       for (String s : sqlList) {
         schnittstelle.prepareStatement(s).execute();
         // TODO löschen ! nach arbeiten

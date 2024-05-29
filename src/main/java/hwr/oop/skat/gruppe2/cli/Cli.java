@@ -1,4 +1,4 @@
-package hwr.oop.skat.gruppe2.Cli;
+package hwr.oop.skat.gruppe2.cli;
 
 import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
 import hwr.oop.skat.gruppe2.domain.Spieler;
