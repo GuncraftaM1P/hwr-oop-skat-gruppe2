@@ -22,14 +22,14 @@ public class SpielendeSpieler {
       if (!kartenStapel.getGelegteKarten().isEmpty()) {
         // Ungleiche Farbe
         if (karte.getFarbe()
-            != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
-        // Schauen ob Spieler nicht bedienen kann
+                != kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
+          // Schauen ob Spieler nicht bedienen kann
           for (Karte kartensuche : this.getHandKarten()) {
             if (kartensuche.getFarbe() == kartenStapel.getGelegteKarten().getFirst().getFarbe()) {
               return;
             }
-        }
-        // TODO Bube auf Nichttrumph
+          }
+          // TODO Bube auf Nichttrumph
         }
         // TODO Bube gleicher Farbe auf Farbe
         // Gleiche Farbe

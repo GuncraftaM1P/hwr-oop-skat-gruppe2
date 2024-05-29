@@ -15,6 +15,13 @@ class FarbeTest {
     }
 
     @Test
+    void TestGetFarbeByWert(){
+        int testWert = 5;
+
+        Assertions.assertThat(Farbe.getFarbeByWert(testWert)).isNull();
+    }
+
+    @Test
     void testGetFarben(){
         List<Farbe> tempList = Farbe.getFarben();
         List<Farbe> shouldBe = new ArrayList<>();

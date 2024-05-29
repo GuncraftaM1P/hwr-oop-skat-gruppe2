@@ -1,3 +1,7 @@
+
+// TODO: Löschen
+
+
 package hwr.oop.skat.gruppe2.domain;
 
 import java.util.ArrayList;
