@@ -64,6 +64,6 @@ class KarteTest {
   void testToString() {
     Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
-    Assertions.assertThat(testKarte.toString()).isEqualTo("Karte{farbe=HERZ, wert=ASS}");
+    Assertions.assertThat(testKarte.toString()).hasToString("Karte{farbe=HERZ, wert=ASS}");
   }
 }
