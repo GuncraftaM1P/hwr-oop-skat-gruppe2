@@ -10,22 +10,17 @@ import java.util.Scanner;
 
 public class SpielerVerwaltung {
 
-
   public static void main(String[] args) {
-   //TODO noch erstellen@SuppressWarnings()
-    new Cli( System.out, args);
-
-
+    // TODO noch erstellen@SuppressWarnings()
+    new Cli(System.out, args);
   }
 
   List<Spieler> spieler; // TODO Laden Liste
 
   public SpielerVerwaltung() {
-    spieler = new ArrayList<>(); //TODO Laden Liste
+    spieler = new ArrayList<>(); // TODO Laden Liste
   }
 }
-
-
 
 
 

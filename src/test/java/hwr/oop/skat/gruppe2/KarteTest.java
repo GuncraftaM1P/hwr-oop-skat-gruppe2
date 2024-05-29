@@ -8,21 +8,35 @@ import org.junit.jupiter.api.Test;
 
 public class KarteTest {
     @Test
-    void testKarteWert(){
+    void testGetFarbe(){
         Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
         Assertions.assertThat(testKarte.getFarbe().getWert()).isEqualTo(Farbe.HERZ.getWert());
     }
 
     @Test
-    void testKartePunkte(){
-    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
-    Assertions.assertThat(testKarte.getWert().getPunkte()).isEqualTo(Wert.ASS.getPunkte());
+    void testGetWert(){
+        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+        Assertions.assertThat(testKarte.getWert().getPunkte()).isEqualTo(Wert.ASS.getPunkte());
     }
 
     @Test
-    void testKarteStaerke(){
+    void testEqualsSelf(){
         Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Assertions.assertThat(testKarte.getWert().getStaerke()).isEqualTo(Wert.ASS.getStaerke());
+        Assertions.assertThat(testKarte.equals(testKarte)).isTrue();
+    }
+
+    @Test
+    void testEqualsKeineKarte(){
+        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+        int testWert = 1;
+        Assertions.assertThat(testKarte.equals(1)).isFalse();
+    }
+
+    @Test
+    void testEquals(){
+        Karte testErsteKarte = new Karte(Farbe.HERZ, Wert.ASS);
+        Karte testZweiteKarte = new Karte(Farbe.HERZ, Wert.ASS);
+        Assertions.assertThat(testErsteKarte.equals(testZweiteKarte)).isTrue();
     }
 }
 
