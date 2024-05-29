@@ -1,12 +1,15 @@
 package hwr.oop.skat.gruppe2.persistence;
 
-import hwr.oop.skat.gruppe2.domain.KartenListe;
+import hwr.oop.skat.gruppe2.domain.Farbe;
+import hwr.oop.skat.gruppe2.domain.Karte;
 import hwr.oop.skat.gruppe2.domain.Spieler;
+import hwr.oop.skat.gruppe2.domain.Wert;
 
 import java.sql.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,8 +20,8 @@ public class SQLVerbinder {
   }
 
   private static SQLVerbinder singleton;
-  //db parameter
-  //TODO ersetzen durch objekt von typ path wegen windows mac untetschiede
+  // db parameter
+  // TODO ersetzen durch objekt von typ path wegen windows mac untetschiede
   private static final String url = "jdbc:sqlite:sqlite/Skat.db";
   private Connection schnittstelle = null;
 
@@ -29,16 +32,13 @@ public class SQLVerbinder {
     return singleton;
   }
 
-
-
   private SQLVerbinder() {
     try {
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
       schnittstelle = DriverManager.getConnection(url);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
 
@@ -46,7 +46,7 @@ public class SQLVerbinder {
     List<String> startBefehle = new ArrayList<>();
 
     startBefehle.add(
-            """
+        """
                     CREATE TABLE IF NOT EXISTS spieler (
                     UUIDSpieler text PRIMARY KEY,
                     name text NOT NULL,
@@ -54,11 +54,12 @@ public class SQLVerbinder {
                     verlohrendeSpiele integer
                     );""");
 
-      //Spiel ID
-      //einzelspieler
-      //der Spieler der darann ist
-      // wenn Null skat wurde vergeben und sonnst mit zwei katent belegt die vergegeben werden müssen
-      startBefehle.add("""
+    // Spiel ID
+    // einzelspieler
+    // der Spieler der darann ist
+    // wenn Null skat wurde vergeben und sonnst mit zwei katent belegt die vergegeben werden müssen
+    startBefehle.add(
+        """
               CREATE TABLE IF NOT EXISTS spiel (
               UUIDSpiel text PRIMARY KEY,
               UUIDRunde text,
@@ -68,10 +69,11 @@ public class SQLVerbinder {
               OffenerSkart text
               );""");
 
-      //Spiel ID
-      //Spieler 1
-      //die nummer von spieler im game
-      startBefehle.add("""
+    // Spiel ID
+    // Spieler 1
+    // die nummer von spieler im game
+    startBefehle.add(
+        """
               CREATE TABLE IF NOT EXISTS SpielHatSpieler (
               UUIDSpiel text PRIMARY KEY,
               UUIDspielenderSpieler text,
@@ -80,7 +82,8 @@ public class SQLVerbinder {
               GewonneneKaten text
               );""");
 
-    startBefehle.add("""
+    startBefehle.add(
+        """
               CREATE TABLE IF NOT EXISTS runden ("
               "UUIDRunde  text PRIMARY KEY,"
               "GespielteKarten text"
@@ -88,57 +91,64 @@ public class SQLVerbinder {
 
     sendMehreSQLBefehle(startBefehle);
 
-    //TODO entefernen nach dem Testen ist Test daten
-    try{
-      ResultSet resultSet = executeSQL("SELECT COUNT(*) as Anzahl FROM spieler WHERE spieler.UUIDSpieler like 'Test1'");
-      resultSet.next();
-    if (resultSet.getInt("Anzahl") < 0) {
-        sendSQLBefehle("INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verlohrendeSpiele)\n"
-                + "VALUES('Test1','TestSpieler',0,0);");}
-    }catch (SQLException e){
-      e.printStackTrace();
-    }
-
-
+    // TODO entefernen nach dem Testen ist Test daten
     try {
-      ResultSet resultSet =executeSQL("SELECT name FROM spieler");
+      ResultSet resultSet =
+          executeSQL(
+              "SELECT COUNT(*) as Anzahl FROM spieler WHERE spieler.UUIDSpieler like 'Test1'");
       resultSet.next();
-      System.out.println(resultSet.toString());
-      if(resultSet.getMetaData().getColumnCount()!=1){
-        System.out.println("ErRRRRROROROOROOR");
-      }else {
-        System.out.println(resultSet.getString("name"));
+      if (resultSet.getInt("Anzahl") < 0) {
+        sendSQLBefehle(
+            "INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verlohrendeSpiele)\n"
+                + "VALUES('Test1','TestSpieler',0,0);");
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
 
-
+    try {
+      ResultSet resultSet = executeSQL("SELECT name FROM spieler");
+      resultSet.next();
+      System.out.println(resultSet.toString());
+      if (resultSet.getMetaData().getColumnCount() != 1) {
+        System.out.println("ErRRRRROROROOROOR");
+      } else {
+        System.out.println(resultSet.getString("name"));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
-  public void NeuenSpielerInDatenbank(String Name, UUID UUIDSpieler){
-    sendSQLBefehle("INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verlohrendeSpiele)\n"
-            + "VALUES('"+UUIDSpieler+"','"+Name+"',0,0);");
+  public void NeuenSpielerInDatenbank(String Name, UUID UUIDSpieler) {
+    sendSQLBefehle(
+        "INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verlohrendeSpiele)\n"
+            + "VALUES('"
+            + UUIDSpieler
+            + "','"
+            + Name
+            + "',0,0);");
   }
 
-  public Spieler getSpielerByUUIDSpieler(String UUIDSpieler){
-    ResultSet resultSet = executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '"+UUIDSpieler+"'");
-    try{
-      return new Spieler(UUID.fromString(resultSet.getString("UUIDSpieler")),resultSet.getString("name"),resultSet.getInt("gewonneneSpiele"),resultSet.getInt("verlohrendeSpiele"));
-    }catch (SQLException e){
+  public Spieler getSpielerByUUIDSpieler(String UUIDSpieler) {
+    ResultSet resultSet =
+        executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '" + UUIDSpieler + "'");
+    try {
+      return new Spieler(
+          UUID.fromString(resultSet.getString("UUIDSpieler")),
+          resultSet.getString("name"),
+          resultSet.getInt("gewonneneSpiele"),
+          resultSet.getInt("verlohrendeSpiele"));
+    } catch (SQLException e) {
       e.printStackTrace();
     }
     return null;
   }
 
-  public KartenListe getKatenByString(String KatenString){
-    return new KartenListe();
-  }
-
-  public int getIntegerVonDB(String sql){
+  public int getIntegerVonDB(String sql) {
     try {
-         ResultSet resultSet = schnittstelle.prepareStatement(sql).executeQuery() ;
-      while (resultSet.next()){
+      ResultSet resultSet = schnittstelle.prepareStatement(sql).executeQuery();
+      while (resultSet.next()) {
         int id = resultSet.getInt(1);
         return id;
       }
@@ -158,31 +168,27 @@ public class SQLVerbinder {
     }
   }
 
-
   private void sendSQLBefehle(String sql) {
-    try{
+    try {
       schnittstelle = DriverManager.getConnection(url);
       schnittstelle.prepareStatement(sql).execute();
-      //TODO löschen ! nach arbeiten
+      // TODO löschen ! nach arbeiten
       System.out.println(sql);
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
   private void sendMehreSQLBefehle(List<String> sqlList) {
-    try{
+    try {
       schnittstelle = DriverManager.getConnection(url);
-      for(String s : sqlList) {
+      for (String s : sqlList) {
         schnittstelle.prepareStatement(s).execute();
-        //TODO löschen ! nach arbeiten
+        // TODO löschen ! nach arbeiten
         System.out.println(s);
       }
-    }
-    catch (SQLException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
-
 }
