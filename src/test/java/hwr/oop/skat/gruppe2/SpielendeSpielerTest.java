@@ -8,106 +8,100 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 class SpielendeSpielerTest {
-    @Test
-    void testKarteSetzenStapelLeer() {
-        KartenStapel testKartenStapel = new KartenStapel();
-        Spieler testSpieler = new Spieler("Spieler");
-        SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+  @Test
+  void testKarteSetzenStapelLeer() {
+    KartenStapel testKartenStapel = new KartenStapel();
+    Spieler testSpieler = new Spieler("Spieler");
+    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
-        testSpielenderSpieler.karteAufDieHand(testKarte);
+    testSpielenderSpieler.karteAufDieHand(testKarte);
 
-        testSpielenderSpieler.karteSetzen(testKarte, testKartenStapel);
+    testSpielenderSpieler.karteSetzen(testKarte, testKartenStapel);
 
-        List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
-        Assertions.assertThat(gelegteKarten)
-                .hasSize(1)
-                .contains(testKarte);
-    }
-    @Test
-    void testKarteSetzenGleicheFarbe() {
-        KartenStapel testKartenStapel = new KartenStapel();
-        Spieler testSpieler = new Spieler("Spieler");
-        SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
-        Karte testSpielerKarte = new Karte(Farbe.HERZ, Wert.ASS);
-        Karte testStapelKarte = new Karte(Farbe.HERZ, Wert.DAME);
+    List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
+    Assertions.assertThat(gelegteKarten).hasSize(1).contains(testKarte);
+  }
 
-        testSpielenderSpieler.karteAufDieHand(testSpielerKarte);
+  @Test
+  void testKarteSetzenGleicheFarbe() {
+    KartenStapel testKartenStapel = new KartenStapel();
+    Spieler testSpieler = new Spieler("Spieler");
+    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
+    Karte testSpielerKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte testStapelKarte = new Karte(Farbe.HERZ, Wert.DAME);
 
-        testKartenStapel.getGelegteKarten().add(testStapelKarte);
+    testSpielenderSpieler.karteAufDieHand(testSpielerKarte);
 
-        testSpielenderSpieler.karteSetzen(testSpielerKarte, testKartenStapel);
+    testKartenStapel.getGelegteKarten().add(testStapelKarte);
 
-        List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
-        Assertions.assertThat(gelegteKarten)
-                .hasSize(2)
-                .contains(testSpielerKarte);
-    }
-    @Test
-    void testKarteSetzenUngleicheFarbeIllegal() {
-        KartenStapel testKartenStapel = new KartenStapel();
-        Spieler testSpieler = new Spieler("Spieler");
-        SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
-        Karte testSpielerKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
-        Karte testSpielerKarteZwei = new Karte(Farbe.KARO, Wert.DAME);
-        Karte testStapelKarte = new Karte(Farbe.KARO, Wert.ASS);
+    testSpielenderSpieler.karteSetzen(testSpielerKarte, testKartenStapel);
 
-        testSpielenderSpieler.karteAufDieHand(testSpielerKarteEins);
-        testSpielenderSpieler.karteAufDieHand(testSpielerKarteZwei);
+    List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
+    Assertions.assertThat(gelegteKarten).hasSize(2).contains(testSpielerKarte);
+  }
 
-        testKartenStapel.getGelegteKarten().add(testStapelKarte);
+  @Test
+  void testKarteSetzenUngleicheFarbeIllegal() {
+    KartenStapel testKartenStapel = new KartenStapel();
+    Spieler testSpieler = new Spieler("Spieler");
+    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
+    Karte testSpielerKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte testSpielerKarteZwei = new Karte(Farbe.KARO, Wert.DAME);
+    Karte testStapelKarte = new Karte(Farbe.KARO, Wert.ASS);
 
-        testSpielenderSpieler.karteSetzen(testSpielerKarteEins, testKartenStapel);
+    testSpielenderSpieler.karteAufDieHand(testSpielerKarteEins);
+    testSpielenderSpieler.karteAufDieHand(testSpielerKarteZwei);
 
-        List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
-        Assertions.assertThat(gelegteKarten)
-                .hasSize(1)
-                .doesNotContain(testSpielerKarteEins);
-    }
-    @Test
-    void testKarteSetzenUngleicheFarbeLegal() {
-        KartenStapel testKartenStapel = new KartenStapel();
-        Spieler testSpieler = new Spieler("Spieler");
-        SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
-        Karte testSpielerKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
-        Karte testSpielerKarteZwei = new Karte(Farbe.HERZ, Wert.DAME);
-        Karte testStapelKarte = new Karte(Farbe.KARO, Wert.ASS);
+    testKartenStapel.getGelegteKarten().add(testStapelKarte);
 
-        testSpielenderSpieler.karteAufDieHand(testSpielerKarteEins);
-        testSpielenderSpieler.karteAufDieHand(testSpielerKarteZwei);
+    testSpielenderSpieler.karteSetzen(testSpielerKarteEins, testKartenStapel);
 
-        testKartenStapel.getGelegteKarten().add(testStapelKarte);
+    List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
+    Assertions.assertThat(gelegteKarten).hasSize(1).doesNotContain(testSpielerKarteEins);
+  }
 
-        testSpielenderSpieler.karteSetzen(testSpielerKarteEins, testKartenStapel);
+  @Test
+  void testKarteSetzenUngleicheFarbeLegal() {
+    KartenStapel testKartenStapel = new KartenStapel();
+    Spieler testSpieler = new Spieler("Spieler");
+    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
+    Karte testSpielerKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte testSpielerKarteZwei = new Karte(Farbe.HERZ, Wert.DAME);
+    Karte testStapelKarte = new Karte(Farbe.KARO, Wert.ASS);
 
-        List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
-        Assertions.assertThat(gelegteKarten)
-                .hasSize(2)
-                .contains(testSpielerKarteEins);
-    }
+    testSpielenderSpieler.karteAufDieHand(testSpielerKarteEins);
+    testSpielenderSpieler.karteAufDieHand(testSpielerKarteZwei);
 
-    @Test
-    void testKarteAufDieHand() {
-        Spieler testSpieler = new Spieler("Spieler");
-        SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    testKartenStapel.getGelegteKarten().add(testStapelKarte);
 
-        testSpielenderSpieler.karteAufDieHand(testKarte);
+    testSpielenderSpieler.karteSetzen(testSpielerKarteEins, testKartenStapel);
 
-        Assertions.assertThat(testSpielenderSpieler.getHandKarten())
-                .hasSize(1)
-                .contains(testKarte);
-    }
-    @Test
-    void testKarteGewonnen() {
-        Spieler testSpieler = new Spieler("Spieler");
-        SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
-        Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    List<Karte> gelegteKarten = testKartenStapel.getGelegteKarten();
+    Assertions.assertThat(gelegteKarten).hasSize(2).contains(testSpielerKarteEins);
+  }
 
-        testSpielenderSpieler.karteGewonnen(testKarte);
+  @Test
+  void testKarteAufDieHand() {
+    Spieler testSpieler = new Spieler("Spieler");
+    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
-        Assertions.assertThat(testSpielenderSpieler.getGewonneneKarten())
-                .hasSize(1)
-                .contains(testKarte);
-    }
+    testSpielenderSpieler.karteAufDieHand(testKarte);
+
+    Assertions.assertThat(testSpielenderSpieler.getHandKarten()).hasSize(1).contains(testKarte);
+  }
+
+  @Test
+  void testKarteGewonnen() {
+    Spieler testSpieler = new Spieler("Spieler");
+    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testSpieler);
+    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+
+    testSpielenderSpieler.karteGewonnen(testKarte);
+
+    Assertions.assertThat(testSpielenderSpieler.getGewonneneKarten())
+        .hasSize(1)
+        .contains(testKarte);
+  }
 }

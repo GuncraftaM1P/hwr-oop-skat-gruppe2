@@ -57,19 +57,4 @@ public class SpielendeSpieler {
   public List<Karte> getGewonneneKarten() {
     return this.gewonneneKarten;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    SpielendeSpieler that = (SpielendeSpieler) o;
-    return Objects.equals(spieler, that.spieler)
-        && Objects.equals(handKarten, that.handKarten)
-        && Objects.equals(gewonneneKarten, that.gewonneneKarten);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(spieler, handKarten, gewonneneKarten);
-  }
 }
