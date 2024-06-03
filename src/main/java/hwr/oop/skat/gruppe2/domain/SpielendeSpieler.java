@@ -2,6 +2,7 @@ package hwr.oop.skat.gruppe2.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: "SpielendeSpieler" refactor zu "Spieler"
 public class SpielendeSpieler {
   Person person;
   List<Karte> handKarten;
@@ -13,6 +14,7 @@ public class SpielendeSpieler {
     this.gewonneneKarten = new ArrayList<>();
   }
 
+  //TODO: Spielfeldreferenz muss zu Stichreferenz geändert werden
   public void karteSetzen(Karte karte, Spielfeld spielfeld) {
     // Karte auf der Hand?
     if (handKarten.contains(karte)) {

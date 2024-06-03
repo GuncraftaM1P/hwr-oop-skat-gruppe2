@@ -1,7 +1,7 @@
 package hwr.oop.skat.gruppe2.cli;
 
 import hwr.oop.skat.gruppe2.persistence.LadenUndSpeichern;
-import hwr.oop.skat.gruppe2.domain.Spieler;
+import hwr.oop.skat.gruppe2.domain.Person;
 
 import java.io.PrintStream;
 
@@ -23,10 +23,10 @@ public class Cli {
 
     private void neuerSpieler(String[] args){
 
-        Spieler person = new Spieler(args[1]);
+        Person person = new Person(args[1]);
         LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
-        ladenUndSpeichern.spielerNeuErstellen(spieler);
-        Systemout.println("Der neue Spieler "+spieler.getName()+" wurde gespeichert. Und hat die UUID:"+spieler.getUuid());
+        ladenUndSpeichern.personNeuErstellen(person);
+        Systemout.println("Der neue Spieler "+person.getName()+" wurde gespeichert. Und hat die UUID:"+person.getUuid());
 
     }
 }

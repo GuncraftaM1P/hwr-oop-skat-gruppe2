@@ -1,14 +1,14 @@
 package hwr.oop.skat.gruppe2;
 
-import hwr.oop.skat.gruppe2.application.SpielerVerwaltung;
+import hwr.oop.skat.gruppe2.application.PersonenVerwaltung;
 import org.junit.jupiter.api.Test;
 
-public class SpielerVerwaltungTest {
+class SpielerVerwaltungTest {
 
     @Test
-    public void testErstelleneneuenspieler(){
-        SpielerVerwaltung spieler = new SpielerVerwaltung();
-        spieler.main(new String[]{"ErstelleNeuenSpieler","Gustaff"});
+    void testErstelleneneueperson(){
+        PersonenVerwaltung person = new PersonenVerwaltung();
+        person.main(new String[]{"ErstelleNeuePerson","Gustaff"});
         //TODO Log abgreifen und überprüfen
     }
 

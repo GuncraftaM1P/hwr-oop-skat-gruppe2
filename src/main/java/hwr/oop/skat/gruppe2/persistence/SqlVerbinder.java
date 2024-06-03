@@ -1,6 +1,6 @@
 package hwr.oop.skat.gruppe2.persistence;
 
-import hwr.oop.skat.gruppe2.domain.Spieler;
+import hwr.oop.skat.gruppe2.domain.Person;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -116,21 +116,21 @@ class SqlVerbinder {
     }
   }
 
-  public void NeuenSpielerInDatenbank(String Name, UUID UUIDSpieler) {
+  public void NeuePersonInDatenbank(String Name, UUID UUIDPerson) {
     sendSQLBefehle(
         "INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verlohrendeSpiele)\n"
             + "VALUES('"
-            + UUIDSpieler
+            + UUIDPerson
             + "','"
             + Name
             + "',0,0);");
   }
 
-  public Spieler getSpielerByUUIDSpieler(String UUIDSpieler) {
+  public Person getPersonByUUIDPerson(String UUIDPerson) {
     ResultSet resultSet =
-        executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '" + UUIDSpieler + "'");
+        executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '" + UUIDPerson + "'");
     try {
-      return new Spieler(
+      return new Person(
           UUID.fromString(resultSet.getString("UUIDSpieler")),
           resultSet.getString("name"),
           resultSet.getInt("gewonneneSpiele"),

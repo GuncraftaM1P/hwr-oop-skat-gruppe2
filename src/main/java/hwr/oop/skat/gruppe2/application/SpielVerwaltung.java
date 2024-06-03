@@ -16,3 +16,5 @@ public class SpielVerwaltung {
 
   private void starteSpielrunde() {}
 }
+
+//TODO: Spieler braucht Referenz auf aktuellen Stich
