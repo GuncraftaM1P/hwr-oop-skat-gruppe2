@@ -11,7 +11,7 @@ public class Stich {
 
 
   public Stich(SpielendeSpieler spieler, Farbe farbe) {
-    this.gelegteKarten = new ArrayList<Karte>();
+    this.gelegteKarten = new ArrayList<>();
     this.spielerAnDerReihe = spieler;
     this.ersteFarbe = farbe;
   }
@@ -69,7 +69,7 @@ public class Stich {
   }
 
   public List<Karte> getGelegteKarten() {
-    return this.getGelegteKarten();
+    return this.gelegteKarten;
   }
 
   public SpielendeSpieler getSpielerAnDerReihe() {
