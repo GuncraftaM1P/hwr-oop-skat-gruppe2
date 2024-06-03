@@ -15,6 +15,16 @@ public class SpielVerwaltung {
   }
 
   private void starteSpielrunde() {}
+
+  /*
+  private void neuerSpieler(String[] args){
+    Spieler spieler = new Spieler(args[1]);
+    LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
+    ladenUndSpeichern.spielerNeuErstellen(spieler);
+    Systemout.println("Der neue Spieler "+spieler.getName()+" wurde gespeichert. Und hat die UUID:"+spieler.getUuid());
+
+  }
+  */
 }
 
 //TODO: Spieler braucht Referenz auf aktuellen Stich
