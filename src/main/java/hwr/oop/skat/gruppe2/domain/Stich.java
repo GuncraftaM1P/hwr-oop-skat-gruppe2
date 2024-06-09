@@ -1,6 +1,7 @@
 package hwr.oop.skat.gruppe2.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Stich {
@@ -16,10 +17,7 @@ public class Stich {
     this.ersteFarbe = farbe;
   }
 
-  public SpielendeSpieler ermittleSieger(List<SpielendeSpieler> spieler, Trumpffarbe trumpffarbe) {
-    if (this.getGelegteKarten().size() != 3) return null;
-
-    // Buben
+  public SpielendeSpieler ermittleSiegerFallsBube(List<SpielendeSpieler> spieler) {
     if (this.getGelegteKarten().contains(new Karte(Farbe.KREUZ, Wert.BUBE))) {
       return spieler.get((this.getGelegteKarten().indexOf(new Karte(Farbe.KREUZ, Wert.BUBE)) + spieler.indexOf(this.getSpielerAnDerReihe())) % 3);
     }
@@ -32,27 +30,49 @@ public class Stich {
     if (this.getGelegteKarten().contains(new Karte(Farbe.KARO, Wert.BUBE))) {
       return spieler.get((this.getGelegteKarten().indexOf(new Karte(Farbe.KARO, Wert.BUBE)) + spieler.indexOf(this.getSpielerAnDerReihe())) % 3);
     }
+    return null;
+  }
 
-    // Trumpfkarten
-    if (this.getGelegteKarten().contains(trumpffarbe)) {
-      Karte gewinnerKarte = new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN);
-      for (Karte i : this.getGelegteKarten()) {
-        if (i.getFarbe() == trumpffarbe.getTrumpffarbe()) {
-          if (i.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
-            gewinnerKarte = i;
+  public SpielendeSpieler ermittleSiegerFallsTrumpf(List<SpielendeSpieler> spieler, Trumpffarbe trumpffarbe) {
+    List<Karte> trumpfListe = Arrays.asList(
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.ACHT),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.NEUN),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.ZEHN),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.BUBE),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.DAME),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.KOENIG),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.ASS)
+    );
+
+    for (Karte i : trumpfListe) {
+      if (this.getGelegteKarten().contains(i)) {
+        Karte gewinnerKarte = new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN);
+        for (Karte j : this.getGelegteKarten()) {
+          if (j.getFarbe() == trumpffarbe.getTrumpffarbe() && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
+            gewinnerKarte = j;
           }
         }
+        return spieler.get((this.getGelegteKarten().indexOf(gewinnerKarte) + spieler.indexOf(this.getSpielerAnDerReihe())) % 3);
       }
-      return spieler.get((this.getGelegteKarten().indexOf(gewinnerKarte) + spieler.indexOf(this.getSpielerAnDerReihe())) % 3);
     }
+    return null;
+  }
+
+  public SpielendeSpieler ermittleSieger(List<SpielendeSpieler> spieler, Trumpffarbe trumpffarbe) {
+    if (this.getGelegteKarten().size() != 3) return null;
+
+    SpielendeSpieler bubenSieger = this.ermittleSiegerFallsBube(spieler);
+    if (bubenSieger != null) {return bubenSieger;}
+
+    SpielendeSpieler trumpfSieger = this.ermittleSiegerFallsTrumpf(spieler, trumpffarbe);
+    if (trumpfSieger != null) {return trumpfSieger;}
 
     // Normale Karten
     Karte gewinnerKarte = new Karte(this.getErsteFarbe(), Wert.SIEBEN);
     for (Karte i : this.getGelegteKarten()) {
-      if (i.getFarbe() == this.getErsteFarbe()) {
-        if (i.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
-          gewinnerKarte = i;
-        }
+      if (i.getFarbe() == this.getErsteFarbe() && i.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
+        gewinnerKarte = i;
       }
     }
     return spieler.get((this.getGelegteKarten().indexOf(gewinnerKarte) + spieler.indexOf(this.getSpielerAnDerReihe())) % 3);
