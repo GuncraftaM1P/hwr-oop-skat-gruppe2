@@ -14,7 +14,12 @@ public class SpielVerwaltung {
     starteSpielrunde();
   }
 
-  private void starteSpielrunde() {}
+  private void starteSpielrunde() {
+    /*
+      TODO: Neues Stich Objekt erstellen
+            Falls Stich voll -> Sieger ermitteln
+    */
+  }
 
   /*
   private void neuerSpieler(String[] args){

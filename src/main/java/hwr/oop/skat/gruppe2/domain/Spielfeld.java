@@ -7,10 +7,12 @@ import java.util.Random;
 public class Spielfeld {
   private final List<Karte> deck;
   private final List<Karte> gelegteKarte;
+  private final Random random;
 
   public Spielfeld() {
     this.deck = neuerKartenStapel();
     this.gelegteKarte = new ArrayList<>();
+    this.random = new Random();
   }
 
   public List<Karte> neuerKartenStapel() {
@@ -27,10 +29,8 @@ public class Spielfeld {
 
   public void kartenVerteilen(List<Spieler> spieler) {
     int i = 0;
-    Random random;
     while (this.deck.size() > 2) {
-        random = new Random();
-        int zufallsZahl = random.nextInt(this.deck.size());
+        int zufallsZahl = this.random.nextInt(this.deck.size());
         spieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
         this.deck.remove(zufallsZahl);
         i++;
