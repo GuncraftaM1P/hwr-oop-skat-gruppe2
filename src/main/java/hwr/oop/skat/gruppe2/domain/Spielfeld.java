@@ -25,16 +25,16 @@ public class Spielfeld {
     return karten;
   }
 
-  public void kartenVerteilen(List<SpielendeSpieler> spielendeSpieler) {
+  public void kartenVerteilen(List<Spieler> spieler) {
     int i = 0;
     Random random;
     while (this.deck.size() > 2) {
         random = new Random();
         int zufallsZahl = random.nextInt(this.deck.size());
-        spielendeSpieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
+        spieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
         this.deck.remove(zufallsZahl);
         i++;
-        if (i == spielendeSpieler.size()) {
+        if (i == spieler.size()) {
           i = 0;
         }
 

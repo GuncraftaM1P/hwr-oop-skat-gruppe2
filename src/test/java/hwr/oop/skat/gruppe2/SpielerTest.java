@@ -1,23 +1,23 @@
 package hwr.oop.skat.gruppe2;
 
-import hwr.oop.skat.gruppe2.domain.SpielendeSpieler;
+import hwr.oop.skat.gruppe2.domain.Spieler;
 import hwr.oop.skat.gruppe2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class SpielendeSpielerTest {
+class SpielerTest {
   @Test
   void testKarteSetzenStapelLeer() {
     Spielfeld testSpielfeld = new Spielfeld();
     Person testPerson = new Person("Spieler");
-    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testPerson);
+    Spieler testSpieler = new Spieler(testPerson);
     Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
-    testSpielenderSpieler.karteAufDieHand(testKarte);
+    testSpieler.karteAufDieHand(testKarte);
 
-    testSpielenderSpieler.karteSetzen(testKarte, testSpielfeld);
+    testSpieler.karteSetzen(testKarte, testSpielfeld);
 
     List<Karte> gelegteKarten = testSpielfeld.getGelegteKarten();
     Assertions.assertThat(gelegteKarten).hasSize(1).contains(testKarte);
@@ -27,15 +27,15 @@ class SpielendeSpielerTest {
   void testKarteSetzenGleicheFarbe() {
     Spielfeld testSpielfeld = new Spielfeld();
     Person testPerson = new Person("Spieler");
-    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testPerson);
+    Spieler testSpieler = new Spieler(testPerson);
     Karte testSpielerKarte = new Karte(Farbe.HERZ, Wert.ASS);
     Karte testStapelKarte = new Karte(Farbe.HERZ, Wert.DAME);
 
-    testSpielenderSpieler.karteAufDieHand(testSpielerKarte);
+    testSpieler.karteAufDieHand(testSpielerKarte);
 
     testSpielfeld.getGelegteKarten().add(testStapelKarte);
 
-    testSpielenderSpieler.karteSetzen(testSpielerKarte, testSpielfeld);
+    testSpieler.karteSetzen(testSpielerKarte, testSpielfeld);
 
     List<Karte> gelegteKarten = testSpielfeld.getGelegteKarten();
     Assertions.assertThat(gelegteKarten).hasSize(2).contains(testSpielerKarte);
@@ -45,17 +45,17 @@ class SpielendeSpielerTest {
   void testKarteSetzenUngleicheFarbeIllegal() {
     Spielfeld testSpielfeld = new Spielfeld();
     Person testPerson = new Person("Spieler");
-    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testPerson);
+    Spieler testSpieler = new Spieler(testPerson);
     Karte testSpielerKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
     Karte testSpielerKarteZwei = new Karte(Farbe.KARO, Wert.DAME);
     Karte testStapelKarte = new Karte(Farbe.KARO, Wert.ASS);
 
-    testSpielenderSpieler.karteAufDieHand(testSpielerKarteEins);
-    testSpielenderSpieler.karteAufDieHand(testSpielerKarteZwei);
+    testSpieler.karteAufDieHand(testSpielerKarteEins);
+    testSpieler.karteAufDieHand(testSpielerKarteZwei);
 
     testSpielfeld.getGelegteKarten().add(testStapelKarte);
 
-    testSpielenderSpieler.karteSetzen(testSpielerKarteEins, testSpielfeld);
+    testSpieler.karteSetzen(testSpielerKarteEins, testSpielfeld);
 
     List<Karte> gelegteKarten = testSpielfeld.getGelegteKarten();
     Assertions.assertThat(gelegteKarten).hasSize(1).doesNotContain(testSpielerKarteEins);
@@ -65,17 +65,17 @@ class SpielendeSpielerTest {
   void testKarteSetzenUngleicheFarbeLegal() {
     Spielfeld testSpielfeld = new Spielfeld();
     Person testPerson = new Person("Spieler");
-    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testPerson);
+    Spieler testSpieler = new Spieler(testPerson);
     Karte testSpielerKarteEins = new Karte(Farbe.HERZ, Wert.ASS);
     Karte testSpielerKarteZwei = new Karte(Farbe.HERZ, Wert.DAME);
     Karte testStapelKarte = new Karte(Farbe.KARO, Wert.ASS);
 
-    testSpielenderSpieler.karteAufDieHand(testSpielerKarteEins);
-    testSpielenderSpieler.karteAufDieHand(testSpielerKarteZwei);
+    testSpieler.karteAufDieHand(testSpielerKarteEins);
+    testSpieler.karteAufDieHand(testSpielerKarteZwei);
 
     testSpielfeld.getGelegteKarten().add(testStapelKarte);
 
-    testSpielenderSpieler.karteSetzen(testSpielerKarteEins, testSpielfeld);
+    testSpieler.karteSetzen(testSpielerKarteEins, testSpielfeld);
 
     List<Karte> gelegteKarten = testSpielfeld.getGelegteKarten();
     Assertions.assertThat(gelegteKarten).hasSize(2).contains(testSpielerKarteEins);
@@ -84,23 +84,23 @@ class SpielendeSpielerTest {
   @Test
   void testKarteAufDieHand() {
     Person testPerson = new Person("Spieler");
-    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testPerson);
+    Spieler testSpieler = new Spieler(testPerson);
     Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
-    testSpielenderSpieler.karteAufDieHand(testKarte);
+    testSpieler.karteAufDieHand(testKarte);
 
-    Assertions.assertThat(testSpielenderSpieler.getHandKarten()).hasSize(1).contains(testKarte);
+    Assertions.assertThat(testSpieler.getHandKarten()).hasSize(1).contains(testKarte);
   }
 
   @Test
   void testKarteGewonnen() {
     Person testPerson = new Person("Spieler");
-    SpielendeSpieler testSpielenderSpieler = new SpielendeSpieler(testPerson);
+    Spieler testSpieler = new Spieler(testPerson);
     Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
-    testSpielenderSpieler.karteGewonnen(testKarte);
+    testSpieler.karteGewonnen(testKarte);
 
-    Assertions.assertThat(testSpielenderSpieler.getGewonneneKarten())
+    Assertions.assertThat(testSpieler.getGewonneneKarten())
         .hasSize(1)
         .contains(testKarte);
   }

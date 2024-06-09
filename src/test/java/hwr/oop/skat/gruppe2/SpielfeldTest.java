@@ -1,6 +1,6 @@
 package hwr.oop.skat.gruppe2;
 
-import hwr.oop.skat.gruppe2.domain.SpielendeSpieler;
+import hwr.oop.skat.gruppe2.domain.Spieler;
 import hwr.oop.skat.gruppe2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -59,12 +59,12 @@ class SpielfeldTest {
     void testKartenVerteilenDeck() {
         Spielfeld testSpielfeld = new Spielfeld();
 
-        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
+        List<Spieler> testSpieler = new ArrayList<>();
+        testSpieler.add(new Spieler(new Person("Spieler 1")));
+        testSpieler.add(new Spieler(new Person("Spieler 2")));
+        testSpieler.add(new Spieler(new Person("Spieler 3")));
 
-        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpieler);
 
         Assertions.assertThat(testSpielfeld.getDeck()).hasSize(2);
     }
@@ -72,39 +72,39 @@ class SpielfeldTest {
     void testKartenVerteilenSpielerEins() {
         Spielfeld testSpielfeld = new Spielfeld();
 
-        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
+        List<Spieler> testSpieler = new ArrayList<>();
+        testSpieler.add(new Spieler(new Person("Spieler 1")));
+        testSpieler.add(new Spieler(new Person("Spieler 2")));
+        testSpieler.add(new Spieler(new Person("Spieler 3")));
 
-        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.getFirst().getHandKarten()).hasSize(10);
+        Assertions.assertThat(testSpieler.getFirst().getHandKarten()).hasSize(10);
     }
     @Test
     void testKartenVerteilenSpielerZwei() {
         Spielfeld testSpielfeld = new Spielfeld();
 
-        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
+        List<Spieler> testSpieler = new ArrayList<>();
+        testSpieler.add(new Spieler(new Person("Spieler 1")));
+        testSpieler.add(new Spieler(new Person("Spieler 2")));
+        testSpieler.add(new Spieler(new Person("Spieler 3")));
 
-        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.get(1).getHandKarten()).hasSize(10);
+        Assertions.assertThat(testSpieler.get(1).getHandKarten()).hasSize(10);
     }
     @Test
     void testKartenVerteilenSpielerDrei() {
         Spielfeld testSpielfeld = new Spielfeld();
 
-        List<SpielendeSpieler> testSpielendeSpieler = new ArrayList<>();
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 1")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 2")));
-        testSpielendeSpieler.add(new SpielendeSpieler(new Person("Spieler 3")));
+        List<Spieler> testSpieler = new ArrayList<>();
+        testSpieler.add(new Spieler(new Person("Spieler 1")));
+        testSpieler.add(new Spieler(new Person("Spieler 2")));
+        testSpieler.add(new Spieler(new Person("Spieler 3")));
 
-        testSpielfeld.kartenVerteilen(testSpielendeSpieler);
+        testSpielfeld.kartenVerteilen(testSpieler);
 
-        Assertions.assertThat(testSpielendeSpieler.get(2).getHandKarten()).hasSize(10);
+        Assertions.assertThat(testSpieler.get(2).getHandKarten()).hasSize(10);
     }
 }

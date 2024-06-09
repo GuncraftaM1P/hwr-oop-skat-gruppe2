@@ -1,13 +1,13 @@
 package hwr.oop.skat.gruppe2.application;
 
 import hwr.oop.skat.gruppe2.domain.Spielfeld;
-import hwr.oop.skat.gruppe2.domain.SpielendeSpieler;
+import hwr.oop.skat.gruppe2.domain.Spieler;
 
 import java.util.List;
 
 public class SpielVerwaltung {
 
-  public SpielVerwaltung(List<SpielendeSpieler> spielers) {
+  public SpielVerwaltung(List<Spieler> spielers) {
     Spielfeld stapel = new Spielfeld();
     stapel.kartenVerteilen(spielers);
 

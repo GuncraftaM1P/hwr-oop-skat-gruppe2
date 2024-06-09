@@ -3,13 +3,12 @@ package hwr.oop.skat.gruppe2.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: "SpielendeSpieler" refactor zu "Spieler"
-public class SpielendeSpieler {
+public class Spieler {
   Person person;
   List<Karte> handKarten;
   List<Karte> gewonneneKarten;
 
-  public SpielendeSpieler(Person person) {
+  public Spieler(Person person) {
     this.person = person;
     this.handKarten = new ArrayList<>();
     this.gewonneneKarten = new ArrayList<>();
