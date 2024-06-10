@@ -21,25 +21,25 @@ public class Stich {
     if (this.getGelegteKarten().contains(new Karte(Farbe.KREUZ, Wert.BUBE))) {
       return spieler.get(
           (this.getGelegteKarten().indexOf(new Karte(Farbe.KREUZ, Wert.BUBE))
-                  + spieler.indexOf(this.getSpielerAnDerReihe()))
+              + spieler.indexOf(this.getSpielerAnDerReihe()))
               % 3);
     }
     if (this.getGelegteKarten().contains(new Karte(Farbe.PIK, Wert.BUBE))) {
       return spieler.get(
           (this.getGelegteKarten().indexOf(new Karte(Farbe.PIK, Wert.BUBE))
-                  + spieler.indexOf(this.getSpielerAnDerReihe()))
+              + spieler.indexOf(this.getSpielerAnDerReihe()))
               % 3);
     }
     if (this.getGelegteKarten().contains(new Karte(Farbe.HERZ, Wert.BUBE))) {
       return spieler.get(
           (this.getGelegteKarten().indexOf(new Karte(Farbe.HERZ, Wert.BUBE))
-                  + spieler.indexOf(this.getSpielerAnDerReihe()))
+              + spieler.indexOf(this.getSpielerAnDerReihe()))
               % 3);
     }
     if (this.getGelegteKarten().contains(new Karte(Farbe.KARO, Wert.BUBE))) {
       return spieler.get(
           (this.getGelegteKarten().indexOf(new Karte(Farbe.KARO, Wert.BUBE))
-                  + spieler.indexOf(this.getSpielerAnDerReihe()))
+              + spieler.indexOf(this.getSpielerAnDerReihe()))
               % 3);
     }
     return null;
@@ -61,19 +61,20 @@ public class Stich {
       if (this.getGelegteKarten().contains(i)) {
         Karte gewinnerKarte = null;
         for (Karte j : this.getGelegteKarten()) {
-          if (gewinnerKarte == null) gewinnerKarte = j;
-          else {
-            if (j.equals(gewinnerKarte)) return null;
-            if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
-                && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
-              gewinnerKarte = j;
-            }
+          if (gewinnerKarte == null) {
+            gewinnerKarte = j;
+            continue;
+          }
+          if (j.equals(gewinnerKarte)) return null;
+          if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
+              && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
+            gewinnerKarte = j;
           }
         }
         this.setSiegerKarte(gewinnerKarte);
         return spieler.get(
             (this.getGelegteKarten().indexOf(gewinnerKarte)
-                    + spieler.indexOf(this.getSpielerAnDerReihe()))
+                + spieler.indexOf(this.getSpielerAnDerReihe()))
                 % 3);
       }
     }
@@ -108,7 +109,7 @@ public class Stich {
     this.setSiegerKarte(gewinnerKarte);
     return spieler.get(
         (this.getGelegteKarten().indexOf(gewinnerKarte)
-                + spieler.indexOf(this.getSpielerAnDerReihe()))
+            + spieler.indexOf(this.getSpielerAnDerReihe()))
             % 3);
   }
 

@@ -15,6 +15,12 @@ public class Spielfeld {
     this.random = new Random();
   }
 
+  public Spielfeld(List<Karte> deck, List<Karte> gelegteKarte) {
+    this.deck = deck;
+    this.gelegteKarte = gelegteKarte;
+    this.random = new Random();
+  }
+
   public List<Karte> neuerKartenStapel() {
     List<Karte> karten = new ArrayList<>();
     List<Wert> werte = Wert.getZahlen();

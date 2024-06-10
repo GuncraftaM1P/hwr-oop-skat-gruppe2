@@ -10,6 +10,7 @@ public class SpielVerwaltung {
   private UUID uuid;
   private Stich stich;
   private Spielfeld stapel;
+  private List<Spieler> spieler;
   private final LadenUndSpeichern ls = new LadenUndSpeichern();
 
   public SpielVerwaltung(List<String> spielerStrings) {
@@ -22,9 +23,22 @@ public class SpielVerwaltung {
     this.uuid = UUID.randomUUID();
   }
 
-  /*public SpielVerwaltung(UUID spiel) {
+  public SpielVerwaltung(UUID spiel) {
     this.uuid = spiel;
-  }*/
+    this.ladeVonPersistenz();
+  }
+
+  public SpielVerwaltung(String uuid) {
+    this.uuid = UUID.fromString(uuid);
+    this.ladeVonPersistenz();
+  }
+
+  private void ladeVonPersistenz() {
+    //todo lade Daten eines existierenden Spiels aus der Datenbank
+    //this.spieler =
+    //this.stich =
+    //this.spielfeld =
+  }
 
   private Spieler getSpielerFromUUIDString(String uuid) {
     Person pers = ls.getPersonVonUUID(UUID.fromString(uuid));
@@ -40,9 +54,19 @@ public class SpielVerwaltung {
     // todo variable setzen, dass der skat noch abgelegt werden muss
   }
 
-  public void waehleSkat() {
-    // todo Skat karten ablegen
+  public Boolean waehleSkat(String spielerUUID, List<Karte> skat, Farbe trumpf) {
+    Boolean erfolgreich = false;
+    for (Spieler s : this.spieler) {
+      if (s.getUUID().equals(spielerUUID)) {
+        erfolgreich = s.skatAblegen(skat);
+      }
+    }
+
+    if (!erfolgreich) {
+      return false;
+    }
     starteSpielrunde();
+    return true;
   }
 
   private void starteSpielrunde() {
@@ -53,13 +77,13 @@ public class SpielVerwaltung {
     */
   }
 
-  public void karteLegen(UUID spieler, Karte karte) {
+  /*public void karteLegen(UUID spieler, Karte karte) {
     if (spieler == stich.getSpielerAnDerReihe().getUUID()) {
       stich.getSpielerAnDerReihe().karteSetzen(karte, stich);
     }
     // Sieger überprüfen
     // ->Spiel weitergeben an nächsten Spieler oder neuen Stich erstellen und Spiel an Sieger geben
-  }
+  }*/
 
   public UUID getUUID() {
     return this.uuid;
@@ -75,5 +99,4 @@ public class SpielVerwaltung {
   }
   */
 }
-
-// TODO: Spieler braucht Referenz auf aktuellen Stich
+//todo save everything to persistence at the end of each command

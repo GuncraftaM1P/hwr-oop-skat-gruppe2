@@ -1,6 +1,8 @@
 package hwr.oop.skat.gruppe2.cli;
 
 import hwr.oop.skat.gruppe2.application.SpielVerwaltung;
+import hwr.oop.skat.gruppe2.domain.Farbe;
+import hwr.oop.skat.gruppe2.domain.Karte;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
@@ -11,8 +13,6 @@ import java.util.List;
 public final class Cli {
   private final PrintStream out;
   private String feedback;
-
-  // Path
 
   public Cli(OutputStream outputStream, String... arguments) {
     this.out = new PrintStream(outputStream);
@@ -32,13 +32,12 @@ public final class Cli {
     } else if (mutable.size() == 2 && mutable.getFirst().equals("neuePerson")) {
       // neuePerson(name)
       // return uuid der Person
+    } else if (mutable.size() == 6 && mutable.getFirst().equals("skatAblegen")) {
+      sv = new SpielVerwaltung(mutable.get(1));
+      if (sv.waehleSkat(mutable.get(2), List.of(new Karte(mutable.get(3)), new Karte(mutable.get(4))), Farbe.getFarbeByWert(Integer.parseInt(mutable.get(5))))) {
+        return "erfolgreich";
+      }
     }
     return null;
   }
-  // methode die Commands auf validität überprüft, bei falscher Eingabe einen Fehler zurrückgibt,
-  // bei leer den help command
-  // methode, die den help command printed
-  // methode, die den current game state wiedergibt (Handkarten, aktueller Stich, Trumpf),
-  // (Mitspieler, Einzelspieler, Reihenfolge)
-  // Methode, die Testet ob der eingegebene Command valide ist
 }

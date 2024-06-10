@@ -1,6 +1,7 @@
 package hwr.oop.skat.gruppe2.persistence;
 
 import hwr.oop.skat.gruppe2.domain.Person;
+import hwr.oop.skat.gruppe2.domain.Spielfeld;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,20 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-class SqlVerbinder {
-  private static SqlVerbinder singleton;
+public class SqlVerbinder {
   // db parameter
   private static final Path URL = Paths.get("jdbc:sqlite:sqlite/Skat.db");
   private Connection schnittstelle = null;
 
-  public static SqlVerbinder getSingletonSchnittstelle() {
-    if (singleton == null) {
-      singleton = new SqlVerbinder();
-    }
-    return singleton;
+  public SqlVerbinder() {
+    this.initialisiereDatenbank();
   }
 
-  private SqlVerbinder() {
+  public void initialisiereDatenbank() {
     try {
       // create a connection to the database
       new File("./sqlite/").mkdirs();
@@ -38,34 +35,34 @@ class SqlVerbinder {
     List<String> startBefehle =
         List.of(
             """
-              CREATE TABLE IF NOT EXISTS spieler (
-              UUIDSpieler text PRIMARY KEY,
-              name text NOT NULL,
-              gewonneneSpiele integer,
-              verloreneSpiele integer
-              );""",
+                CREATE TABLE IF NOT EXISTS spieler (
+                UUIDSpieler text PRIMARY KEY,
+                name text NOT NULL,
+                gewonneneSpiele integer,
+                verloreneSpiele integer
+                );""",
             """
-              CREATE TABLE IF NOT EXISTS spiel (
-              UUIDSpiel text PRIMARY KEY,
-              UUIDRunde text,
-              UUIDSpielenderSpielerEinzelspieler text,
-              UUIDAktuellerSpielenderSpieler text,
-              UUIDStich text,
-              OffenerSkat text
-              );""",
+                CREATE TABLE IF NOT EXISTS spiel (
+                UUIDSpiel text PRIMARY KEY,
+                UUIDRunde text,
+                UUIDSpielenderSpielerEinzelspieler text,
+                UUIDAktuellerSpielenderSpieler text,
+                UUIDStich text,
+                OffenerSkat text
+                );""",
             """
-              CREATE TABLE IF NOT EXISTS SpielHatSpieler (
-              UUIDSpiel text PRIMARY KEY,
-              UUIDSpielenderSpieler text,
-              SpielerNummer integer,
-              Handkarten text,
-              GewonneneKarten text
-              );""",
+                CREATE TABLE IF NOT EXISTS SpielHatSpieler (
+                UUIDSpiel text PRIMARY KEY,
+                UUIDSpielenderSpieler text,
+                SpielerNummer integer,
+                Handkarten text,
+                GewonneneKarten text
+                );""",
             """
-              CREATE TABLE IF NOT EXISTS runden ("
-              "UUIDRunde  text PRIMARY KEY,"
-              "GespielteKarten text"
-              ");""");
+                CREATE TABLE IF NOT EXISTS runden ("
+                "UUIDRunde  text PRIMARY KEY,"
+                "GespielteKarten text"
+                ");""");
 
     sendMehreSQLBefehle(startBefehle);
   }
@@ -81,9 +78,8 @@ class SqlVerbinder {
   }
 
   public Person getPersonByUUIDPerson(String personUUID) {
-    ResultSet resultSet =
-        executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '" + personUUID + "'");
     try {
+      ResultSet resultSet = executeSQL("SELECT * FROM spieler WHERE UUIDSpieler = '" + personUUID + "'");
       return new Person(
           UUID.fromString(resultSet.getString("UUIDSpieler")),
           resultSet.getString("name"),
@@ -99,8 +95,7 @@ class SqlVerbinder {
     try {
       ResultSet resultSet = schnittstelle.prepareStatement(sql).executeQuery();
       while (resultSet.next()) {
-        int id = resultSet.getInt(1);
-        return id;
+        return resultSet.getInt(1);
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -122,8 +117,6 @@ class SqlVerbinder {
     try {
       schnittstelle = DriverManager.getConnection(URL.toString());
       schnittstelle.prepareStatement(sql).execute();
-      // TODO löschen ! nach arbeiten
-      System.out.println(sql);
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -134,11 +127,19 @@ class SqlVerbinder {
       schnittstelle = DriverManager.getConnection(URL.toString());
       for (String s : sqlList) {
         schnittstelle.prepareStatement(s).execute();
-        // TODO löschen ! nach arbeiten
-        System.out.println(s);
       }
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  public Spielfeld ladeSpielfeld(UUID spiel) {
+    try {
+      ResultSet resultSet = this.executeSQL("SELECT * FROM  WHERE  =" + spiel.toString() + "");
+      return new Spielfeld(); //todo fill with data
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 }
