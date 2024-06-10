@@ -3,12 +3,12 @@ package hwr.oop.skat.gruppe2.domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Stich {
-  private final List<Karte> gelegteKarten;
+  private List<Karte> gelegteKarten;
   private final Spieler spielerAnDerReihe;
   private final Farbe ersteFarbe;
-  private Spieler sieger;
 
 
   public Stich(Spieler spieler, Farbe farbe) {
@@ -100,7 +100,7 @@ public class Stich {
     return this.ersteFarbe;
   }
 
-  public Spieler getSieger() {
-    return this.sieger;
+  public void setGelegteKarten(List<Karte> karten) {
+    this.gelegteKarten = karten;
   }
 }

@@ -2,6 +2,7 @@ package hwr.oop.skat.gruppe2.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Spieler {
   Person person;
@@ -56,6 +57,10 @@ public class Spieler {
 
   public List<Karte> getGewonneneKarten() {
     return this.gewonneneKarten;
+  }
+
+  public Person getPerson() {
+    return person;
   }
 
   public void setHandKarten(List<Karte> handKarten) {
