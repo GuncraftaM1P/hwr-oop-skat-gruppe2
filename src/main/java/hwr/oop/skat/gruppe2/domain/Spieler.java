@@ -70,4 +70,12 @@ public class Spieler {
   public void setGewonneneKarten(List<Karte> gewonneneKarten) {
     this.gewonneneKarten = gewonneneKarten;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Spieler that = (Spieler) o;
+    return Objects.equals(person, that.person) && Objects.equals(handKarten, that.handKarten) && Objects.equals(gewonneneKarten, that.gewonneneKarten);
+  }
 }
