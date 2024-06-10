@@ -2,7 +2,6 @@ package hwr.oop.skat.gruppe2;
 
 import hwr.oop.skat.gruppe2.domain.Farbe;
 import hwr.oop.skat.gruppe2.domain.Trumpffarbe;
-import org.assertj.core.api.Assert;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
