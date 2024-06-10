@@ -8,11 +8,13 @@ public class Stich {
   private List<Karte> gelegteKarten;
   private final Spieler spielerAnDerReihe;
   private final Farbe ersteFarbe;
+  private Karte siegerKarte;
 
   public Stich(Spieler spieler, Farbe farbe) {
     this.gelegteKarten = new ArrayList<>();
     this.spielerAnDerReihe = spieler;
     this.ersteFarbe = farbe;
+    this.siegerKarte = null;
   }
 
   public Spieler ermittleSiegerFallsBube(List<Spieler> spieler) {
@@ -57,13 +59,18 @@ public class Stich {
 
     for (Karte i : trumpfListe) {
       if (this.getGelegteKarten().contains(i)) {
-        Karte gewinnerKarte = new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN);
+        Karte gewinnerKarte = null;
         for (Karte j : this.getGelegteKarten()) {
-          if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
-              && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
-            gewinnerKarte = j;
+          if (gewinnerKarte == null) gewinnerKarte = j;
+          else {
+            if (j.equals(gewinnerKarte)) return null;
+            if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
+                && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
+              gewinnerKarte = j;
+            }
           }
         }
+        this.setSiegerKarte(gewinnerKarte);
         return spieler.get(
             (this.getGelegteKarten().indexOf(gewinnerKarte)
                     + spieler.indexOf(this.getSpielerAnDerReihe()))
@@ -87,13 +94,18 @@ public class Stich {
     }
 
     // Normale Karten
-    Karte gewinnerKarte = new Karte(this.getErsteFarbe(), Wert.SIEBEN);
-    for (Karte i : this.getGelegteKarten()) {
-      if (i.getFarbe() == this.getErsteFarbe()
-          && i.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
-        gewinnerKarte = i;
+    Karte gewinnerKarte = null;
+    for (Karte j : this.getGelegteKarten()) {
+      if (gewinnerKarte == null) gewinnerKarte = j;
+      else {
+        if (j.equals(gewinnerKarte)) return null;
+        if (j.getFarbe() == this.getErsteFarbe()
+            && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
+          gewinnerKarte = j;
+        }
       }
     }
+    this.setSiegerKarte(gewinnerKarte);
     return spieler.get(
         (this.getGelegteKarten().indexOf(gewinnerKarte)
                 + spieler.indexOf(this.getSpielerAnDerReihe()))
@@ -119,7 +131,15 @@ public class Stich {
     return this.ersteFarbe;
   }
 
+  public Karte getSiegerKarte() {
+    return siegerKarte;
+  }
+
   public void setGelegteKarten(List<Karte> karten) {
     this.gelegteKarten = karten;
+  }
+
+  public void setSiegerKarte(Karte karte) {
+    this.siegerKarte = karte;
   }
 }

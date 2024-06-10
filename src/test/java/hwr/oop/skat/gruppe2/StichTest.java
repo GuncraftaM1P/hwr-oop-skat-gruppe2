@@ -202,6 +202,27 @@ class StichTest {
   }
 
   @Test
+  void testErmittleSiegerGleicheKarte() {
+    List<Spieler> testSpieler =
+            Arrays.asList(
+                    new Spieler(new Person("TestPerson1")),
+                    new Spieler(new Person("TestPerson2")),
+                    new Spieler(new Person("TestPerson3")));
+
+    Stich testStich = new Stich(testSpieler.getLast(), Farbe.HERZ);
+
+    testStich.setGelegteKarten(
+            Arrays.asList(
+                    new Karte(Farbe.HERZ, Wert.DAME),
+                    new Karte(Farbe.HERZ, Wert.ACHT),
+                    new Karte(Farbe.HERZ, Wert.DAME)));
+
+    testStich.ermittleSieger(testSpieler, new Trumpffarbe(Farbe.KARO));
+
+    Assertions.assertThat(testStich.getSiegerKarte()).isNull();
+  }
+
+  @Test
   void testErmittleSiegerFallsTrumpf() {
     List<Spieler> testSpieler =
         Arrays.asList(
@@ -220,9 +241,49 @@ class StichTest {
     boolean siegerErmittelt =
         testStich
             .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.KARO))
-            .equals(testSpieler.getFirst());
+            .equals(testSpieler.getLast());
 
     Assertions.assertThat(siegerErmittelt).isTrue();
+  }
+  @Test
+  void testErmittleSiegerFallsTrumpfGleicheKarte() {
+    List<Spieler> testSpieler =
+            Arrays.asList(
+                    new Spieler(new Person("TestPerson1")),
+                    new Spieler(new Person("TestPerson2")),
+                    new Spieler(new Person("TestPerson3")));
+
+    Stich testStich = new Stich(testSpieler.getLast(), Farbe.KREUZ);
+
+    testStich.setGelegteKarten(
+            Arrays.asList(
+                    new Karte(Farbe.HERZ, Wert.DAME),
+                    new Karte(Farbe.HERZ, Wert.ACHT),
+                    new Karte(Farbe.HERZ, Wert.DAME)));
+
+    testStich.ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ));
+
+    Assertions.assertThat(testStich.getSiegerKarte()).isNull();
+  }
+  @Test
+  void testErmittleSiegerFallsTrumpfKleinereKarte() {
+    List<Spieler> testSpieler =
+            Arrays.asList(
+                    new Spieler(new Person("TestPerson1")),
+                    new Spieler(new Person("TestPerson2")),
+                    new Spieler(new Person("TestPerson3")));
+
+    Stich testStich = new Stich(testSpieler.getLast(), Farbe.KREUZ);
+
+    testStich.setGelegteKarten(
+            Arrays.asList(
+                    new Karte(Farbe.HERZ, Wert.DAME),
+                    new Karte(Farbe.HERZ, Wert.ACHT),
+                    new Karte(Farbe.HERZ, Wert.SIEBEN)));
+
+    testStich.ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ));
+
+    Assertions.assertThat(testStich.getSiegerKarte().equals(new Karte(Farbe.HERZ, Wert.DAME))).isTrue();
   }
 
   @Test
