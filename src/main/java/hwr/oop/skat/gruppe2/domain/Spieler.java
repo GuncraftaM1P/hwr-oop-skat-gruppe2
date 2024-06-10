@@ -3,6 +3,7 @@ package hwr.oop.skat.gruppe2.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Spieler {
   Person person;
@@ -15,17 +16,16 @@ public class Spieler {
     this.gewonneneKarten = new ArrayList<>();
   }
 
-  // TODO: Spielfeldreferenz muss zu Stichreferenz geändert werden
-  public void karteSetzen(Karte karte, Spielfeld spielfeld) {
+  public void karteSetzen(Karte karte, Stich stich) {
     // Karte auf der Hand?
     if (handKarten.contains(karte)) {
       // Kartenstapel Leer?
-      if (!spielfeld.getGelegteKarten().isEmpty()) {
+      if (!stich.isEmpty()) {
         // Ungleiche Farbe
-        if (karte.getFarbe() != spielfeld.getGelegteKarten().getFirst().getFarbe()) {
+        if (karte.getFarbe() != stich.getFarbeZumBedienen()) {
           // Schauen ob Spieler nicht bedienen kann
           for (Karte kartensuche : this.getHandKarten()) {
-            if (kartensuche.getFarbe() == spielfeld.getGelegteKarten().getFirst().getFarbe()) {
+            if (kartensuche.getFarbe() == stich.getFarbeZumBedienen()) {
               return;
             }
           }
@@ -34,16 +34,20 @@ public class Spieler {
         // TODO Bube gleicher Farbe auf Farbe
         // Gleiche Farbe
         this.getHandKarten().remove(karte);
-        spielfeld.addGelegteKarte(karte);
+        stich.legeKarte(karte);
         return;
       }
       this.getHandKarten().remove(karte);
-      spielfeld.addGelegteKarte(karte);
+      stich.legeKarte(karte);
     }
   }
 
   public void karteAufDieHand(Karte karte) {
     this.handKarten.add(karte);
+  }
+
+  public void kartenAufDieHand(List<Karte> neueKarten) {
+    this.handKarten.addAll(neueKarten);
   }
 
   public void karteGewonnen(Karte karte) {
@@ -63,6 +67,10 @@ public class Spieler {
     return person;
   }
 
+  public UUID getUUID() {
+    return this.person.getUuid();
+  }
+
   public void setHandKarten(List<Karte> handKarten) {
     this.handKarten = handKarten;
   }
@@ -76,6 +84,13 @@ public class Spieler {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Spieler that = (Spieler) o;
-    return Objects.equals(person, that.person) && Objects.equals(handKarten, that.handKarten) && Objects.equals(gewonneneKarten, that.gewonneneKarten);
+    return Objects.equals(person, that.person)
+        && Objects.equals(handKarten, that.handKarten)
+        && Objects.equals(gewonneneKarten, that.gewonneneKarten);
+  }
+
+  @Override
+  public int hashCode() {
+    return super.hashCode();
   }
 }

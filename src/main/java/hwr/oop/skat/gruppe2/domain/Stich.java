@@ -107,6 +107,18 @@ public class Stich {
     sieger.setGewonneneKarten(gewonneneKarten);
   }
 
+  public boolean isEmpty() {
+    return this.gelegteKarten.isEmpty();
+  }
+
+  public Farbe getFarbeZumBedienen() {
+    return this.gelegteKarten.getFirst().getFarbe();
+  }
+
+  public void legeKarte(Karte karte) {
+    this.gelegteKarten.add(karte);
+  }
+
   public List<Karte> getGelegteKarten() {
     return this.gelegteKarten;
   }

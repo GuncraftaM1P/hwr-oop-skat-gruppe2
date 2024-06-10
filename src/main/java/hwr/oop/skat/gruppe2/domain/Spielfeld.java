@@ -30,14 +30,13 @@ public class Spielfeld {
   public void kartenVerteilen(List<Spieler> spieler) {
     int i = 0;
     while (this.deck.size() > 2) {
-        int zufallsZahl = this.random.nextInt(this.deck.size());
-        spieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
-        this.deck.remove(zufallsZahl);
-        i++;
-        if (i == spieler.size()) {
-          i = 0;
-        }
-
+      int zufallsZahl = this.random.nextInt(this.deck.size());
+      spieler.get(i).karteAufDieHand(this.deck.get(zufallsZahl));
+      this.deck.remove(zufallsZahl);
+      i++;
+      if (i == spieler.size()) {
+        i = 0;
+      }
     }
   }
 
@@ -54,4 +53,4 @@ public class Spielfeld {
   public void addGelegteKarte(Karte karte) {
     this.gelegteKarte.add(karte);
   }
-  }
+}

@@ -8,7 +8,7 @@ public enum Wert {
   ACHT(0,8),
   NEUN(0,9),
   ZEHN(10,12),
-  BUBE(2,14),
+  BUBE(2,28),
   DAME(3,10),
   KOENIG(4,11),
   ASS(11,13);
