@@ -5,6 +5,7 @@ import hwr.oop.skat.gruppe2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
 class SpielerTest {
@@ -103,5 +104,37 @@ class SpielerTest {
     Assertions.assertThat(testSpieler.getGewonneneKarten())
         .hasSize(1)
         .contains(testKarte);
+  }
+
+  @Test
+  void testSetHandkarten() {
+    List<Karte> testKarten = Arrays.asList(
+            new Karte(Farbe.HERZ, Wert.ASS),
+            new Karte(Farbe.KARO, Wert.ASS)
+    );
+
+    Spieler testSpieler = new Spieler(new Person("testPerson"));
+
+    testSpieler.setHandKarten(testKarten);
+
+    Assertions.assertThat(testSpieler.getHandKarten())
+            .hasSize(2)
+            .containsExactlyElementsOf(testKarten);
+  }
+
+  @Test
+  void testSetGewonneneKarten() {
+    List<Karte> testKarten = Arrays.asList(
+            new Karte(Farbe.HERZ, Wert.ASS),
+            new Karte(Farbe.KARO, Wert.ASS)
+    );
+
+    Spieler testSpieler = new Spieler(new Person("testPerson"));
+
+    testSpieler.setGewonneneKarten(testKarten);
+
+    Assertions.assertThat(testSpieler.getGewonneneKarten())
+            .hasSize(2)
+            .containsExactlyElementsOf(testKarten);
   }
 }
