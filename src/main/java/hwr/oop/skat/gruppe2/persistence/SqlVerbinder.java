@@ -1,7 +1,6 @@
 package hwr.oop.skat.gruppe2.persistence;
 
-import hwr.oop.skat.gruppe2.domain.Person;
-import hwr.oop.skat.gruppe2.domain.Spielfeld;
+import hwr.oop.skat.gruppe2.domain.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,6 +8,7 @@ import java.sql.*;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,24 +45,21 @@ public class SqlVerbinder {
                 CREATE TABLE IF NOT EXISTS spiel (
                 UUIDSpiel text PRIMARY KEY,
                 UUIDRunde text,
-                UUIDSpielenderSpielerEinzelspieler text,
-                UUIDAktuellerSpielenderSpieler text,
-                UUIDStich text,
-                OffenerSkat text
+                UUIDEinzelspieler text,
+                UUIDAktuellerSpieler text,
+                Stich text,
+                OffenerSkat text,
+                Trumpf text
                 );""",
             """
                 CREATE TABLE IF NOT EXISTS SpielHatSpieler (
-                UUIDSpiel text PRIMARY KEY,
-                UUIDSpielenderSpieler text,
+                UUIDSpielHatSpieler text PRIMARY KEY,
+                UUIDSpiel text,
+                UUIDSpieler text,
                 SpielerNummer integer,
                 Handkarten text,
                 GewonneneKarten text
-                );""",
-            """
-                CREATE TABLE IF NOT EXISTS runden ("
-                "UUIDRunde  text PRIMARY KEY,"
-                "GespielteKarten text"
-                ");""");
+                );""");
 
     sendMehreSQLBefehle(startBefehle);
   }
@@ -135,8 +132,44 @@ public class SqlVerbinder {
 
   public Spielfeld ladeSpielfeld(UUID spiel) {
     try {
-      ResultSet resultSet = this.executeSQL("SELECT * FROM  WHERE  =" + spiel.toString() + "");
-      return new Spielfeld(); //todo fill with data
+      ResultSet resultSet = this.executeSQL("SELECT OffenerSkat, Trumpf FROM spiel s " +
+          "WHERE UUIDSpiel =" + spiel.toString());
+      return new Spielfeld(this.kartenListeVonString(resultSet.getString("OffenerSkat")), Farbe.getFarbeByWert(Integer.parseInt(resultSet.getString("Trumpf"))));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  public List<Karte> kartenListeVonString(String kartenListenString) {
+    return Arrays.stream(kartenListenString.split(",")).map(Karte::new).toList();
+  }
+
+  public List<Spieler> ladeSpieler(UUID spiel) {
+    List<Spieler> spielerListe = new ArrayList<>();
+    try {
+      ResultSet rs = this.executeSQL("SELECT shs.UUIDSpieler, shs.SpielerNummer, shs.Handkarten, shs.GewonneneKarten, s.name, s.gewonneneSpiele, s.verloreneSpiele " +
+          "FROM spielHatSpieler shs, spieler s WHERE shs.UUIDSpiel =" + spiel.toString()+" AND shs.UUIDSpieler = s.UUIDSpieler " +
+          "ORDER BY SpielerNummer ASC");
+      while(rs != null && rs.next()) {
+        Person person = new Person(UUID.fromString(rs.getString("UUIDSpieler")), rs.getString("name"), Integer.parseInt(rs.getString("gewonneneSpiele")), Integer.parseInt(rs.getString("verloreneSpiele")));
+        spielerListe.add(new Spieler(person, this.kartenListeVonString(rs.getString("Handkarten")), this.kartenListeVonString(rs.getString("GewonneneKarten"))));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return spielerListe;
+  }
+
+  public Stich ladeStich(UUID spiel) {
+    try {
+      ResultSet rs = this.executeSQL("SELECT shs.UUIDSpieler, shs.SpielerNummer, shs.Handkarten, shs.GewonneneKarten, s.name, s.gewonneneSpiele, s.verloreneSpiele, sp.Stich " +
+          "FROM spielHatSpieler shs, spieler s, spiel sp WHERE shs.UUIDSpiel =" + spiel.toString()+" AND sp.UUIDSpiel = "+spiel+" AND shs.UUIDSpieler = s.UUIDAktuellerSpieler");
+      while(rs != null && rs.next()) {
+        Person person = new Person(UUID.fromString(rs.getString("UUIDSpieler")), rs.getString("name"), Integer.parseInt(rs.getString("gewonneneSpiele")), Integer.parseInt(rs.getString("verloreneSpiele")));
+        Spieler spieler = new Spieler(person, this.kartenListeVonString(rs.getString("Handkarten")), this.kartenListeVonString(rs.getString("GewonneneKarten")));
+        return new Stich(spieler, this.kartenListeVonString(rs.getString("Stich")));
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }

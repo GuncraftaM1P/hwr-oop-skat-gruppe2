@@ -34,10 +34,9 @@ public class SpielVerwaltung {
   }
 
   private void ladeVonPersistenz() {
-    //todo lade Daten eines existierenden Spiels aus der Datenbank
-    //this.spieler =
-    //this.stich =
-    //this.spielfeld =
+    this.spieler = ls.ladeSpielerVonSpiel(this.uuid);
+    this.stapel = ls.ladeSpielfeldVonSpiel(this.uuid);
+    this.stich = ls.ladeStichVonSpiel(this.uuid);
   }
 
   private Spieler getSpielerFromUUIDString(String uuid) {
@@ -53,7 +52,7 @@ public class SpielVerwaltung {
     spieler.getFirst().kartenAufDieHand(this.stapel.getDeck());
     // todo variable setzen, dass der skat noch abgelegt werden muss
   }
-
+//todo sind die Speler die neu erstellt werden oder gelagen werden valide?
   public Boolean waehleSkat(String spielerUUID, List<Karte> skat, Farbe trumpf) {
     Boolean erfolgreich = false;
     for (Spieler s : this.spieler) {

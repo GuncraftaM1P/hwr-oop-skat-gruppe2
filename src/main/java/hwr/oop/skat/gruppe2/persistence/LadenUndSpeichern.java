@@ -2,6 +2,7 @@ package hwr.oop.skat.gruppe2.persistence;
 
 import hwr.oop.skat.gruppe2.domain.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +12,7 @@ public class LadenUndSpeichern {
   // Formate des Strings: wert der Farbe (1 digit) + "-" + Staerke des Wertes (1-2 digits)
   // die Karten sind durch "," von einander getrennt
   // z.B. "2-7,3-12,1-8" -> Herz sieben, Pik Zehn, Karo Acht
-  private SqlVerbinder sqlVerbinder;
+  private final SqlVerbinder sqlVerbinder;
 
   public LadenUndSpeichern() {
     this.sqlVerbinder = new SqlVerbinder();
@@ -39,7 +40,18 @@ public class LadenUndSpeichern {
     return this.sqlVerbinder.getPersonByUUIDPerson(uuid.toString());
   }
 
-  public Spielfeld ladeSpeilfeld(UUID spiel) {
+  public Spielfeld ladeSpielfeldVonSpiel(UUID spiel) {
     return this.sqlVerbinder.ladeSpielfeld(spiel);
+  }
+
+  public List<Spieler> ladeSpielerVonSpiel(UUID spiel){
+    List<Spieler> spielerListe = this.sqlVerbinder.ladeSpieler(spiel);
+    if(spielerListe.size() == 3)
+      return spielerListe;
+    return null;
+  }
+
+  public Stich ladeStichVonSpiel(UUID spiel){
+    return this.sqlVerbinder.ladeStich(spiel);
   }
 }

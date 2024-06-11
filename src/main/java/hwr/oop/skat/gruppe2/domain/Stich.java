@@ -6,14 +6,21 @@ import java.util.List;
 
 public class Stich {
   private List<Karte> gelegteKarten;
-  private final Spieler spielerAnDerReihe;
+  private Spieler spielerAnDerReihe;
   private final Farbe ersteFarbe;
   private Karte siegerKarte;
 
-  public Stich(Spieler spieler, Farbe farbe) {
+  public Stich(Spieler spieler, List<Karte> gelegteKarten) {
+    this.gelegteKarten = gelegteKarten;
+    this.spielerAnDerReihe = spieler;
+    this.ersteFarbe = gelegteKarten.getFirst().getFarbe();
+    this.siegerKarte = null;
+  }
+
+  public Stich(Spieler spieler, Farbe ersteFarbe) {
     this.gelegteKarten = new ArrayList<>();
     this.spielerAnDerReihe = spieler;
-    this.ersteFarbe = farbe;
+    this.ersteFarbe = ersteFarbe;
     this.siegerKarte = null;
   }
 
@@ -154,5 +161,9 @@ public class Stich {
 
   public void setSiegerKarte(Karte karte) {
     this.siegerKarte = karte;
+  }
+
+  public void setSpielerAnDerReihe(Spieler spielerAnDerReihe){
+    this.spielerAnDerReihe = spielerAnDerReihe;
   }
 }

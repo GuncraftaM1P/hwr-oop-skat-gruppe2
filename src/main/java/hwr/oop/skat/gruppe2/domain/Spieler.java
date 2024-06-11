@@ -16,6 +16,12 @@ public class Spieler {
     this.gewonneneKarten = new ArrayList<>();
   }
 
+  public Spieler(Person person, List<Karte> handKarten, List<Karte> gewonneneKarten) {
+    this.person = person;
+    this.handKarten = handKarten;
+    this.gewonneneKarten = gewonneneKarten;
+  }
+
   public void karteSetzen(Karte karte, Stich stich) {
     // Karte auf der Hand?
     if (handKarten.contains(karte)) {
