@@ -10,12 +10,12 @@ public class Spielfeld {
   private final Random random;
 
   public Spielfeld() {
-    this.deck = neuerKartenStapel();
+    this.deck = neuesDeck();
     this.gelegteKarte = new ArrayList<>();
     this.random = new Random();
   }
 
-  public List<Karte> neuerKartenStapel() {
+  public List<Karte> neuesDeck() {
     List<Karte> karten = new ArrayList<>();
     List<Wert> werte = Wert.getZahlen();
     List<Farbe> farben = Farbe.getFarben();

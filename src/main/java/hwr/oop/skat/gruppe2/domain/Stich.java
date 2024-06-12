@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Stich {
   private List<Karte> gelegteKarten;
-  private final Spieler spielerAnDerReihe;
-  private final Farbe ersteFarbe;
+  private Spieler spielerAnDerReihe;
+  private Farbe ersteFarbe;
   private Karte siegerKarte;
 
-  public Stich(Spieler spieler, Farbe farbe) {
+  public Stich(Spieler spielerAnDerReihe) {
     this.gelegteKarten = new ArrayList<>();
-    this.spielerAnDerReihe = spieler;
-    this.ersteFarbe = farbe;
+    this.spielerAnDerReihe = spielerAnDerReihe;
+    this.ersteFarbe = null;
     this.siegerKarte = null;
   }
 
@@ -52,22 +52,17 @@ public class Stich {
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.ACHT),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.NEUN),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.ZEHN),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.BUBE),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.DAME),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.KOENIG),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.ASS));
 
     for (Karte i : trumpfListe) {
       if (this.getGelegteKarten().contains(i)) {
-        Karte gewinnerKarte = null;
+        Karte gewinnerKarte = new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN);
         for (Karte j : this.getGelegteKarten()) {
-          if (gewinnerKarte == null) gewinnerKarte = j;
-          else {
-            if (j.equals(gewinnerKarte)) return null;
-            if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
-                && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
-              gewinnerKarte = j;
-            }
+          if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
+              && gewinnerKarte.getWert().getStaerke() <= j.getWert().getStaerke()) {
+            gewinnerKarte = j;
           }
         }
         this.setSiegerKarte(gewinnerKarte);
@@ -153,5 +148,13 @@ public class Stich {
 
   public void setSiegerKarte(Karte karte) {
     this.siegerKarte = karte;
+  }
+
+  public void setSpielerAnDerReihe(Spieler anDerReihe) {
+    this.spielerAnDerReihe = anDerReihe;
+  }
+
+  public void setErsteFarbe(Farbe farbe) {
+    this.ersteFarbe = farbe;
   }
 }

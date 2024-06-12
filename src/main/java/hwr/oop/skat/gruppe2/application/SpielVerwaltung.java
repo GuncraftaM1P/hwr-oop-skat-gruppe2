@@ -55,7 +55,11 @@ public class SpielVerwaltung {
 
   public void karteLegen(UUID spieler, Karte karte) {
     if (spieler == stich.getSpielerAnDerReihe().getUUID()) {
-      stich.getSpielerAnDerReihe().karteSetzen(karte, stich);
+      /*
+        TODO: Alle Spieler per Liste als Parameter übergeben (Die Funktion ermittelt dadurch den
+              nächsten Spieler ab der Reihe)
+      */
+      stich.getSpielerAnDerReihe().karteSetzen(karte, stich, List.of());
     }
     // Sieger überprüfen
     // ->Spiel weitergeben an nächsten Spieler oder neuen Stich erstellen und Spiel an Sieger geben

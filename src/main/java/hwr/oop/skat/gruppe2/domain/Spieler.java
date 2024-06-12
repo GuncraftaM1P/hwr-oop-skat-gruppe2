@@ -16,29 +16,37 @@ public class Spieler {
     this.gewonneneKarten = new ArrayList<>();
   }
 
-  public void karteSetzen(Karte karte, Stich stich) {
-    // Karte auf der Hand?
-    if (handKarten.contains(karte)) {
-      // Kartenstapel Leer?
-      if (!stich.isEmpty()) {
-        // Ungleiche Farbe
-        if (karte.getFarbe() != stich.getFarbeZumBedienen()) {
-          // Schauen ob Spieler nicht bedienen kann
-          for (Karte kartensuche : this.getHandKarten()) {
-            if (kartensuche.getFarbe() == stich.getFarbeZumBedienen()) {
-              return;
-            }
-          }
-          // TODO Bube auf Nichttrumph
-        }
-        // TODO Bube gleicher Farbe auf Farbe
-        // Gleiche Farbe
-        this.getHandKarten().remove(karte);
-        stich.legeKarte(karte);
-        return;
-      }
+  public void karteSetzen(Karte karte, Stich stich, List<Spieler> spieler) {
+    // Check: Spieler an der Reihe
+    if (!stich.getSpielerAnDerReihe().equals(this)) return;
+
+    // Check: Karte enthalten
+    if (!this.getHandKarten().contains(karte)) return;
+
+    // Check: Stich leer
+    if (stich.getGelegteKarten().isEmpty()) {
       this.getHandKarten().remove(karte);
       stich.legeKarte(karte);
+      stich.setErsteFarbe(karte.getFarbe());
+      stich.setSpielerAnDerReihe(spieler.get((spieler.indexOf(this) + 1) % 3));
+      return;
+    }
+
+    // Check: Gleiche Farbe
+    if (karte.getFarbe() == stich.getErsteFarbe()) {
+      this.getHandKarten().remove(karte);
+      stich.legeKarte(karte);
+      stich.setSpielerAnDerReihe(spieler.get((spieler.indexOf(this) + 1) % 3));
+    }
+    else {
+      // Check: Kann der Spieler bedienen?
+      for (Karte i : this.getHandKarten()) {
+        if (i.getFarbe() == stich.getErsteFarbe()) return;
+      }
+
+      this.getHandKarten().remove(karte);
+      stich.legeKarte(karte);
+      stich.setSpielerAnDerReihe(spieler.get((spieler.indexOf(this) + 1) % 3));
     }
   }
 
