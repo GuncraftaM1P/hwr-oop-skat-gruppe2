@@ -1,10 +1,10 @@
-Spielablauf und benötigte Funktionen
-
-für alle Spieler-Aktionen benötigt:
-- spiel aus der Datenbank laden
+# Spielablauf und benötigte Funktionen
+#
+# für alle Spieler-Aktionen benötigt:
+# - spiel aus der Datenbank laden
 - spiel in die Datenbank speichern
 
-Spieler-Aktion durch eingaben (später CLI)
+# Spieler-Aktion durch eingaben (später CLI)
 #- neues spiel starten (mit zwei anderen spielern)
     - Datenbankeintrag anlegen
 - karte legen
@@ -19,30 +19,19 @@ Funktionen, um diese Spieler-Eingabe zu ermöglichen
 - neue Runde starten
 - Sieger des Stichs ermitteln
         - Karten diesem Spieler zuweisen, Stich leeren und neue Runde starten
-- karte erhalten/ gewinnen
+# - karte erhalten/ gewinnen
 
 Konkrete Funktionen für Nutzer:
 - Spieler erstellen
-- Spiel erstellen
-- Spieler hinzufügen
-- Spiel starten
+# - Spiel erstellen
+# - Spieler hinzufügen
+# - Spiel starten
 
 - Hand anschauen
-- (Punkte anzeigen, Reizen)
-- (Einzelspieler) 2 Karten abwerfen
-
+? - (Punkte anzeigen, Reizen)
+# - (Einzelspieler) 2 Karten abwerfen
 
 - Stich anschauen
 - Karte setzen
 
-- (Gewonnene Karten anschauen)
-
-
-
-CLI :
-// methode die Commands auf validität überprüft, bei falscher Eingabe einen Fehler zurrückgibt,
-// bei leer den help command
-// methode, die den help command printed
-// methode, die den current game state wiedergibt (Handkarten, aktueller Stich, Trumpf),
-// (Mitspieler, Einzelspieler, Reihenfolge)
-// Methode, die Testet ob der eingegebene Command valide ist
+? - (Gewonnene Karten anschauen)

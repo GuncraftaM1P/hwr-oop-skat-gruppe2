@@ -30,8 +30,8 @@ public final class Cli {
       sv = new SpielVerwaltung(List.of(mutable.get(1), mutable.get(2), mutable.get(3)));
       return sv.getUUID().toString();
     } else if (mutable.size() == 2 && mutable.getFirst().equals("neuePerson")) {
-      // neuePerson(name)
-      // return uuid der Person
+      sv = new SpielVerwaltung();
+      sv.erstelleSpieler(mutable.get(1));
     } else if (mutable.size() == 6 && mutable.getFirst().equals("skatAblegen")) {
       sv = new SpielVerwaltung(mutable.get(1));
       if (sv.waehleSkat(mutable.get(2), List.of(new Karte(mutable.get(3)), new Karte(mutable.get(4))), Farbe.getFarbeByWert(Integer.parseInt(mutable.get(5))))) {

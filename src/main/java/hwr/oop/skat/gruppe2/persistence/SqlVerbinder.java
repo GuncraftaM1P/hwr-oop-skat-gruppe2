@@ -64,14 +64,10 @@ public class SqlVerbinder {
     sendMehreSQLBefehle(startBefehle);
   }
 
-  public void neuePersonInDatenbank(String name, UUID personUUID) {
-    sendSQLBefehle(
-        "INSERT INTO spieler(UUIDSpieler,name,gewonneneSpiele,verloreneSpiele)\n"
-            + "VALUES('"
-            + personUUID
-            + "','"
-            + name
-            + "',0,0);");
+  public boolean speicherPerson(Person person) {
+    return this.sendSQLBefehle(
+        "INSERT INTO spieler(UUIDSpieler, name, gewonneneSpiele, verloreneSpiele) "
+            + "VALUES('" + person.getUuid() + "','" + person.getName() + "'," + person.getGewonneneRunden() + "," + person.getVerloreneRunden() + ");");
   }
 
   public Person getPersonByUUIDPerson(String personUUID) {
@@ -81,7 +77,7 @@ public class SqlVerbinder {
           UUID.fromString(resultSet.getString("UUIDSpieler")),
           resultSet.getString("name"),
           resultSet.getInt("gewonneneSpiele"),
-          resultSet.getInt("verloreneSpiele"));
+          resultSet.getInt("verloreneSpiele") + resultSet.getInt("gewonneneSpiele"));
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -110,12 +106,14 @@ public class SqlVerbinder {
     }
   }
 
-  private void sendSQLBefehle(String sql) {
+  private boolean sendSQLBefehle(String sql) {
     try {
       schnittstelle = DriverManager.getConnection(URL.toString());
       schnittstelle.prepareStatement(sql).execute();
+      return true;
     } catch (SQLException e) {
       e.printStackTrace();
+      return false;
     }
   }
 
@@ -149,9 +147,9 @@ public class SqlVerbinder {
     List<Spieler> spielerListe = new ArrayList<>();
     try {
       ResultSet rs = this.executeSQL("SELECT shs.UUIDSpieler, shs.SpielerNummer, shs.Handkarten, shs.GewonneneKarten, s.name, s.gewonneneSpiele, s.verloreneSpiele " +
-          "FROM spielHatSpieler shs, spieler s WHERE shs.UUIDSpiel =" + spiel.toString()+" AND shs.UUIDSpieler = s.UUIDSpieler " +
+          "FROM spielHatSpieler shs, spieler s WHERE shs.UUIDSpiel =" + spiel.toString() + " AND shs.UUIDSpieler = s.UUIDSpieler " +
           "ORDER BY SpielerNummer ASC");
-      while(rs != null && rs.next()) {
+      while (rs != null && rs.next()) {
         Person person = new Person(UUID.fromString(rs.getString("UUIDSpieler")), rs.getString("name"), Integer.parseInt(rs.getString("gewonneneSpiele")), Integer.parseInt(rs.getString("verloreneSpiele")));
         spielerListe.add(new Spieler(person, this.kartenListeVonString(rs.getString("Handkarten")), this.kartenListeVonString(rs.getString("GewonneneKarten"))));
       }
@@ -164,8 +162,8 @@ public class SqlVerbinder {
   public Stich ladeStich(UUID spiel) {
     try {
       ResultSet rs = this.executeSQL("SELECT shs.UUIDSpieler, shs.SpielerNummer, shs.Handkarten, shs.GewonneneKarten, s.name, s.gewonneneSpiele, s.verloreneSpiele, sp.Stich " +
-          "FROM spielHatSpieler shs, spieler s, spiel sp WHERE shs.UUIDSpiel =" + spiel.toString()+" AND sp.UUIDSpiel = "+spiel+" AND shs.UUIDSpieler = s.UUIDAktuellerSpieler");
-      while(rs != null && rs.next()) {
+          "FROM spielHatSpieler shs, spieler s, spiel sp WHERE shs.UUIDSpiel =" + spiel.toString() + " AND sp.UUIDSpiel = " + spiel + " AND shs.UUIDSpieler = s.UUIDAktuellerSpieler");
+      while (rs != null && rs.next()) {
         Person person = new Person(UUID.fromString(rs.getString("UUIDSpieler")), rs.getString("name"), Integer.parseInt(rs.getString("gewonneneSpiele")), Integer.parseInt(rs.getString("verloreneSpiele")));
         Spieler spieler = new Spieler(person, this.kartenListeVonString(rs.getString("Handkarten")), this.kartenListeVonString(rs.getString("GewonneneKarten")));
         return new Stich(spieler, this.kartenListeVonString(rs.getString("Stich")));

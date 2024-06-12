@@ -33,6 +33,9 @@ public class SpielVerwaltung {
     this.ladeVonPersistenz();
   }
 
+  public SpielVerwaltung() {
+  }
+
   private void ladeVonPersistenz() {
     this.spieler = ls.ladeSpielerVonSpiel(this.uuid);
     this.stapel = ls.ladeSpielfeldVonSpiel(this.uuid);
@@ -40,20 +43,21 @@ public class SpielVerwaltung {
   }
 
   private Spieler getSpielerFromUUIDString(String uuid) {
-    Person pers = ls.getPersonVonUUID(UUID.fromString(uuid));
-    return new Spieler(pers);
+    Person person = ls.getPersonVonUUID(UUID.fromString(uuid));
+    return new Spieler(person);
   }
 
-  public void neuesSpiel(List<Spieler> spieler) {
+  public boolean neuesSpiel(List<Spieler> spieler) {
     this.stapel = new Spielfeld();
     stapel.kartenVerteilen(spieler);
 
     // vorübergehend wird der erste Spieler immer der Einzelspieler
     spieler.getFirst().kartenAufDieHand(this.stapel.getDeck());
-    // todo variable setzen, dass der skat noch abgelegt werden muss
+    return true;
   }
-//todo sind die Speler die neu erstellt werden oder gelagen werden valide?
-  public Boolean waehleSkat(String spielerUUID, List<Karte> skat, Farbe trumpf) {
+
+  public boolean waehleSkat(String spielerUUIDString, List<Karte> skat, Farbe trumpf) {
+    UUID spielerUUID = UUID.fromString(spielerUUIDString);
     Boolean erfolgreich = false;
     for (Spieler s : this.spieler) {
       if (s.getUUID().equals(spielerUUID)) {
@@ -61,22 +65,31 @@ public class SpielVerwaltung {
       }
     }
 
-    if (!erfolgreich) {
-      return false;
+    if (erfolgreich) {
+      starteSpielrunde();
     }
-    starteSpielrunde();
-    return true;
+    return erfolgreich;
+    //todo trumpf verarbeiten
   }
 
-  private void starteSpielrunde() {
+  public UUID erstelleSpieler(String name) {
+    Person person = new Person(name);
+    if(ls.speicherPerson(person)){
+      return person.getUuid();
+    }
+    return null;
+  }
+
+  private boolean starteSpielrunde() {
     /*
       TODO: Neues Stich Objekt erstellen
             Falls Stich voll -> Sieger ermitteln
               neuen Stich erstellen
     */
+    return true;
   }
 
-  /*public void karteLegen(UUID spieler, Karte karte) {
+  /*public boolean karteLegen(UUID spieler, Karte karte) {
     if (spieler == stich.getSpielerAnDerReihe().getUUID()) {
       stich.getSpielerAnDerReihe().karteSetzen(karte, stich);
     }
@@ -87,15 +100,4 @@ public class SpielVerwaltung {
   public UUID getUUID() {
     return this.uuid;
   }
-
-  /*
-  private void neuerSpieler(String[] args){
-    Spieler spieler = new Spieler(args[1]);
-    LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
-    ladenUndSpeichern.spielerNeuErstellen(spieler);
-    Systemout.println("Der neue Spieler "+spieler.getName()+" wurde gespeichert. Und hat die UUID:"+spieler.getUuid());
-
-  }
-  */
 }
-//todo save everything to persistence at the end of each command
