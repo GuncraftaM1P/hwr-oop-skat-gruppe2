@@ -53,8 +53,7 @@ public class Spieler {
     if (this.handKarten.contains(karten.getFirst()) && this.handKarten.contains(karten.getLast())) {
       this.handKarten.remove(karten.getFirst());
       this.handKarten.remove(karten.getLast());
-      this.gewonneneKarten.add(karten.getFirst());
-      this.gewonneneKarten.add(karten.getLast());
+      this.kartenGewonnen(karten);
       return true;
     }
     return false;
@@ -109,10 +108,5 @@ public class Spieler {
     return Objects.equals(person, that.person)
         && Objects.equals(handKarten, that.handKarten)
         && Objects.equals(gewonneneKarten, that.gewonneneKarten);
-  }
-
-  @Override
-  public int hashCode() {
-    return super.hashCode();
   }
 }
