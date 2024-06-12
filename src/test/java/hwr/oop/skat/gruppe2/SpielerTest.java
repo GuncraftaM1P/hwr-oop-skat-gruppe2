@@ -10,37 +10,32 @@ import java.util.List;
 
 class SpielerTest {
 
-
   @Test
   void testKannBedienenTrue() {
     Spieler testSpieler = new Spieler(new Person("Person"));
 
-    testSpieler.setHandKarten(List.of(
-            new Karte(Farbe.HERZ, Wert.ASS),
-            new Karte(Farbe.KARO, Wert.ASS)
-    ));
+    testSpieler.setHandKarten(
+        List.of(new Karte(Farbe.HERZ, Wert.ASS), new Karte(Farbe.KARO, Wert.ASS)));
 
     Assertions.assertThat(testSpieler.kannBedienen(Farbe.HERZ)).isTrue();
   }
+
   @Test
   void testKannBedienenFalseBube() {
     Spieler testSpieler = new Spieler(new Person("Person"));
 
-    testSpieler.setHandKarten(List.of(
-            new Karte(Farbe.HERZ, Wert.BUBE),
-            new Karte(Farbe.KARO, Wert.ASS)
-    ));
+    testSpieler.setHandKarten(
+        List.of(new Karte(Farbe.HERZ, Wert.BUBE), new Karte(Farbe.KARO, Wert.ASS)));
 
     Assertions.assertThat(testSpieler.kannBedienen(Farbe.HERZ)).isFalse();
   }
+
   @Test
   void testKannBedienenFalseFarbe() {
     Spieler testSpieler = new Spieler(new Person("Person"));
 
-    testSpieler.setHandKarten(List.of(
-            new Karte(Farbe.PIK, Wert.ASS),
-            new Karte(Farbe.KARO, Wert.ASS)
-    ));
+    testSpieler.setHandKarten(
+        List.of(new Karte(Farbe.PIK, Wert.ASS), new Karte(Farbe.KARO, Wert.ASS)));
 
     Assertions.assertThat(testSpieler.kannBedienen(Farbe.HERZ)).isFalse();
   }
@@ -60,11 +55,12 @@ class SpielerTest {
   void testKartenGewonnen() {
     Person testPerson = new Person("Spieler");
     Spieler testSpieler = new Spieler(testPerson);
-    List<Karte> testKarten = List.of(new Karte(Farbe.HERZ, Wert.ASS), new Karte(Farbe.PIK, Wert.ASS));
+    List<Karte> testKarten =
+        List.of(new Karte(Farbe.HERZ, Wert.ASS), new Karte(Farbe.PIK, Wert.ASS));
 
     testSpieler.kartenGewonnen(testKarten);
 
-    Assertions.assertThat(testSpieler.getGewonneneKarten()).hasSize(1).containsAll(testKarten);
+    Assertions.assertThat(testSpieler.getGewonneneKarten()).hasSize(2).containsAll(testKarten);
   }
 
   @Test

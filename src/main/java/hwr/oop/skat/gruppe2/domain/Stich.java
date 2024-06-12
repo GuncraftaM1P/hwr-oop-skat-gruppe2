@@ -19,7 +19,7 @@ public class Stich {
   public Stich(Spieler spieler) {
     this.gelegteKarten = new ArrayList<>();
     this.spielerAnDerReihe = spieler;
-    this.ersteFarbe = gelegteKarten.getFirst().getFarbe();
+    this.ersteFarbe = null;
     this.siegerKarte = null;
   }
 
