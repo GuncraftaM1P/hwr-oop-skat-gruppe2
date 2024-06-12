@@ -52,17 +52,22 @@ public class Stich {
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.ACHT),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.NEUN),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.ZEHN),
+            new Karte(trumpffarbe.getTrumpffarbe(), Wert.BUBE),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.DAME),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.KOENIG),
             new Karte(trumpffarbe.getTrumpffarbe(), Wert.ASS));
 
     for (Karte i : trumpfListe) {
       if (this.getGelegteKarten().contains(i)) {
-        Karte gewinnerKarte = new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN);
+        Karte gewinnerKarte = null;
         for (Karte j : this.getGelegteKarten()) {
-          if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
-              && gewinnerKarte.getWert().getStaerke() <= j.getWert().getStaerke()) {
-            gewinnerKarte = j;
+          if (gewinnerKarte == null) gewinnerKarte = j;
+          else {
+            if (j.equals(gewinnerKarte)) return null;
+            if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
+                && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
+              gewinnerKarte = j;
+            }
           }
         }
         this.setSiegerKarte(gewinnerKarte);
@@ -148,13 +153,5 @@ public class Stich {
 
   public void setSiegerKarte(Karte karte) {
     this.siegerKarte = karte;
-  }
-
-  public void setSpielerAnDerReihe(Spieler anDerReihe) {
-    this.spielerAnDerReihe = anDerReihe;
-  }
-
-  public void setErsteFarbe(Farbe farbe) {
-    this.ersteFarbe = farbe;
   }
 }

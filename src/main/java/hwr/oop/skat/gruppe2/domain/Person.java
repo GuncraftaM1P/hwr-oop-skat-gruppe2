@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class Person {
   private final UUID uuid;
-  private final String name; // Muss unique sein zur identification
+  private final String name;
   private final int gewonneneRunden;
   private final int gespielteRunden;
 
@@ -36,5 +36,9 @@ public class Person {
 
   public int getGespielteRunden() {
     return gespielteRunden;
+  }
+
+  public int getVerloreneRunden() {
+    return this.gespielteRunden - this.gewonneneRunden;
   }
 }

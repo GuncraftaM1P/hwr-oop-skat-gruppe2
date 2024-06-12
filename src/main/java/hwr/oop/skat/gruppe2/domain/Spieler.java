@@ -43,11 +43,30 @@ public class Spieler {
       for (Karte i : this.getHandKarten()) {
         if (i.getFarbe() == stich.getErsteFarbe()) return;
       }
-
       this.getHandKarten().remove(karte);
       stich.legeKarte(karte);
-      stich.setSpielerAnDerReihe(spieler.get((spieler.indexOf(this) + 1) % 3));
     }
+  }
+
+  public Boolean skatAblegen(List<Karte> karten) {
+    if (this.handKarten.size() < 12) {
+      return false;
+    }
+    List<Karte> handKartenTemp = this.handKarten;
+    int possible = 0;
+    for (Karte karte : karten) {
+      for (Karte k : this.getHandKarten()) {
+        if (k.equals(karte)) {
+          possible++;
+          break;
+        }
+      }
+    }
+    if (possible == handKarten.size()) {
+      this.handKarten = handKartenTemp;
+      return true;
+    }
+    return false;
   }
 
   public void karteAufDieHand(Karte karte) {

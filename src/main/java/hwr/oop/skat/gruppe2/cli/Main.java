@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public final class Main {
   public static void main(String[] args) {
-    //Todo suppress warning
+    @SuppressWarnings("java:S106")
     final Cli cli = new Cli(System.out, args);
     cli.handle(Arrays.asList(args));
   }

@@ -8,14 +8,20 @@ public class Spielfeld {
   private final List<Karte> deck;
   private final List<Karte> gelegteKarte;
   private final Random random;
+  private Farbe trumpf;
 
   public Spielfeld() {
-    this.deck = neuesDeck();
-    this.gelegteKarte = new ArrayList<>();
+    this.deck = neuerKartenStapel();
     this.random = new Random();
   }
 
-  public List<Karte> neuesDeck() {
+  public Spielfeld(List<Karte> deck, Farbe trumpf) {
+    this.deck = deck;
+    this.random = new Random();
+    this.trumpf = trumpf; //todo nutze das anstatt der in der Funktion gegebenen Variable
+  }
+
+  public List<Karte> neuerKartenStapel() {
     List<Karte> karten = new ArrayList<>();
     List<Wert> werte = Wert.getZahlen();
     List<Farbe> farben = Farbe.getFarben();
