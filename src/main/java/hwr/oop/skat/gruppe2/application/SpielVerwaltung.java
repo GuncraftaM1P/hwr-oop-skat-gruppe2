@@ -80,14 +80,19 @@ public class SpielVerwaltung {
   }
 
   public boolean karteLegen(UUID spieler, Karte karte) {
-    if (spieler == stich.getSpielerAnDerReihe().getUUID()) {
-      /*
-        TODO: Alle Spieler per Liste als Parameter übergeben (Die Funktion ermittelt dadurch den
-              nächsten Spieler ab der Reihe)
-      */
-      stich.getSpielerAnDerReihe().karteSetzen(karte, stich, List.of());
-    }
+    if (spieler == stich.getSpielerAnDerReihe().getUUID() &&
+      stich.getSpielerAnDerReihe().kannLegen(karte, stich.getErsteFarbe())) {
+      int i = 0;
+      for (Spieler s : this.spieler) {
+        if (s.getUUID().equals(spieler)) {
+          i = this.spieler.indexOf(s);
+        }
+      }
+      Spieler naechster = this.spieler.get((i+1)%3);
+      stich.getSpielerAnDerReihe().entferneVonHand(karte);
+      stich.legeKarte(karte, naechster);
 
+    }
     // Sieger überprüfen
     // ->Spiel weitergeben an nächsten Spieler oder neuen Stich erstellen und Spiel an Sieger geben
     return true;

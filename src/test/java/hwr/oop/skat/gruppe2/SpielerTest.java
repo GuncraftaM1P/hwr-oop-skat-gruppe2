@@ -10,7 +10,7 @@ import java.util.List;
 
 class SpielerTest {
   @Test
-  void testKarteSetzenStapelLeerHandkarten() {
+  void testKannLegenStapelLeerHandkarten() {
 
     Spieler testSpieler1 = new Spieler(new Person("Spieler1"));
     Spieler testSpieler2 = new Spieler(new Person("Spieler2"));
@@ -20,14 +20,14 @@ class SpielerTest {
     testSpieler1.karteAufDieHand(testKarte);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testSpieler1.getHandKarten()).isEmpty();
   }
 
   @Test
-  void testKarteSetzenStapelLeerGelegteKarten() {
+  void testKannLegenStapelLeerGelegteKarten() {
 
     Spieler testSpieler1 = new Spieler(new Person("Spieler1"));
     Spieler testSpieler2 = new Spieler(new Person("Spieler2"));
@@ -37,14 +37,14 @@ class SpielerTest {
     testSpieler1.karteAufDieHand(testKarte);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getGelegteKarten()).hasSize(1);
   }
 
   @Test
-  void testKarteSetzenStapelLeerErsteFarbe() {
+  void testKannLegenStapelLeerErsteFarbe() {
 
     Spieler testSpieler1 = new Spieler(new Person("Spieler1"));
     Spieler testSpieler2 = new Spieler(new Person("Spieler2"));
@@ -54,14 +54,14 @@ class SpielerTest {
     testSpieler1.karteAufDieHand(testKarte);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getErsteFarbe()).isEqualTo(Farbe.HERZ);
   }
 
   @Test
-  void testKarteSetzenStapelLeerSpielerAnDerReihe() {
+  void testKannLegenStapelLeerSpielerAnDerReihe() {
 
     Person testPerson = new Person("Spieler");
     Spieler testSpieler1 = new Spieler(testPerson);
@@ -72,7 +72,7 @@ class SpielerTest {
     testSpieler1.karteAufDieHand(testKarte);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     boolean gleicherSpieler = testStich.getSpielerAnDerReihe().equals(testSpieler2);
@@ -81,7 +81,7 @@ class SpielerTest {
   }
 
   @Test
-  void testKarteSetzenNichtAnDerReihe() {
+  void testKannLegenNichtAnDerReihe() {
 
     Person testPerson = new Person("Spieler");
     Spieler testSpieler1 = new Spieler(testPerson);
@@ -92,7 +92,7 @@ class SpielerTest {
     testSpieler1.karteAufDieHand(testKarte);
 
     Stich testStich = new Stich(testSpieler2);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getGelegteKarten()).isEmpty();
@@ -109,14 +109,14 @@ class SpielerTest {
     Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getGelegteKarten()).isEmpty();
   }
 
   @Test
-  void testKarteSetzenGleicheFarbe() {
+  void testKannLegenGleicheFarbe() {
 
     Person testPerson = new Person("Spieler");
     Spieler testSpieler1 = new Spieler(testPerson);
@@ -130,16 +130,16 @@ class SpielerTest {
     testSpieler2.karteAufDieHand(testKarte2);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte1, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
-    testSpieler2.karteSetzen(
+    testSpieler2.kannLegen(
         testKarte2, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getGelegteKarten()).hasSize(2);
   }
 
   @Test
-  void testKarteSetzenGleicheFarbeSpielerAnDerReihe() {
+  void testKannLegenGleicheFarbeSpielerAnDerReihe() {
 
     Spieler testSpieler1 = new Spieler(new Person("Spieler1"));
     Spieler testSpieler2 = new Spieler(new Person("Spieler2"));
@@ -152,9 +152,9 @@ class SpielerTest {
     testSpieler2.karteAufDieHand(testKarte2);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte1, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
-    testSpieler2.karteSetzen(
+    testSpieler2.kannLegen(
         testKarte2, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     boolean gleicherSpieler = testStich.getSpielerAnDerReihe().equals(testSpieler3);
@@ -163,7 +163,7 @@ class SpielerTest {
   }
 
   @Test
-  void testKarteSetzenUngleicheFarbeLegal() {
+  void testKannLegenUngleicheFarbeLegal() {
 
     Spieler testSpieler1 = new Spieler(new Person("Spieler1"));
     Spieler testSpieler2 = new Spieler(new Person("Spieler2"));
@@ -176,16 +176,16 @@ class SpielerTest {
     testSpieler2.karteAufDieHand(testKarte2);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte1, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
-    testSpieler2.karteSetzen(
+    testSpieler2.kannLegen(
         testKarte2, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getGelegteKarten()).hasSize(2);
   }
 
   @Test
-  void testKarteSetzenUngleicheFarbeLegalSpielerAnDerReihe() {
+  void testKannLegenUngleicheFarbeLegalSpielerAnDerReihe() {
 
     Person testPerson = new Person("Spieler");
     Spieler testSpieler1 = new Spieler(testPerson);
@@ -199,9 +199,9 @@ class SpielerTest {
     testSpieler2.karteAufDieHand(testKarte2);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte1, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
-    testSpieler2.karteSetzen(
+    testSpieler2.kannLegen(
         testKarte2, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     boolean gleicherSpieler = testStich.getSpielerAnDerReihe().equals(testSpieler2);
@@ -210,7 +210,7 @@ class SpielerTest {
   }
 
   @Test
-  void testKarteSetzenUngleicheFarbeIllegal() {
+  void testKannLegenUngleicheFarbeIllegal() {
 
     Person testPerson = new Person("Spieler");
     Spieler testSpieler1 = new Spieler(testPerson);
@@ -226,9 +226,9 @@ class SpielerTest {
     testSpieler2.karteAufDieHand(testKarte3);
 
     Stich testStich = new Stich(testSpieler1);
-    testSpieler1.karteSetzen(
+    testSpieler1.kannLegen(
         testKarte1, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
-    testSpieler2.karteSetzen(
+    testSpieler2.kannLegen(
         testKarte2, testStich, Arrays.asList(testSpieler1, testSpieler2, testSpieler3));
 
     Assertions.assertThat(testStich.getGelegteKarten()).hasSize(1);

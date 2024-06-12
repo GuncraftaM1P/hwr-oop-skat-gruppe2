@@ -7,7 +7,7 @@ import java.util.List;
 public class Stich {
   private List<Karte> gelegteKarten;
   private Spieler spielerAnDerReihe;
-  private final Farbe ersteFarbe;
+  private Farbe ersteFarbe;
   private Karte siegerKarte;
 
   public Stich(Spieler spieler, List<Karte> gelegteKarten) {
@@ -139,12 +139,10 @@ public class Stich {
     return this.gelegteKarten.isEmpty();
   }
 
-  public Farbe getFarbeZumBedienen() {
-    return this.gelegteKarten.getFirst().getFarbe();
-  }
-
-  public void legeKarte(Karte karte) {
+  public void legeKarte(Karte karte, Spieler naechster) {
     this.gelegteKarten.add(karte);
+    this.spielerAnDerReihe = naechster;
+    this.ersteFarbe = this.gelegteKarten.getFirst().getFarbe();
   }
 
   public List<Karte> getGelegteKarten() {
@@ -169,9 +167,5 @@ public class Stich {
 
   public void setSiegerKarte(Karte karte) {
     this.siegerKarte = karte;
-  }
-
-  public void setSpielerAnDerReihe(Spieler spielerAnDerReihe) {
-    this.spielerAnDerReihe = spielerAnDerReihe;
   }
 }
