@@ -16,6 +16,12 @@ public class Spieler {
     this.gewonneneKarten = new ArrayList<>();
   }
 
+  public Spieler(Person person, List<Karte> handKarten, List<Karte> gewonneneKarten) {
+    this.person = person;
+    this.handKarten = handKarten;
+    this.gewonneneKarten = gewonneneKarten;
+  }
+
   public void karteSetzen(Karte karte, Stich stich) {
     // Karte auf der Hand?
     if (handKarten.contains(karte)) {
@@ -29,7 +35,7 @@ public class Spieler {
               return;
             }
           }
-          // TODO Bube auf Nichttrumph
+          // TODO Bube auf NichtTrumpf
         }
         // TODO Bube gleicher Farbe auf Farbe
         // Gleiche Farbe
@@ -40,6 +46,27 @@ public class Spieler {
       this.getHandKarten().remove(karte);
       stich.legeKarte(karte);
     }
+  }
+
+  public Boolean skatAblegen(List<Karte> karten) {
+    if (this.handKarten.size() < 12) {
+      return false;
+    }
+    List<Karte> handKartenTemp = this.handKarten;
+    int possible = 0;
+    for (Karte karte : karten) {
+      for (Karte k : this.getHandKarten()) {
+        if (k.equals(karte)) {
+          possible++;
+          break;
+        }
+      }
+    }
+    if (possible == handKarten.size()) {
+      this.handKarten = handKartenTemp;
+      return true;
+    }
+    return false;
   }
 
   public void karteAufDieHand(Karte karte) {

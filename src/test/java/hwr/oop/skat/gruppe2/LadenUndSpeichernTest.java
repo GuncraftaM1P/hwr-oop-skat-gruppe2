@@ -12,7 +12,7 @@ class LadenUndSpeichernTest {
     void LandUndSpeichernTestVonKartenListen() {
         String test = "2-7,3-12,1-8";
         LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
-        List<Karte> karten = ladenUndSpeichern.kartenListeVonString(test);
+        List<Karte> karten = ladenUndSpeichern.kartenStringZuListe(test);
         Assertions.assertThat(test).isEqualTo(ladenUndSpeichern.kartenListeZuString(karten));
     }
 
@@ -20,7 +20,7 @@ class LadenUndSpeichernTest {
     void LandUndSpeichernTestVonNeuenSpielerSpeicher() {
         String test = "2-7,3-12,1-8";
         LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
-        List<Karte> karten = ladenUndSpeichern.kartenListeVonString(test);
+        List<Karte> karten = ladenUndSpeichern.kartenStringZuListe(test);
         Assertions.assertThat(test).isEqualTo(ladenUndSpeichern.kartenListeZuString(karten));
     }
 
