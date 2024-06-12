@@ -40,7 +40,7 @@ public class SpielVerwaltung {
     this.stich = ls.ladeStichVonSpiel(this.uuid);
   }
 
-  public boolean spielZwischenspeichern(){
+  public boolean spielZwischenspeichern() {
     return this.ls.speicherSpiel(this.spieler, this.stich, this.stapel, this.uuid);
   }
 
@@ -96,7 +96,7 @@ public class SpielVerwaltung {
 
 
       Spieler sieger = stich.ermittleSieger(this.spieler, this.stapel.getTrumpf());
-      if(sieger != null){
+      if (sieger != null) {
         sieger.kartenAufDieHand(this.stich.getGelegteKarten());
         this.stich = new Stich(sieger);
       }

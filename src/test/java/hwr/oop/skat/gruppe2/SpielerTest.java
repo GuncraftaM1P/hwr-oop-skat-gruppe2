@@ -253,9 +253,9 @@ class SpielerTest {
     testSpieler.setHandKarten(testHandKarten);
 
     Assertions.assertThat(
-                    testSpieler.skatAblegen(
-                            List.of(new Karte(Farbe.HERZ, Wert.SIEBEN), new Karte(Farbe.HERZ, Wert.ACHT))))
-            .isTrue();
+            testSpieler.skatAblegen(
+                List.of(new Karte(Farbe.HERZ, Wert.SIEBEN), new Karte(Farbe.HERZ, Wert.ACHT))))
+        .isTrue();
   }
 
 
@@ -387,14 +387,14 @@ class SpielerTest {
   }
 
   @Test
-  void testGetUUID(){
+  void testGetUUID() {
     Person testPerson = new Person("Spieler1");
     Spieler testSpieler = new Spieler(testPerson);
     Assertions.assertThat(testSpieler.getUUID()).isEqualTo(testPerson.getUuid());
   }
 
   @Test
-  void testEntferneVonKarten(){
+  void testEntferneVonKarten() {
     List<Karte> handKarten = new ArrayList<Karte>();
     handKarten.add(new Karte(Farbe.HERZ, Wert.ACHT));
     handKarten.add(new Karte(Farbe.KARO, Wert.ACHT));
