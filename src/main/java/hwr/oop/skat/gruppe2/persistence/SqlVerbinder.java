@@ -86,9 +86,10 @@ public class SqlVerbinder {
 
   public int getIntegerVonDB(String sql) {
     try {
-      ResultSet resultSet = schnittstelle.prepareStatement(sql).executeQuery();
-      while (resultSet.next()) {
-        return resultSet.getInt(1);
+      try (ResultSet resultSet = schnittstelle.prepareStatement(sql).executeQuery()) {
+        while (resultSet.next()) {
+          return resultSet.getInt(1);
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();

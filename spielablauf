@@ -5,13 +5,13 @@
 - spiel in die Datenbank speichern
 
 # Spieler-Aktion durch eingaben (später CLI)
-#- neues spiel starten (mit zwei anderen spielern)
+# - neues spiel starten (mit zwei anderen spielern)
     - Datenbankeintrag anlegen
-- karte legen
+# - karte legen
 - Spielinformationen anzeigen lassen
     - aktueller Stich, Handkarten
     - gewonnene und gespielte Spiele eines Spielers
-#- Zwei karten ablegen, nachdem der Skat aufgenommen wurde
+# - Zwei karten ablegen, nachdem der Skat aufgenommen wurde
 
 Funktionen, um diese Spieler-Eingabe zu ermöglichen
 - Spiel auswerten und beenden

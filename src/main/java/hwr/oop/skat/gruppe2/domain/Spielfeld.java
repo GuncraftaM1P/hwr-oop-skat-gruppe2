@@ -48,4 +48,12 @@ public class Spielfeld {
   public List<Karte> getDeck() {
     return this.deck;
   }
+
+  public Farbe getTrumpf() {
+    return this.trumpf;
+  }
+
+  public void setTrumpf(Farbe trumpf) {
+    this.trumpf = trumpf;
+  }
 }

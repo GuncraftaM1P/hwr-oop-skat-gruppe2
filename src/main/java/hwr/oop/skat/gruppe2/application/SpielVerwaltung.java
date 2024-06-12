@@ -14,22 +14,17 @@ public class SpielVerwaltung {
   private final LadenUndSpeichern ls = new LadenUndSpeichern();
 
   public SpielVerwaltung(List<String> spielerStrings) {
-    List<Spieler> spieler =
+    List<Spieler> neueSpieler =
         List.of(
             this.getSpielerFromUUIDString(spielerStrings.get(0)),
             this.getSpielerFromUUIDString(spielerStrings.get(1)),
             this.getSpielerFromUUIDString(spielerStrings.get(2)));
-    neuesSpiel(spieler);
+    neuesSpiel(neueSpieler);
     this.uuid = UUID.randomUUID();
   }
 
   public SpielVerwaltung(UUID spiel) {
     this.uuid = spiel;
-    this.ladeVonPersistenz();
-  }
-
-  public SpielVerwaltung(String uuid) {
-    this.uuid = UUID.fromString(uuid);
     this.ladeVonPersistenz();
   }
 
@@ -40,6 +35,10 @@ public class SpielVerwaltung {
     this.spieler = ls.ladeSpielerVonSpiel(this.uuid);
     this.stapel = ls.ladeSpielfeldVonSpiel(this.uuid);
     this.stich = ls.ladeStichVonSpiel(this.uuid);
+  }
+
+  public boolean spielZwischenspeichern(){
+    return this.ls.speicherSpiel(this.spieler, this.stich, this.stapel);
   }
 
   private Spieler getSpielerFromUUIDString(String uuid) {
@@ -56,17 +55,17 @@ public class SpielVerwaltung {
     return true;
   }
 
-  public boolean waehleSkat(String spielerUUIDString, List<Karte> skat, Farbe trumpf) {
-    UUID spielerUUID = UUID.fromString(spielerUUIDString);
+  public boolean waehleSkat(String spielerUUID, List<Karte> skat, Farbe trumpf) {
     Boolean erfolgreich = false;
     for (Spieler s : this.spieler) {
-      if (s.getUUID().equals(spielerUUID)) {
+      if (s.getUUID().equals(UUID.fromString(spielerUUID))) {
         erfolgreich = s.skatAblegen(skat);
       }
     }
 
-    if (erfolgreich) {
+    if (Boolean.TRUE.equals(erfolgreich)) {
       this.stich = new Stich(this.spieler.getFirst());
+      this.stapel.setTrumpf(trumpf);
     }
     return erfolgreich;
   }
@@ -81,21 +80,26 @@ public class SpielVerwaltung {
 
   public boolean karteLegen(UUID spieler, Karte karte) {
     if (spieler == stich.getSpielerAnDerReihe().getUUID() &&
-      stich.getSpielerAnDerReihe().kannLegen(karte, stich.getErsteFarbe())) {
+        stich.getSpielerAnDerReihe().kannLegen(karte, stich.getErsteFarbe())) {
       int i = 0;
       for (Spieler s : this.spieler) {
         if (s.getUUID().equals(spieler)) {
           i = this.spieler.indexOf(s);
         }
       }
-      Spieler naechster = this.spieler.get((i+1)%3);
+      Spieler naechster = this.spieler.get((i + 1) % 3);
       stich.getSpielerAnDerReihe().entferneVonHand(karte);
       stich.legeKarte(karte, naechster);
 
+
+      Spieler sieger = stich.ermittleSieger(this.spieler, this.stapel.getTrumpf());
+      if(sieger != null){
+        sieger.kartenAufDieHand(this.stich.getGelegteKarten());
+        this.stich = new Stich(sieger);
+      }
+      return true;
     }
-    // Sieger überprüfen
-    // ->Spiel weitergeben an nächsten Spieler oder neuen Stich erstellen und Spiel an Sieger geben
-    return true;
+    return false;
   }
 
   public UUID getUUID() {

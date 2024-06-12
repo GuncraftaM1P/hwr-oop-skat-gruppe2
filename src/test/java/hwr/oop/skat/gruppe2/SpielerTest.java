@@ -246,14 +246,14 @@ class SpielerTest {
   }
 
   @Test
-  void testKarteGewonnen() {
+  void testKartenGewonnen() {
     Person testPerson = new Person("Spieler");
     Spieler testSpieler = new Spieler(testPerson);
-    Karte testKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    List<Karte> testKarten = List.of(new Karte(Farbe.HERZ, Wert.ASS), new Karte(Farbe.PIK, Wert.ASS));
 
-    testSpieler.karteGewonnen(testKarte);
+    testSpieler.kartenGewonnen(testKarten);
 
-    Assertions.assertThat(testSpieler.getGewonneneKarten()).hasSize(1).contains(testKarte);
+    Assertions.assertThat(testSpieler.getGewonneneKarten()).hasSize(1).containsAll(testKarten);
   }
 
   @Test

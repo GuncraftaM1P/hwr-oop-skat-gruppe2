@@ -16,6 +16,12 @@ public class Spieler {
     this.gewonneneKarten = new ArrayList<>();
   }
 
+  public Spieler(Person person, List<Karte> handKarten, List<Karte> gewonneneKarten) {
+    this.person = person;
+    this.handKarten = handKarten;
+    this.gewonneneKarten = gewonneneKarten;
+  }
+
   public boolean kannLegen(Karte karte, Farbe ersteFarbe) {
     // Check: Karte enthalten
     if (!this.getHandKarten().contains(karte)) return false;
@@ -26,19 +32,18 @@ public class Spieler {
 
     // Check: Gleiche Farbe
     if (karte.getFarbe() == ersteFarbe) {
-      if(karte.getWert() == Wert.BUBE && this.kannBedienen(ersteFarbe))
+      if (karte.getWert() == Wert.BUBE && this.kannBedienen(ersteFarbe))
         return false;
-    }
-    else {
+    } else {
       // Check: Kann der Spieler bedienen?
-      if(this.kannBedienen(ersteFarbe))
+      if (this.kannBedienen(ersteFarbe))
         return false;
     }
 
     return true;
   }
 
-  private boolean kannBedienen(Farbe bedienen){
+  private boolean kannBedienen(Farbe bedienen) {
     for (Karte k : this.getHandKarten()) {
       if (k.getFarbe() == bedienen && k.getWert() != Wert.BUBE)
         return true;
@@ -67,7 +72,7 @@ public class Spieler {
     return false;
   }
 
-  public void entferneVonHand(Karte karte){
+  public void entferneVonHand(Karte karte) {
     this.handKarten.remove(karte);
   }
 
@@ -79,8 +84,8 @@ public class Spieler {
     this.handKarten.addAll(neueKarten);
   }
 
-  public void karteGewonnen(Karte karte) {
-    this.gewonneneKarten.add(karte);
+  public void kartenGewonnen(List<Karte> karte) {
+    this.gewonneneKarten.addAll(karte);
   }
 
   // Getter
@@ -117,6 +122,7 @@ public class Spieler {
         && Objects.equals(handKarten, that.handKarten)
         && Objects.equals(gewonneneKarten, that.gewonneneKarten);
   }
+
   @Override
   public int hashCode() {
     return super.hashCode();

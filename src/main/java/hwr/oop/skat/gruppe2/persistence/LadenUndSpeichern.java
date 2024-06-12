@@ -47,4 +47,8 @@ public class LadenUndSpeichern {
   public boolean speicherPerson(Person person) {
     return this.sqlVerbinder.speicherPerson(person);
   }
+
+  public boolean speicherSpiel(List<Spieler> spieler, Stich stich, Spielfeld stapel) {
+    return false;
+  }
 }

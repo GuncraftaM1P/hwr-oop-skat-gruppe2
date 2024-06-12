@@ -1,7 +1,6 @@
 package hwr.oop.skat.gruppe2.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Stich {
@@ -59,17 +58,17 @@ public class Stich {
     return null;
   }
 
-  public Spieler ermittleSiegerFallsTrumpf(List<Spieler> spieler, Trumpffarbe trumpffarbe) {
+  public Spieler ermittleSiegerFallsTrumpf(List<Spieler> spieler, Farbe trumpffarbe) {
     List<Karte> trumpfListe =
         List.of(
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.SIEBEN),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.ACHT),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.NEUN),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.ZEHN),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.BUBE),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.DAME),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.KOENIG),
-            new Karte(trumpffarbe.getTrumpffarbe(), Wert.ASS)
+            new Karte(trumpffarbe, Wert.SIEBEN),
+            new Karte(trumpffarbe, Wert.ACHT),
+            new Karte(trumpffarbe, Wert.NEUN),
+            new Karte(trumpffarbe, Wert.ZEHN),
+            new Karte(trumpffarbe, Wert.BUBE),
+            new Karte(trumpffarbe, Wert.DAME),
+            new Karte(trumpffarbe, Wert.KOENIG),
+            new Karte(trumpffarbe, Wert.ASS)
         );
 
     for (Karte i : trumpfListe) {
@@ -82,7 +81,7 @@ public class Stich {
           continue;
         }
         if (j.equals(gewinnerKarte)) return null;
-        if (j.getFarbe() == trumpffarbe.getTrumpffarbe()
+        if (j.getFarbe() == trumpffarbe
             && j.getWert().getStaerke() > gewinnerKarte.getWert().getStaerke()) {
           gewinnerKarte = j;
         }
@@ -96,7 +95,7 @@ public class Stich {
     return null;
   }
 
-  public Spieler ermittleSieger(List<Spieler> spieler, Trumpffarbe trumpffarbe) {
+  public Spieler ermittleSieger(List<Spieler> spieler, Farbe trumpffarbe) {
     if (this.getGelegteKarten().size() != 3) return null;
 
     Spieler bubenSieger = this.ermittleSiegerFallsBube(spieler);
@@ -133,10 +132,6 @@ public class Stich {
     gewonneneKarten.addAll(this.getGelegteKarten());
 
     sieger.setGewonneneKarten(gewonneneKarten);
-  }
-
-  public boolean isEmpty() {
-    return this.gelegteKarten.isEmpty();
   }
 
   public void legeKarte(Karte karte, Spieler naechster) {
