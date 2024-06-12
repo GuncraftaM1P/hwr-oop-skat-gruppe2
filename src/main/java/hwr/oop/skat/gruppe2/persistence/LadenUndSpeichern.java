@@ -17,14 +17,6 @@ public class LadenUndSpeichern {
     return Arrays.stream(kartenListenString.split(",")).map(Karte::new).toList();
   }
 
-  public String kartenListeZuString(List<Karte> kartenListe) {
-    return kartenListe.stream().map(this::kartezuString).reduce((a, b) -> a + "," + b).orElse("");
-  }
-
-  private String kartezuString(Karte karte) {
-    return karte.getFarbe().getWert() + "-" + karte.getWert().getStaerke();
-  }
-
   public Person getPersonVonUUID(UUID uuid) {
     return this.sqlVerbinder.getPersonByUUIDPerson(uuid.toString());
   }
@@ -48,7 +40,7 @@ public class LadenUndSpeichern {
     return this.sqlVerbinder.speicherPerson(person);
   }
 
-  public boolean speicherSpiel(List<Spieler> spieler, Stich stich, Spielfeld stapel) {
-    return false;
+  public boolean speicherSpiel(List<Spieler> spieler, Stich stich, Spielfeld stapel, UUID spiel) {
+    return sqlVerbinder.speicherSpiel(spieler, stich, stapel, spiel);
   }
 }

@@ -38,7 +38,7 @@ public class SpielVerwaltung {
   }
 
   public boolean spielZwischenspeichern(){
-    return this.ls.speicherSpiel(this.spieler, this.stich, this.stapel);
+    return this.ls.speicherSpiel(this.spieler, this.stich, this.stapel, this.uuid);
   }
 
   private Spieler getSpielerFromUUIDString(String uuid) {

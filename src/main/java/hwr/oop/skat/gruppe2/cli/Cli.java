@@ -1,5 +1,5 @@
 package hwr.oop.skat.gruppe2.cli;
-
+/*
 import hwr.oop.skat.gruppe2.application.SpielVerwaltung;
 import hwr.oop.skat.gruppe2.domain.Farbe;
 import hwr.oop.skat.gruppe2.domain.Karte;
@@ -49,4 +49,4 @@ public final class Cli {
       sv.spielZwischenspeichern();
     return ret;
   }
-}
+}*/

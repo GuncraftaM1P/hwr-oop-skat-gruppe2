@@ -43,6 +43,13 @@ class KarteTest {
   }
 
   @Test
+  void testEqualsDifferentConstructor() {
+    Karte testErsteKarte = new Karte(Farbe.HERZ, Wert.ASS);
+    Karte testZweiteKarte = new Karte("2-13");
+    Assertions.assertThat(testErsteKarte.equals(testZweiteKarte)).isTrue();
+  }
+
+  @Test
   void testEquals_DifferentFarbe() {
     Karte karte1 = new Karte(Farbe.HERZ, Wert.ASS);
     Karte karte2 = new Karte(Farbe.PIK, Wert.ASS);

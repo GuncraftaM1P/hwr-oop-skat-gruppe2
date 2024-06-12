@@ -1,5 +1,5 @@
 package hwr.oop.skat.gruppe2.cli;
-
+/*
 import java.util.Arrays;
 
 public final class Main {
@@ -9,3 +9,4 @@ public final class Main {
     cli.handle(Arrays.asList(args));
   }
 }
+*/
