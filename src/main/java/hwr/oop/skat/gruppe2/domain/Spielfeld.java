@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class Spielfeld {
   private final List<Karte> deck;
-  private final List<Karte> gelegteKarte;
   private final Random random;
   private Farbe trumpf;
 
@@ -18,7 +17,7 @@ public class Spielfeld {
   public Spielfeld(List<Karte> deck, Farbe trumpf) {
     this.deck = deck;
     this.random = new Random();
-    this.trumpf = trumpf; //todo nutze das anstatt der in der Funktion gegebenen Variable
+    this.trumpf = trumpf;
   }
 
   public List<Karte> neuerKartenStapel() {
@@ -46,17 +45,7 @@ public class Spielfeld {
     }
   }
 
-  // Getter
-  public List<Karte> getGelegteKarten() {
-    return this.gelegteKarte;
-  }
-
   public List<Karte> getDeck() {
     return this.deck;
-  }
-
-  // Setter
-  public void addGelegteKarte(Karte karte) {
-    this.gelegteKarte.add(karte);
   }
 }

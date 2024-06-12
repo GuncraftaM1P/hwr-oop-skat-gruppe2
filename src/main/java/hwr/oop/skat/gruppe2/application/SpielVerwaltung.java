@@ -66,30 +66,20 @@ public class SpielVerwaltung {
     }
 
     if (erfolgreich) {
-      starteSpielrunde();
+      this.stich = new Stich(this.spieler.getFirst());
     }
     return erfolgreich;
-    //todo trumpf verarbeiten
   }
 
   public UUID erstelleSpieler(String name) {
     Person person = new Person(name);
-    if(ls.speicherPerson(person)){
+    if (ls.speicherPerson(person)) {
       return person.getUuid();
     }
     return null;
   }
 
-  private boolean starteSpielrunde() {
-    /*
-      TODO: Neues Stich Objekt erstellen
-            Falls Stich voll -> Sieger ermitteln
-              neuen Stich erstellen
-    */
-    return true;
-  }
-
-  /*public boolean karteLegen(UUID spieler, Karte karte) {
+  public boolean karteLegen(UUID spieler, Karte karte) {
     if (spieler == stich.getSpielerAnDerReihe().getUUID()) {
       /*
         TODO: Alle Spieler per Liste als Parameter übergeben (Die Funktion ermittelt dadurch den
@@ -97,9 +87,11 @@ public class SpielVerwaltung {
       */
       stich.getSpielerAnDerReihe().karteSetzen(karte, stich, List.of());
     }
+
     // Sieger überprüfen
     // ->Spiel weitergeben an nächsten Spieler oder neuen Stich erstellen und Spiel an Sieger geben
-  }*/
+    return true;
+  }
 
   public UUID getUUID() {
     return this.uuid;
