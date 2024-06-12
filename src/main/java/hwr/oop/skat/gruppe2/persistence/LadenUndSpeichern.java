@@ -29,7 +29,7 @@ public class LadenUndSpeichern {
     List<Spieler> spielerListe = this.sqlVerbinder.ladeSpieler(spiel);
     if (spielerListe.size() == 3)
       return spielerListe;
-    return null;
+    return List.of();
   }
 
   public Stich ladeStichVonSpiel(UUID spiel) {

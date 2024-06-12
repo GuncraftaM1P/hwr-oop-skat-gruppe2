@@ -107,4 +107,11 @@ class SpielfeldTest {
 
         Assertions.assertThat(testSpieler.get(2).getHandKarten()).hasSize(10);
     }
+
+    @Test
+    void testSetTrumpf(){
+        Spielfeld testSpielfeld = new Spielfeld(List.of(), Farbe.HERZ);
+        testSpielfeld.setTrumpf(Farbe.KREUZ);
+        Assertions.assertThat(testSpielfeld.getTrumpf()).isEqualTo(Farbe.KREUZ);
+    }
 }

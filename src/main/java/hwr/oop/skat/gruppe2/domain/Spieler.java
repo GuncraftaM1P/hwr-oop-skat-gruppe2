@@ -109,4 +109,8 @@ public class Spieler {
         && Objects.equals(handKarten, that.handKarten)
         && Objects.equals(gewonneneKarten, that.gewonneneKarten);
   }
+  @Override
+  public int hashCode() {
+    return 0;
+  }
 }

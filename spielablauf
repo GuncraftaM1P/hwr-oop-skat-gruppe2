@@ -2,36 +2,36 @@
 #
 # für alle Spieler-Aktionen benötigt:
 # - spiel aus der Datenbank laden
-- spiel in die Datenbank speichern
-
+# - spiel in die Datenbank speichern
+#
 # Spieler-Aktion durch eingaben (später CLI)
 # - neues spiel starten (mit zwei anderen spielern)
-    - Datenbankeintrag anlegen
+O    - Datenbankeintrag anlegen
 # - karte legen
-- Spielinformationen anzeigen lassen
-    - aktueller Stich, Handkarten
-    - gewonnene und gespielte Spiele eines Spielers
+O - Spielinformationen anzeigen lassen
+O    - aktueller Stich, Handkarten
+O    - gewonnene und gespielte Spiele eines Spielers
 # - Zwei karten ablegen, nachdem der Skat aufgenommen wurde
-
-Funktionen, um diese Spieler-Eingabe zu ermöglichen
-- Spiel auswerten und beenden
-    - aus der Datenbank löschen
-- neue Runde starten
-- Sieger des Stichs ermitteln
-        - Karten diesem Spieler zuweisen, Stich leeren und neue Runde starten
+#
+#Funktionen, um diese Spieler-Eingabe zu ermöglichen
+O - Spiel auswerten und beenden
+O    - aus der Datenbank löschen
+O - neue Runde starten
+# - Sieger des Stichs ermitteln
+O        - Karten diesem Spieler zuweisen, Stich leeren und neue Runde starten
 # - karte erhalten/ gewinnen
-
-Konkrete Funktionen für Nutzer:
-- Spieler erstellen
+#
+#Konkrete Funktionen für Nutzer:
+# - Spieler erstellen
 # - Spiel erstellen
 # - Spieler hinzufügen
 # - Spiel starten
-
-- Hand anschauen
+#
+O - Hand anschauen
 ? - (Punkte anzeigen, Reizen)
 # - (Einzelspieler) 2 Karten abwerfen
-
-- Stich anschauen
-- Karte setzen
-
+#
+O - Stich anschauen
+# - Karte setzen
+#
 ? - (Gewonnene Karten anschauen)

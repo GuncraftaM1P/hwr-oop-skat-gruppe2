@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class SqlVerbinder {
   // db parameter
-  private static final Path URL = Paths.get("jdbc:sqlite:sqlite/Skat.db");
+  private static final Path URL = Paths.get("jdbc꞉sqlite꞉sqlite/Skat.db");
   private Connection schnittstelle = null;
 
   private static final String GEWONNENE_SPIELE = "gewonneneSpiele"; //damit SonarLint Ruhe gibt
@@ -30,7 +30,7 @@ public class SqlVerbinder {
       // create a connection to the database
       new File("./sqlite/").mkdirs();
 
-      schnittstelle = DriverManager.getConnection(URL.toString());
+      schnittstelle = DriverManager.getConnection(this.URL.toString());
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -112,7 +112,7 @@ public class SqlVerbinder {
 
   private boolean sendSQLBefehle(String sql) {
     try {
-      schnittstelle = DriverManager.getConnection(URL.toString());
+      schnittstelle = DriverManager.getConnection(this.URL.toString());
       schnittstelle.prepareStatement(sql).execute();
       return true;
     } catch (SQLException e) {
@@ -123,7 +123,7 @@ public class SqlVerbinder {
 
   private void sendMehreSQLBefehle(List<String> sqlList) {
     try {
-      schnittstelle = DriverManager.getConnection(URL.toString());
+      schnittstelle = DriverManager.getConnection(this.URL.toString());
       for (String s : sqlList) {
         schnittstelle.prepareStatement(s).execute();
       }

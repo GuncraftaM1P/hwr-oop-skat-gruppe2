@@ -4,6 +4,7 @@ import hwr.oop.skat.gruppe2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -400,5 +401,15 @@ class StichTest {
             new Karte(Farbe.KARO, Wert.BUBE)));
 
     Assertions.assertThat(testStich.ermittleSiegerFallsBube(testSpieler)).isNotNull();
+  }
+
+  @Test
+  void testLegeKarte() {
+    Spieler testSpieler = new Spieler(new Person("TestPerson1"));
+    List<Karte> testKarte = new ArrayList<Karte>();
+    testKarte.add(new Karte(Farbe.PIK, Wert.SIEBEN));
+    Stich testStich = new Stich(testSpieler, testKarte);
+    testStich.legeKarte(new Karte(Farbe.HERZ, Wert.ACHT), new Spieler(new Person("TestPerson2")));
+    Assertions.assertThat(testStich.getSpielerAnDerReihe()).isNotEqualTo(testSpieler);
   }
 }

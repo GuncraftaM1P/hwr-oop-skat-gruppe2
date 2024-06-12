@@ -11,24 +11,27 @@ public class SpielVerwaltung {
   private Stich stich;
   private Spielfeld stapel;
   private List<Spieler> spieler;
-  private final LadenUndSpeichern ls = new LadenUndSpeichern();
+  private final LadenUndSpeichern ls;
 
   public SpielVerwaltung(List<String> spielerStrings) {
+    this.uuid = UUID.randomUUID();
+    this.ls = new LadenUndSpeichern();
     List<Spieler> neueSpieler =
         List.of(
             this.getSpielerFromUUIDString(spielerStrings.get(0)),
             this.getSpielerFromUUIDString(spielerStrings.get(1)),
             this.getSpielerFromUUIDString(spielerStrings.get(2)));
     neuesSpiel(neueSpieler);
-    this.uuid = UUID.randomUUID();
   }
 
   public SpielVerwaltung(UUID spiel) {
     this.uuid = spiel;
+    this.ls = new LadenUndSpeichern();
     this.ladeVonPersistenz();
   }
 
   public SpielVerwaltung() {
+    this.ls = new LadenUndSpeichern();
   }
 
   private void ladeVonPersistenz() {

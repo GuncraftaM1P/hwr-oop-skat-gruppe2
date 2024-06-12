@@ -23,13 +23,6 @@ public class Stich {
     this.siegerKarte = null;
   }
 
-  public Stich(Spieler spieler, Farbe ersteFarbe) {
-    this.gelegteKarten = new ArrayList<>();
-    this.spielerAnDerReihe = spieler;
-    this.ersteFarbe = ersteFarbe;
-    this.siegerKarte = null;
-  }
-
   public Spieler ermittleSiegerFallsBube(List<Spieler> spieler) {
     if (this.getGelegteKarten().contains(new Karte(Farbe.KREUZ, Wert.BUBE))) {
       return spieler.get(

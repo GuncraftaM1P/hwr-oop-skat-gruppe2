@@ -5,8 +5,10 @@ import hwr.oop.skat.gruppe2.domain.*;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 class SpielerTest {
 
@@ -230,32 +232,33 @@ class SpielerTest {
         .isFalse();
   }
 
-  /*
+
   @Test
   void testSkatAblegenRichtigeKarten() {
     Spieler testSpieler = new Spieler(new Person("Person"));
 
-    testSpieler.setHandKarten(
-            List.of(
-                    new Karte(Farbe.HERZ, Wert.SIEBEN),
-                    new Karte(Farbe.HERZ, Wert.ACHT),
-                    new Karte(Farbe.HERZ, Wert.NEUN),
-                    new Karte(Farbe.KARO, Wert.SIEBEN),
-                    new Karte(Farbe.KARO, Wert.ACHT),
-                    new Karte(Farbe.KARO, Wert.NEUN),
-                    new Karte(Farbe.PIK, Wert.SIEBEN),
-                    new Karte(Farbe.PIK, Wert.ACHT),
-                    new Karte(Farbe.PIK, Wert.NEUN),
-                    new Karte(Farbe.KREUZ, Wert.SIEBEN),
-                    new Karte(Farbe.KREUZ, Wert.ACHT),
-                    new Karte(Farbe.KREUZ, Wert.NEUN)));
+    List<Karte> testHandKarten = new ArrayList<>(List.of(
+        new Karte(Farbe.HERZ, Wert.SIEBEN),
+        new Karte(Farbe.HERZ, Wert.ACHT),
+        new Karte(Farbe.HERZ, Wert.NEUN),
+        new Karte(Farbe.KARO, Wert.SIEBEN),
+        new Karte(Farbe.KARO, Wert.ACHT),
+        new Karte(Farbe.KARO, Wert.NEUN),
+        new Karte(Farbe.PIK, Wert.SIEBEN),
+        new Karte(Farbe.PIK, Wert.ACHT),
+        new Karte(Farbe.PIK, Wert.NEUN),
+        new Karte(Farbe.KREUZ, Wert.SIEBEN),
+        new Karte(Farbe.KREUZ, Wert.ACHT),
+        new Karte(Farbe.KREUZ, Wert.NEUN)));
+
+    testSpieler.setHandKarten(testHandKarten);
 
     Assertions.assertThat(
                     testSpieler.skatAblegen(
                             List.of(new Karte(Farbe.HERZ, Wert.SIEBEN), new Karte(Farbe.HERZ, Wert.ACHT))))
             .isTrue();
   }
-  */
+
 
   @Test
   void testKarteAufDieHand() {
@@ -382,5 +385,23 @@ class SpielerTest {
     int testSpieler2 = testSpieler.hashCode();
 
     Assertions.assertThat(testSpieler1).isEqualTo(testSpieler2);
+  }
+
+  @Test
+  void testGetUUID(){
+    Person testPerson = new Person("Spieler1");
+    Spieler testSpieler = new Spieler(testPerson);
+    Assertions.assertThat(testSpieler.getUUID()).isEqualTo(testPerson.getUuid());
+  }
+
+  @Test
+  void testEntferneVonKarten(){
+    List<Karte> handKarten = new ArrayList<Karte>();
+    handKarten.add(new Karte(Farbe.HERZ, Wert.ACHT));
+    handKarten.add(new Karte(Farbe.KARO, Wert.ACHT));
+    Spieler testSpieler = new Spieler(new Person("Spieler"), handKarten, List.of(new Karte(Farbe.HERZ, Wert.SIEBEN)));
+    testSpieler.entferneVonHand(new Karte(Farbe.HERZ, Wert.ACHT));
+    handKarten.removeFirst();
+    Assertions.assertThat(testSpieler.getHandKarten()).isEqualTo(handKarten);
   }
 }

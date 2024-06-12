@@ -59,4 +59,10 @@ class PersonTest {
         Person testPerson = new Person("Spieler");
         Assertions.assertThat(testPerson.getGewonneneRunden()).isZero();
     }
+
+    @Test
+    void testPersonVerloren() {
+        Person testPerson = new Person(UUID.randomUUID(),"Spieler", 1, 2);
+        Assertions.assertThat(testPerson.getVerloreneRunden()).isEqualTo(1);
+    }
 }
