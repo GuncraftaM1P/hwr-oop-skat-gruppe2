@@ -1,48 +1,46 @@
 package hwr.oop.skat.gruppe2.persistence;
 
 import hwr.oop.skat.gruppe2.domain.*;
+
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 public class LadenUndSpeichern {
+  private final SqlVerbinder sqlVerbinder;
 
-    public static void main(String[] args){
-        LadenUndSpeichern ladenUndSpeichern = new LadenUndSpeichern();
-        KartenListe kartes = ladenUndSpeichern.kartenListeVonString("2-7,3-12,1-8");
-        System.out.println(ladenUndSpeichern.kartenListeZuString(kartes));
-    }
+  public LadenUndSpeichern() {
+    this.sqlVerbinder = new SqlVerbinder();
+  }
 
-    //
-    //Karten list transformation
-    //
-    //Format von den String muss sein Eine Karte ist Zahl gefolgt von "-" gefolgt von ein bis zwei Zahlen
-    //die Karten sind durch "," von einander getränd
-    //z.B. "2-7,3-12,1-8" -> Herz sieben, Pik Zehn, Karo Acht
-    public KartenListe kartenListeVonString(String kartenListenString) {
-        return new KartenListe(Arrays.stream(kartenListenString.split(",")).map(karteString -> stringZuKarte(karteString)).toList());
-    }
-    private Karte stringZuKarte(String stringZuKarte) {
-        String[] temp =  stringZuKarte.split("-");
-        return new Karte(Farbe.getFarbeByWert(Integer.parseInt(temp[0])), Wert.getWertByStaerke(Integer.parseInt(temp[1])));
-    }
+  public List<Karte> kartenStringZuListe(String kartenListenString) {
+    return Arrays.stream(kartenListenString.split(",")).map(Karte::new).toList();
+  }
 
-    public String kartenListeZuString(KartenListe kartenListe){
-        return kartenListe.getKartenListe().stream()
-                .map(karte -> kartezuString(karte))
-                .reduce((a,b) -> a+","+b)
-                .orElse("");
-    }
-    private String kartezuString(Karte karte) {
-        return karte.getFarbe().getWert()+"-"+karte.getWert().getStaerke();
-    }
+  public Person getPersonVonUUID(UUID uuid) {
+    return this.sqlVerbinder.getPersonByUUIDPerson(uuid.toString());
+  }
 
-    //Neuer Spieler in DatenBank Speichern
-    public UUID spielerNeuErstellen(Spieler spieler){
-        SQLVerbinder.getSingletonSchnitstelle().NeuenSpielerInDatenbank(spieler.getName(), spieler.getUuid());
-        return spieler.getUuid();
-    }
+  public Spielfeld ladeSpielfeldVonSpiel(UUID spiel) {
+    return this.sqlVerbinder.ladeSpielfeld(spiel);
+  }
 
-  public Spieler getSpielerVonUUID(UUID uuid) {
-        return SQLVerbinder.getSingletonSchnitstelle().getSpielerByUUIDSpieler(uuid.toString());
-    }
+  public List<Spieler> ladeSpielerVonSpiel(UUID spiel) {
+    List<Spieler> spielerListe = this.sqlVerbinder.ladeSpieler(spiel);
+    if (spielerListe.size() == 3)
+      return spielerListe;
+    return List.of();
+  }
+
+  public Stich ladeStichVonSpiel(UUID spiel) {
+    return this.sqlVerbinder.ladeStich(spiel);
+  }
+
+  public boolean speicherPerson(Person person) {
+    return this.sqlVerbinder.speicherPerson(person);
+  }
+
+  public boolean speicherSpiel(List<Spieler> spieler, Stich stich, Spielfeld stapel, UUID spiel) {
+    return sqlVerbinder.speicherSpiel(spieler, stich, stapel, spiel);
+  }
 }
