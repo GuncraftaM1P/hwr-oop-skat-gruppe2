@@ -75,7 +75,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ))
+            .ermittleSieger(testSpieler, Farbe.HERZ)
             .equals(testSpieler.get(1));
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -99,7 +99,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ))
+            .ermittleSieger(testSpieler, Farbe.HERZ)
             .equals(testSpieler.get(1));
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -123,7 +123,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ))
+            .ermittleSieger(testSpieler, Farbe.HERZ)
             .equals(testSpieler.get(1));
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -147,7 +147,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ))
+            .ermittleSieger(testSpieler, Farbe.HERZ)
             .equals(testSpieler.get(1));
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -172,7 +172,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.HERZ))
+            .ermittleSieger(testSpieler, Farbe.HERZ)
             .equals(testSpieler.get(1));
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -197,7 +197,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSieger(testSpieler, new Trumpffarbe(Farbe.KARO))
+            .ermittleSieger(testSpieler, Farbe.KARO)
             .equals(testSpieler.get(1));
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -220,7 +220,7 @@ class StichTest {
             new Karte(Farbe.HERZ, Wert.ACHT),
             new Karte(Farbe.HERZ, Wert.DAME)));
 
-    testStich.ermittleSieger(testSpieler, new Trumpffarbe(Farbe.KARO));
+    testStich.ermittleSieger(testSpieler, Farbe.KARO);
 
     Assertions.assertThat(testStich.getSiegerKarte()).isNull();
   }
@@ -244,7 +244,7 @@ class StichTest {
 
     boolean siegerErmittelt =
         testStich
-            .ermittleSiegerFallsTrumpf(testSpieler, new Trumpffarbe(Farbe.KARO))
+            .ermittleSiegerFallsTrumpf(testSpieler, Farbe.KARO)
             .equals(testSpieler.getLast());
 
     Assertions.assertThat(siegerErmittelt).isTrue();
@@ -267,7 +267,7 @@ class StichTest {
             new Karte(Farbe.KREUZ, Wert.ZEHN),
             new Karte(Farbe.KARO, Wert.SIEBEN)));
 
-    testStich.ermittleSiegerFallsTrumpf(testSpieler, new Trumpffarbe(Farbe.KARO));
+    testStich.ermittleSiegerFallsTrumpf(testSpieler, Farbe.KARO);
 
     boolean gleicheKarte =
         testStich.getSiegerKarte().getFarbe() == Farbe.KARO
@@ -293,7 +293,7 @@ class StichTest {
             new Karte(Farbe.KREUZ, Wert.ZEHN),
             new Karte(Farbe.HERZ, Wert.DAME)));
 
-    testStich.ermittleSiegerFallsTrumpf(testSpieler, new Trumpffarbe(Farbe.HERZ));
+    testStich.ermittleSiegerFallsTrumpf(testSpieler, Farbe.HERZ);
 
     boolean gleicheKarte = testStich.getSiegerKarte().equals(new Karte(Farbe.HERZ, Wert.DAME));
 
@@ -318,7 +318,7 @@ class StichTest {
             new Karte(Farbe.KARO, Wert.SIEBEN)));
 
     Assertions.assertThat(
-            testStich.ermittleSiegerFallsTrumpf(testSpieler, new Trumpffarbe(Farbe.PIK)))
+            testStich.ermittleSiegerFallsTrumpf(testSpieler, Farbe.PIK))
         .isNull();
   }
 

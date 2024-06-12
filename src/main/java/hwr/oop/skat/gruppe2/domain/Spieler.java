@@ -23,50 +23,38 @@ public class Spieler {
   }
 
   public boolean kannLegen(Karte karte, Farbe ersteFarbe) {
-    // Check: Karte enthalten
+    // Karte nicht enthalten
     if (!this.getHandKarten().contains(karte)) return false;
 
-    // Check: Stich leer
-    if (ersteFarbe == null)
-      return true;
+    // Stich leer
+    if (ersteFarbe == null) return true;
 
-    // Check: Gleiche Farbe
+    // Case: Gleiche Farbe
     if (karte.getFarbe() == ersteFarbe) {
-      if (karte.getWert() == Wert.BUBE && this.kannBedienen(ersteFarbe))
-        return false;
-    } else {
-      // Check: Kann der Spieler bedienen?
-      if (this.kannBedienen(ersteFarbe))
-        return false;
+      return karte.getWert() != Wert.BUBE || !this.kannBedienen(ersteFarbe);
     }
-
-    return true;
+    // Case: Ungleiche Farbe
+    else {
+      return !this.kannBedienen(ersteFarbe);
+    }
   }
 
-  private boolean kannBedienen(Farbe bedienen) {
+  public boolean kannBedienen(Farbe bedienen) {
     for (Karte k : this.getHandKarten()) {
-      if (k.getFarbe() == bedienen && k.getWert() != Wert.BUBE)
-        return true;
+      if (k.getFarbe() == bedienen && k.getWert() != Wert.BUBE) return true;
     }
     return false;
   }
 
-  public Boolean skatAblegen(List<Karte> karten) {
-    if (this.handKarten.size() < 12) {
-      return false;
-    }
-    List<Karte> handKartenTemp = this.handKarten;
-    int possible = 0;
-    for (Karte karte : karten) {
-      for (Karte k : this.getHandKarten()) {
-        if (k.equals(karte)) {
-          possible++;
-          break;
-        }
-      }
-    }
-    if (possible == handKarten.size()) {
-      this.handKarten = handKartenTemp;
+  public boolean skatAblegen(List<Karte> karten) {
+    if (karten.size() != 2) return false;
+    if (this.handKarten.size() != 12) return false;
+
+    if (this.handKarten.contains(karten.getFirst()) && this.handKarten.contains(karten.getLast())) {
+      this.handKarten.remove(karten.getFirst());
+      this.handKarten.remove(karten.getLast());
+      this.gewonneneKarten.add(karten.getFirst());
+      this.gewonneneKarten.add(karten.getLast());
       return true;
     }
     return false;
